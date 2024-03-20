@@ -62,20 +62,20 @@ const pokemonNumero = async (poke) => {
         sumaBaseStatNumero *= 2;
     }
       
-    if (descripcion.capture_rate < 10) {
+    if (descripcion.capture_rate < 20) {
         sumaBaseStatNumero += 120;
-    } else if ( descripcion.capture_rate >= 10 && descripcion.capture_rate < 20)
+    } else if ( descripcion.capture_rate >= 20 && descripcion.capture_rate < 40)
     {
         sumaBaseStatNumero += 90;
-    } else if ( descripcion.capture_rate >= 20 && descripcion.capture_rate < 30)
+    } else if ( descripcion.capture_rate >= 40 && descripcion.capture_rate < 60)
     { 
-         sumaBaseStatNumero += 70;
-    } else if ( descripcion.capture_ra8te >= 30 && descripcion.capture_rate < 40)
+         sumaBaseStatNumero += 60;
+    } else if ( descripcion.capture_rate >= 60 && descripcion.capture_rate < 80)
      {
-       sumaBaseStatNumero += 60;
-    } else if (descripcion.capture_rate > 40 && descripcion.capture_rate < 60) {
        sumaBaseStatNumero += 40;
-    } else if (descripcion.capture_rate > 60) {
+    } else if (descripcion.capture_rate > 80 && descripcion.capture_rate < 100) {
+       sumaBaseStatNumero += 20;
+    } else if (descripcion.capture_rate > 100) {
       sumaBaseStatNumero -= 20;
     }
   
