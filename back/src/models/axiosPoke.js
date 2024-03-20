@@ -1,12 +1,12 @@
 import axios from 'axios'
 
-const pokemonNumero = async (pikachu) => {
+const pokemonNumero = async (poke) => {
     try {
       const [pokemon, descripcion] = await Promise.all([
-        axios(`https://pokeapi.co/api/v2/pokemon/10041`).then((response) =>
+        axios(`https://pokeapi.co/api/v2/pokemon/${poke}`).then((response) =>
           response.json()
         ),
-        axios(`https://pokeapi.co/api/v2/pokemon-species/130`).then((response) =>
+        axios(`https://pokeapi.co/api/v2/pokemon-species/${poke}`).then((response) =>
           response.json()
         ),
       ]);
@@ -26,9 +26,8 @@ const pokemonNumero = async (pikachu) => {
       const name = pokemon.name.toUpperCase();
       const img = pokemon.sprites.other['official-artwork'].front_default;
       const id = pokemon.id;
-      const type = pokemon.types[0].type.name;
+    
   
-      //mapeamos los tipos de pokemon para traducirlos al español
       const tiposEspañol = pokemon.types.map((tipo) => {
         const tipoNombre = tipo.type.name;
         const tipoTraducido = traducirTipo(tipoNombre);
@@ -53,36 +52,32 @@ const pokemonNumero = async (pikachu) => {
         minimumFractionDigits: 2,
         maximumFractionDigits: 2,
       });
-      let sumaBaseStatNumero = parseFloat(sumaBaseStat);
-      if (legendario) {
+
+
+    let sumaBaseStatNumero = parseFloat(sumaBaseStat);
+    if (legendario) {
         sumaBaseStatNumero *= 5;
-      }
-      if (mythical) {
+     }
+    if (mythical) {
         sumaBaseStatNumero *= 2;
-      }
-  
-      if (descripcion.capture_rate < 10) {
+    }
+      
+    if (descripcion.capture_rate < 10) {
         sumaBaseStatNumero += 120;
-      } else if (
-        descripcion.capture_rate >= 10 &&
-        descripcion.capture_rate < 20
-      ) {
+    } else if ( descripcion.capture_rate >= 10 && descripcion.capture_rate < 20)
+    {
         sumaBaseStatNumero += 90;
-      } else if (
-        descripcion.capture_rate >= 20 &&
-        descripcion.capture_rate < 30
-      ) {
-        sumaBaseStatNumero += 70;
-      } else if (
-        descripcion.capture_ra8te >= 30 &&
-        descripcion.capture_rate < 40
-      ) {
-        sumaBaseStatNumero += 60;
-      } else if (descripcion.capture_rate > 40 && descripcion.capture_rate < 60) {
-        sumaBaseStatNumero += 40;
-      } else if (descripcion.capture_rate > 60) {
-        sumaBaseStatNumero -= 20;
-      }
+    } else if ( descripcion.capture_rate >= 20 && descripcion.capture_rate < 30)
+    { 
+         sumaBaseStatNumero += 70;
+    } else if ( descripcion.capture_ra8te >= 30 && descripcion.capture_rate < 40)
+     {
+       sumaBaseStatNumero += 60;
+    } else if (descripcion.capture_rate > 40 && descripcion.capture_rate < 60) {
+       sumaBaseStatNumero += 40;
+    } else if (descripcion.capture_rate > 60) {
+      sumaBaseStatNumero -= 20;
+    }
   
       const newPoke = {
         nombre: name,
@@ -100,6 +95,7 @@ const pokemonNumero = async (pikachu) => {
         precio: sumaBaseStatNumero,
       };
       console.log(newPoke);
+    
     } catch (error) {
       console.error('Error al obtener detalles del Pokémon:', error);
     }
@@ -157,5 +153,3 @@ const pokemonNumero = async (pikachu) => {
     );
     return arrayhabilidades;
   }
-  pokemonNumero();
-  
