@@ -7,6 +7,7 @@ const PokemonSchema = new Schema({
         type: String,
          required: true 
         },
+
     tipo: [{
          type: String,
         enum: ['Normal', 'Fuego', 'Agua', 'Planta', 'Eléctrico', 'Hielo', 'Lucha', 'Veneno', 'Tierra',
@@ -15,6 +16,7 @@ const PokemonSchema = new Schema({
     peso: {
         type: Number,
         required: true 
+
     },
     altura: { 
         type: Number,
@@ -51,3 +53,4 @@ const PokemonSchema = new Schema({
 const PokemonModel = mongoose.model('Pokemon', PokemonSchema);
 
 module.exports = PokemonModel;
+
