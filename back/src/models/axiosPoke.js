@@ -1,15 +1,30 @@
-import axios from 'axios'
+const axios=require('axios')
+const PokemonModel = require('./Pokemodels')
+
+const ObtenerPokemons = async (pagina) => {
+  try {
+    const response = await axios(pagina);
+    const data = await response.data;
+
+    let todos = data.results;
+
+    for (const pokemon of todos) {
+      await pokemonNumero(pokemon.name);
+    }
+  } catch (error) {
+    console.error('Error al obtener la lista de Pokémon:', error);
+  }
+};
 
 const pokemonNumero = async (poke) => {
     try {
-      const [pokemon, descripcion] = await Promise.all([
-        axios(`https://pokeapi.co/api/v2/pokemon/${poke}`).then((response) =>
-          response.json()
-        ),
-        axios(`https://pokeapi.co/api/v2/pokemon-species/${poke}`).then((response) =>
-          response.json()
-        ),
+      const [pokemonResponse, descripcionResponse] = await Promise.all([
+        axios(`https://pokeapi.co/api/v2/pokemon/${poke}`),
+        axios(`https://pokeapi.co/api/v2/pokemon-species/${poke}`)
       ]);
+
+      const pokemon = pokemonResponse.data; // Acceder al cuerpo de la respuesta
+      const descripcion = descripcionResponse.data;
       const arrayhabilidades = await detalle(pokemon.abilities);
       const habilidades = arrayhabilidades.map((habilidad) => ({
         nombre: habilidad.nombre,
@@ -39,8 +54,8 @@ const pokemonNumero = async (poke) => {
         valor: stats.base_stat,
       }));
   
-      const peso = `${pokemon.weight / 10} kg`;
-      const height = `${pokemon.height / 10} mts`;
+      const peso = pokemon.weight / 10;
+      const height = pokemon.height / 10;
   
       let sumaBaseStat = (
         (pokemon.stats.reduce((total, stats) => {
@@ -90,11 +105,14 @@ const pokemonNumero = async (poke) => {
         id_pokedex: id,
         legendario: legendario,
         mythical: mythical,
-        habilidad: habilidades,
+        habilidades: habilidades,
         ratio_captura: descripcion.capture_rate,
         precio: sumaBaseStatNumero,
+        base_experience:base_experience
       };
-      console.log(newPoke);
+
+      await  PokemonModel.create(newPoke)
+      console.log(name);
     
     } catch (error) {
       console.error('Error al obtener detalles del Pokémon:', error);
@@ -140,7 +158,7 @@ const pokemonNumero = async (poke) => {
         const urlHabilidad = ability.ability.url;
   
         const response = await axios(`${urlHabilidad}`);
-        const axiosHabilidad = await response.json();
+        const axiosHabilidad = await response.data;
   
         return {
           nombre: axiosHabilidad.names.find((name) => name.language.name === 'es')
@@ -153,3 +171,4 @@ const pokemonNumero = async (poke) => {
     );
     return arrayhabilidades;
   }
+module.exports ={ pokemonNumero,ObtenerPokemons}

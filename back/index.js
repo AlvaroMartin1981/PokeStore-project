@@ -1,7 +1,7 @@
 //requerimos los modulos propios de Express y los creados
 const express= require('express')
 const app =express()
-const dbConnection=require('./config/db');
+const dbConnection=require('./src/config/db');
 require('dotenv').config();
 const PORT = process.env.PORT;
 
@@ -13,7 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 //Indicamos que la ruta / sera la primera ruta que nos llevara y a partir de ahi todas las demas
-app.use ('/',)
+
 
 //levantamos el puerto
 app.listen(PORT,()=>{

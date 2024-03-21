@@ -2,16 +2,14 @@ const mongoose = require('mongoose');
 
 
 // Definir el esquema para el modelo de Pokémon
-const PokemonSchema = new Schema({
+const PokemonSchema = new mongoose.Schema({
     nombre: { 
         type: String,
          required: true 
         },
 
     tipo: [{
-         type: String,
-        enum: ['Normal', 'Fuego', 'Agua', 'Planta', 'Eléctrico', 'Hielo', 'Lucha', 'Veneno', 'Tierra',
-        'Volador', 'Psíquico', 'Bicho', 'Roca', 'Fantasma', 'Dragón', 'Siniestro', 'Acero', 'Hada']
+         type: String
         }],
     peso: {
         type: Number,
@@ -28,8 +26,7 @@ const PokemonSchema = new Schema({
     },
     habilidades: [{
         nombre: String,
-        descripcion:String,
-        required:true
+        descripcion:String
     }],
     descripcion: String,
     estadisticas: [{
@@ -45,6 +42,7 @@ const PokemonSchema = new Schema({
         type: Boolean, 
         default: false 
     },
+    ratio_captura:Number,
     base_experience: Number,
     precio:Number
 });
