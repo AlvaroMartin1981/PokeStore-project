@@ -18,6 +18,7 @@ app.use('/',routes)
 
 
 //levantamos el puerto
-app.listen(PORT,()=>{
-    console.log(`El servidor esta escuchando en http://localhost:${PORT}`)
+
+app.listen(PORT, () => {
+    console.log(`Server started on http://localhost:${PORT}`);
 })
