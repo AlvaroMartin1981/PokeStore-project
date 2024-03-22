@@ -1,5 +1,5 @@
 const axios=require('axios')
-const PokemonModel = require('./Pokemodels')
+const PokemonModel = require('./PokemonModel')
 
 const ObtenerPokemons = async (pagina) => {
   try {

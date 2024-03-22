@@ -1,17 +1,19 @@
 //requerimos los modulos propios de Express y los creados
-const express= require('express')
-const app =express()
+const express= require('express');
+const app =express();
 const dbConnection=require('./src/config/db');
 require('dotenv').config();
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 5000;
+const routes=require ('./src/Routes/routes')
 
 //Nos conectamos con la base de datos
-dbConnection()
+dbConnection();
 
 //Middleware que usaremos para todas las rutas
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+app.use('/',routes)
 //Indicamos que la ruta / sera la primera ruta que nos llevara y a partir de ahi todas las demas
 
 
