@@ -8,6 +8,7 @@ const routes=require ('./src/Routes/routes')
 
 //Nos conectamos con la base de datos
 dbConnection();
+// Llamar a la función para obtener las pokeballs
 
 //Middleware que usaremos para todas las rutas
 app.use(express.urlencoded({ extended: true }));

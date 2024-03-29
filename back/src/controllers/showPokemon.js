@@ -1,6 +1,6 @@
 const PokemonModel= require('../models/PokemonModel');
 
- async function  showProducts (req, res){
+ async function  showPokemon (req, res){
     try {
       const TodosPokemon = await PokemonModel.find();
         res.json(TodosPokemon)
@@ -11,4 +11,4 @@ const PokemonModel= require('../models/PokemonModel');
     }
   }
 
-module.exports =showProducts
+module.exports =showPokemon

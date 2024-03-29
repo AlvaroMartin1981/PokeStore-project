@@ -111,6 +111,7 @@ const pokemonNumero = async (poke) => {
         base_experience:base_experience
       };
 
+
       await  PokemonModel.create(newPoke)
       console.log(name);
     
