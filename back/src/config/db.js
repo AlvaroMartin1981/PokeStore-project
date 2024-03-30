@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 require('dotenv').config();
-const obtenerPokeballs =require('../models/axiosPokeballs')
 
 const dbConnection = async() => {
     try {

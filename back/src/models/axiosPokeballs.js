@@ -60,3 +60,4 @@ async function obtenerPokeballs() {
 }
 
 
+module.exports= obtenerPokeballs
