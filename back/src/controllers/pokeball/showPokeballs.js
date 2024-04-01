@@ -1,4 +1,4 @@
-const PokeBallModel= require('../models/PokeBallModel');
+const PokeBallModel= require('../../models/PokeBallModel');
 
  async function showPokeballs (req, res){
     try {

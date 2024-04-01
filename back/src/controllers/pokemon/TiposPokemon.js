@@ -1,4 +1,4 @@
-const PokemonModel= require('../models/PokemonModel');
+const PokemonModel= require('../../models/PokemonModel');
 
 async function  pokeTipo (req, res){
     let tipos = req.params.tipo;
