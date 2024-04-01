@@ -1,5 +1,5 @@
 const axios = require('axios');
-const PokeballModel = require('./PokeBallModel');
+const PokeballModel = require('../models/PokeBallModel');
 
 async function obtenerPokeballs() {
     try {
