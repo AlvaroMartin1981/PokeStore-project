@@ -5,6 +5,16 @@ const dbConnection=require('./src/config/db');
 require('dotenv').config();
 const PORT = process.env.PORT || 5000;
 const routes=require ('./src/Routes/routes')
+var admin = require("firebase-admin");
+var serviceAccount = require("path/to/serviceAccountKey.json");
+const { initializeApp } = require('firebase-admin/app');
+
+var serviceAccount = require("back_firebase/serviceAccountKey.json");
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount)
+});
+
 
 //Nos conectamos con la base de datos
 dbConnection();

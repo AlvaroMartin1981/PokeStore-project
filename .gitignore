@@ -1,5 +1,6 @@
 # Node.js
 node_modules/
+back_firebase
 
 # npm
 *.lock
@@ -8,6 +9,8 @@ yarn-debug.log*
 yarn-error.log*  
 package-lock.jso
 package-lock.json
+firebase.json
+.firebaserc
 
 # Logs and databases  
 *.log  
@@ -15,6 +18,8 @@ package-lock.json
 *.sqlite3  
 *.db  
 *.sql
+.firebase
+.github
 
 # Dependencias de desarrollo
 .env
