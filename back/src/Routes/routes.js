@@ -10,6 +10,15 @@ const obtenerPokemonConEvolucion =require('../controllers/pokemon/evolucionaPoke
 const showItems =require('../controllers/items/showItems') 
 const itemsTipo =require('../controllers/items/tipoItems') 
 const ItemsUnico =require('../controllers/items/ItemsId') 
+const productController= require('../controllers/productController')
+
+
+
+routes.get( '/', (req, res) => {
+    res.redirect('/products/')
+});
+
+routes.get( "/products", productController.showProducts )
 
 
 routes.get('/pokemon',showPokemon)
