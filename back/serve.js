@@ -6,18 +6,7 @@ require('dotenv').config();
 const PORT = process.env.PORT || 5003;
 const routes=require ('./src/Routes/routes')
 const cors=require ('cors')
-/*const admin = require("firebase-admin");
-const { initializeApp } = require('firebase-admin/app');
-;
-hpola
 
-const serviceAccount = require("./back_firebase/serviceAccountKey.json");
-
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount)
-});
-
-*/
 //Nos conectamos con la base de datos
 dbConnection();
 
@@ -27,7 +16,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use('/',routes)
-//Indicamos que la ruta / sera la primera ruta que nos llevara y a partir de ahi todas las demas
 
 
 //levantamos el puerto
