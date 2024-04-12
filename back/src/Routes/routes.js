@@ -4,28 +4,11 @@ const itemController = require('../controllers/itemController');
 const pokemonController = require('../controllers/pokemonController');
 const pokeballController = require('../controllers/pokeballController')
 
-
-
 //const productController= require('../controllers/productController')
-
-
 
 routes.get( '/', (req, res) => {
     res.redirect('/products/')
 });
-
-/*routes.get( "/products", productController.showProducts)
-routes.get("/dashboard/products", productController.showProducts)
-routes.get("/dashboard/products/pokemon", productController.showPokemon)
-routes.get("dashboard/products/pokemon/:pokemonId", productController.pokemonId)
-routes.get("/dashboard/products/pokeballs", productController.showPokeballs)
-routes.get("/dashboard/products/pokeballs/:pokeballId", productController.pokeballId)
-routes.get("/dashboard/products/items", productController.showItems)
-routes.get("/dashboard/products/items/:itemsId", productController.showItems)*/
-
-
-
-
 
 routes.get('/pokemon',pokemonController.showPokemon)
 routes.get('/pokemon/nombre/:nombre',pokemonController.pokemonPorNombre)
@@ -44,8 +27,5 @@ routes.get('/items/categoria/:itemstipo',itemController.itemsTipo)//revisar
 routes.get('/items/:itemsId',itemController.itemsId)//revisar
 routes.get('/items/nombre/:nombre',itemController.itemsPorNombre)
 
-//Falta buscar items por nombre y por tipo
-
-//ademas de las rutas de dashboard y de usuario
 
 module.exports= routes 

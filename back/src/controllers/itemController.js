@@ -1,4 +1,4 @@
-const ItemModel= require('../models/ItemModel');
+const itemModel= require('../models/ItemModel');
 
 const  itemController ={
 
