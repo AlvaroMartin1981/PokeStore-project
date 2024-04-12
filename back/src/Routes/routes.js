@@ -1,16 +1,12 @@
 const express= require('express')
 const routes = express.Router()
-const showPokemon= require('../controllers/pokemon/showPokemon')
-const pokeTipo= require('../controllers/pokemon/TiposPokemon')
-const showPokeballs =require('../controllers/pokeball/showPokeballs')
-const pokemonUnico = require('../controllers/pokemon/pokemonId')
-const pokeballUnica= require ('../controllers/pokeball/pokeballId')
-const pokemonEspecial =require('../controllers/pokemon/especialPokemon')
-const obtenerPokemonConEvolucion =require('../controllers/pokemon/evolucionaPokemon')
-const showItems =require('../controllers/items/showItems') 
-const itemsTipo =require('../controllers/items/tipoItems') 
-const ItemsUnico =require('../controllers/items/ItemsId') 
-const productController= require('../controllers/productController')
+const itemController = require('../controllers/itemController');
+const pokemonController = require('../controllers/pokemonController');
+const pokeballController = require('../controllers/pokeballController')
+
+
+
+//const productController= require('../controllers/productController')
 
 
 
@@ -18,25 +14,35 @@ routes.get( '/', (req, res) => {
     res.redirect('/products/')
 });
 
-routes.get( "/products", productController.showProducts )
+/*routes.get( "/products", productController.showProducts)
+routes.get("/dashboard/products", productController.showProducts)
+routes.get("/dashboard/products/pokemon", productController.showPokemon)
+routes.get("dashboard/products/pokemon/:pokemonId", productController.pokemonId)
+routes.get("/dashboard/products/pokeballs", productController.showPokeballs)
+routes.get("/dashboard/products/pokeballs/:pokeballId", productController.pokeballId)
+routes.get("/dashboard/products/items", productController.showItems)
+routes.get("/dashboard/products/items/:itemsId", productController.showItems)*/
 
 
-routes.get('/pokemon',showPokemon)
-routes.get('/pokemon/nombre/:nombre',pokemonUnico.pokemonPorNombre)
-routes.get('/pokemon/:pokemonId',pokemonUnico.pokemonId)
-routes.get('/pokemon/tipo/:tipo',pokeTipo)
-routes.get('/pokemon/especial/legendarios',pokemonEspecial.obtenerLegendarios)
-routes.get('/pokemon/especial/misticos',pokemonEspecial.obtenerMísticos)
-routes.get('/pokemon/evoluciona/evolucion',obtenerPokemonConEvolucion)
 
-routes.get('/pokeballs',showPokeballs)
-routes.get('/pokeballs/:pokeballId',pokeballUnica.pokeballId)
-routes.get('/pokeballs/nombre/:nombre',pokeballUnica.pokeballPorNombre)
 
-routes.get('/items',showItems)
-routes.get('/items/categoria/:itemstipo',itemsTipo)//revisar
-routes.get('/items/:itemsId',ItemsUnico.itemsId)//revisar
-routes.get('/items/nombre/:nombre',ItemsUnico.itemsPorNombre)
+
+routes.get('/pokemon',pokemonController.showPokemon)
+routes.get('/pokemon/nombre/:nombre',pokemonController.pokemonPorNombre)
+routes.get('/pokemon/:pokemonId',pokemonController.pokemonId)
+routes.get('/pokemon/tipo/:tipo',pokemonController.pokeTipo)
+routes.get('/pokemon/especial/legendarios',pokemonController.obtenerLegendarios)
+routes.get('/pokemon/especial/misticos',pokemonController.obtenerMísticos)
+routes.get('/pokemon/evoluciona/evolucion',pokemonController.obtenerPokemonConEvolucion)
+
+routes.get('/pokeballs',pokeballController.showPokeballs)
+routes.get('/pokeballs/:pokeballId',pokeballController.pokeballId)
+routes.get('/pokeballs/nombre/:nombre',pokeballController.pokeballPorNombre)
+
+routes.get('/items',itemController.showItems)
+routes.get('/items/categoria/:itemstipo',itemController.itemsTipo)//revisar
+routes.get('/items/:itemsId',itemController.itemsId)//revisar
+routes.get('/items/nombre/:nombre',itemController.itemsPorNombre)
 
 //Falta buscar items por nombre y por tipo
 
