@@ -5,7 +5,6 @@ const pokemonController = require('../controllers/pokemonController');
 const pokeballController = require('../controllers/pokeballController')
 
 
-
 //const productController= require('../controllers/productController')
 
 
@@ -13,18 +12,6 @@ const pokeballController = require('../controllers/pokeballController')
 routes.get( '/', (req, res) => {
     res.redirect('/products/')
 });
-
-/*routes.get( "/products", productController.showProducts)
-routes.get("/dashboard/products", productController.showProducts)
-routes.get("/dashboard/products/pokemon", productController.showPokemon)
-routes.get("dashboard/products/pokemon/:pokemonId", productController.pokemonId)
-routes.get("/dashboard/products/pokeballs", productController.showPokeballs)
-routes.get("/dashboard/products/pokeballs/:pokeballId", productController.pokeballId)
-routes.get("/dashboard/products/items", productController.showItems)
-routes.get("/dashboard/products/items/:itemsId", productController.showItems)*/
-
-
-
 
 
 routes.get('/pokemon',pokemonController.showPokemon)
