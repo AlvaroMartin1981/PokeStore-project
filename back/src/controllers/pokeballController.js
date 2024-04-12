@@ -1,6 +1,6 @@
-const PokeBallModel= require('../../models/PokeBallModel')
+const PokeBallModel= require('../models/PokeBallModel')
 
-const  pokeballUnica ={
+const  pokeballController ={
 
     async pokeballId(req, res) {
         try {
@@ -31,7 +31,18 @@ console.log(pokeballId)
             console.error(error);
             res.status(500).json({ error: 'Error al obtener el detalle de la pokeball' });
         }
-    }
+    },
+    async showPokeballs (req, res){
+        try {
+          const TodasPokeBall = await PokeBallModel.find();
+            res.json(TodasPokeBall)
+         
+        } catch (error) {
+          console.error(error);
+          res.status(500).json({ error: 'Error al obtener todos los pokemons' });
+        }
+      }
+    
 }
 
-module.exports = pokeballUnica;
+module.exports = pokeballController;
