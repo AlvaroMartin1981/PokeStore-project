@@ -16,7 +16,11 @@ const PokeballSchema = new mongoose.Schema({
     precio: {
         type: mongoose.Schema.Types.Mixed,
         required: true
-    }
+    },
+    categoria:{
+        type: String,
+        required: true
+      }
 });
 
 const PokeballModel = mongoose.model('Pokeball', PokeballSchema);

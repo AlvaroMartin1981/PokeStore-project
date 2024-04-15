@@ -74,6 +74,10 @@ const PokemonSchema = new mongoose.Schema({
       },
     ],
   },
+  categoria:{
+    type: String,
+    required: true
+  },
   evolucionDe: String,
 });
 
