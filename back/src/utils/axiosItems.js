@@ -55,7 +55,8 @@ async function obtenerOtrosItems() {
           descripcion: description,
           imagen: imagen,
           precio: cost,
-          categoria: categoria,
+          tipo: categoria,
+          categoria:'Item',
         };
         await ItemModel.create(newItem)
         // Crear el modelo del nuevo ítem

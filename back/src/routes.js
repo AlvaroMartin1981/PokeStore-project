@@ -1,10 +1,10 @@
 const express= require('express')
 const routes = express.Router()
-const itemController = require('../controllers/itemController');
-const pokemonController = require('../controllers/pokemonController');
-const pokeballController = require('../controllers/pokeballController')
+const itemController = require('./controllers/itemController');
+const pokemonController = require('./controllers/pokemonController');
+const pokeballController = require('./controllers/pokeballController')
 
-//const productController= require('../controllers/productController')
+const productController= require('./controllers/productController')
 
 routes.get( '/', (req, res) => {
     res.redirect('/products/')
@@ -27,5 +27,6 @@ routes.get('/items/categoria/:itemstipo',itemController.itemsTipo)//revisar
 routes.get('/items/:itemsId',itemController.itemsId)//revisar
 routes.get('/items/nombre/:nombre',itemController.itemsPorNombre)
 
+routes.get('/products',productController.obtenerProduct)  //listado de
 
 module.exports= routes 

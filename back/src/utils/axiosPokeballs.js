@@ -46,7 +46,8 @@ async function obtenerPokeballs() {
                         nombre: nombre,
                         descripcion: description,
                         imagen: imagen,
-                        precio: cost
+                        precio: cost,
+                        categoria:'Pokeball',
                     };
 
                     await PokeballModel.create(newPokeBall)

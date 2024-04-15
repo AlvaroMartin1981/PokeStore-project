@@ -115,9 +115,10 @@ const pokemonNumero = async (poke) => {
       base_experience: base_experience,
       cadena_evoluciones: evoluciones,
       evolucionDe: evolucionDe,
+      categoria:'Pokemon'
     };
     await  PokemonModel.create(newPoke)
-    console.log(`Pokemon creado ${nombre}`);
+    console.log(`Pokemon creado ${name}`);
   } catch (error) {
     console.error('Error al obtener detalles del Pokémon:', error);
   }

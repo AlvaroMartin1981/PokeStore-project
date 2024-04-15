@@ -17,7 +17,11 @@ const ItemSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.Mixed,
     required: true
 },
-  categoria: {
+  tipo: {
+    type: String,
+    required: true
+  },
+  categoria:{
     type: String,
     required: true
   }
