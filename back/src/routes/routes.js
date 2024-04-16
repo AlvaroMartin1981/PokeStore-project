@@ -1,10 +1,10 @@
 const express= require('express')
 const routes = express.Router()
-const itemController = require('./controllers/itemController');
-const pokemonController = require('./controllers/pokemonController');
-const pokeballController = require('./controllers/pokeballController')
+const itemController = require('../controllers/itemController');
+const pokemonController = require('../controllers/pokemonController');
+const pokeballController = require('../controllers/pokeballController')
 
-const productController= require('./controllers/productController')
+const productController= require('../controllers/productController')
 
 routes.get( '/', (req, res) => {
     res.redirect('/products/')
