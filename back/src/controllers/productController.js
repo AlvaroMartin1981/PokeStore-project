@@ -9,7 +9,7 @@ const productController=  {
             const TodosPokemon = await PokemonModel.find();
             const TodasPokeBall = await PokeBallModel.find();
             const items = await itemModel.find();
-            const productos =TodosPokemon + TodasPokeBall + items 
+            const productos =[TodosPokemon,TodasPokeBall,items ]
             res.json(productos)
         }  catch (error) {
             console.error(error);
