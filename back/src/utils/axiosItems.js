@@ -1,19 +1,16 @@
 const axios = require('axios');
-const ItemModel = require('../models/itemModel')
+const ProductModel = require('../models/productoModel');
 
-async function obtenerOtrosItems() {
+async function obtenerItems() {
   try {
-    let url = 'https://pokeapi.co/api/v2/item/?limit=30000';
+    let url = 'https://pokeapi.co/api/v2/item?limit=100000&offset=0';
 
     const response = await axios.get(url);
     const { results: items } = response.data;
 
-    // Filtrar los ítems que no son pokeballs
-    const otrosItems = items.filter((item) => {
-      return !(item.name.includes('-ball') || item.name.includes('-Ball'));
-    });
+    const tiposItemsSet = new Set(); // Conjunto para almacenar tipos únicos de items
 
-    for (const item of otrosItems) {
+    for (const item of items) {
       const itemResponse = await axios.get(item.url);
       const itemDetails = itemResponse.data;
 
@@ -30,7 +27,7 @@ async function obtenerOtrosItems() {
         let cost =
           itemDetails.cost > 0
             ? itemDetails.cost / 100
-            : 'Por el momento, este ítem no está disponible';
+            : 'Este ítem no está disponible';
 
         // Obtener la categoría en español
         let categoria = itemDetails.category.name;
@@ -50,22 +47,34 @@ async function obtenerOtrosItems() {
 
         nombre = nombreEntry ? nombreEntry.name : item.name;
 
-        const newItem = {
+        const newProduct = {
           nombre: nombre,
           descripcion: description,
           imagen: imagen,
           precio: cost,
           tipo: categoria,
-          categoria:'Item',
+          categoria: 'item', // Puedes cambiar esto según cómo quieras manejar las categorías
+          // Agrega aquí cualquier otro campo específico del producto
         };
-        await ItemModel.create(newItem)
-        // Crear el modelo del nuevo ítem
-        console.log(newItem.nombre);
+
+        // Añadir el tipo de item al conjunto de tiposItemsSet
+        tiposItemsSet.add(categoria);
+
+        // Crear el modelo del nuevo producto
+        await ProductModel.create(newProduct);
+        console.log(newProduct.nombre);
+        console.log(tiposItemsSet)
       }
     }
+
+    // Convertir el conjunto de tipos únicos de items en un array
+    const tiposItemsArray = Array.from(tiposItemsSet);
+    console.log('Tipos de items:', tiposItemsArray);
+
   } catch (error) {
     console.error('Error al obtener los ítems:', error);
     throw error;
   }
 }
-module.exports=obtenerOtrosItems
+
+module.exports = obtenerItems;
