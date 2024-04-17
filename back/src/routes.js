@@ -5,7 +5,7 @@ const productController = require('./controllers/productController');
 
 router.get('/productos', productController.getAll);
 router.get('/productos/:id', productController.getById);
-router.get('/productos/buscar', productController.getProductsByName);
+router.get('/productos/nombre/:nombre', productController.getProductsByName);//revisr
 router.put('/productos/:id/editar', productController.edit);
 router.put('/productos/:id', productController.update);
 router.delete('/productos/:id', productController.delete);

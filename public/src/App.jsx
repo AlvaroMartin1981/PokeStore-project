@@ -17,7 +17,7 @@ function App() {
 
 export default App;
 
-Set(36) {
+/*Set(36) {
   'standard-balls',
   'special-balls',
   'healing',
@@ -54,4 +54,4 @@ Set(36) {
   'gameplay',
   'unused',
   'plot-advancement'
-}
+}*/

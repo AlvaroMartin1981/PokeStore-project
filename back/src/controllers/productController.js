@@ -28,8 +28,8 @@ const productController = {
     // Buscar productos por nombre
     getProductsByName: async (req, res) => {
         try {
-            const { nombre } = req.query;
-            const products = await ProductModel.find({ nombre: new RegExp(nombre, 'i') });
+            const nombre  = req.params.nombre;
+            const products = await ProductModel.findOne({ nombre });
             res.json(products);
         } catch (error) {
             res.status(500).json({ error: error.message });
