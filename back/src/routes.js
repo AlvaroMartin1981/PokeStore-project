@@ -1,32 +1,16 @@
-const express= require('express')
-const routes = express.Router()
-const itemController = require('./controllers/itemController');
-const pokemonController = require('./controllers/pokemonController');
-const pokeballController = require('./controllers/pokeballController')
+const express = require('express');
+const router = express.Router();
+const productController = require('./controllers/productController');
 
-const productController= require('./controllers/productController')
 
-routes.get( '/', (req, res) => {
-    res.redirect('/products/')
-});
+router.get('/productos', productController.getAll);
+router.get('/productos/:id', productController.getById);
+router.get('/productos/buscar', productController.getProductsByName);
+router.put('/productos/:id/editar', productController.edit);
+router.put('/productos/:id', productController.update);
+router.delete('/productos/:id', productController.delete);
+router.post('/productos/:id/comentario', productController.insertComment);
+router.post('/productos/:id/like', productController.like);
+router.post('/productos/crear', productController.create);
 
-routes.get('/pokemon',pokemonController.showPokemon)
-routes.get('/pokemon/nombre/:nombre',pokemonController.pokemonPorNombre)
-routes.get('/pokemon/:pokemonId',pokemonController.pokemonId)
-routes.get('/pokemon/tipo/:tipo',pokemonController.pokeTipo)
-routes.get('/pokemon/especial/legendarios',pokemonController.obtenerLegendarios)
-routes.get('/pokemon/especial/misticos',pokemonController.obtenerMísticos)
-routes.get('/pokemon/evoluciona/evolucion',pokemonController.obtenerPokemonConEvolucion)
-
-routes.get('/pokeballs',pokeballController.showPokeballs)
-routes.get('/pokeballs/:pokeballId',pokeballController.pokeballId)
-routes.get('/pokeballs/nombre/:nombre',pokeballController.pokeballPorNombre)
-
-routes.get('/items',itemController.showItems)
-routes.get('/items/categoria/:itemstipo',itemController.itemsTipo)//revisar
-routes.get('/items/:itemsId',itemController.itemsId)//revisar
-routes.get('/items/nombre/:nombre',itemController.itemsPorNombre)
-
-routes.get('/products',productController.obtenerProduct)  //listado de
-
-module.exports= routes 
+module.exports = router;
