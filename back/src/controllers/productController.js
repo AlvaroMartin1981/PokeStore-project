@@ -1,11 +1,11 @@
-const ProductModel = require('../models/ProductModel');
+const ProductoModel = require('../models/ProductoModel');
 
 
 const productController = {
     // Obtener todos los productos
    async getAll  (req, res){
         try {
-            const products = await ProductModel.find();
+            const products = await ProductoModel.find();
             res.json(products);
         } catch (error) {
             res.status(500).json({ error: error.message });
@@ -15,7 +15,7 @@ const productController = {
     // Obtener un producto por su ID
     async getById  (req, res){
         try {
-            const product = await ProductModel.findById(req.params.id);
+            const product = await ProductoModel.findById(req.params.id);
             if (!product) {
                 return res.status(404).json({ message: 'Producto no encontrado' });
             }
@@ -30,7 +30,7 @@ const productController = {
         try {
             let nombre = req.params.nombre;
             nombre = nombre.toUpperCase(); // Convertir a mayúsculas
-            const pokemon = await ProductModel.findOne({ nombre });
+            const pokemon = await ProductoModel.findOne({ nombre });
             res.json(pokemon);
         } catch (error) {
             res.status(500).json({ error: error.message });
@@ -40,7 +40,7 @@ const productController = {
     // Editar un producto
     async edit (req, res) {
         try {
-            const product = await ProductModel.findById(req.params.id);
+            const product = await ProductoModel.findById(req.params.id);
             if (!product) {
                 return res.status(404).json({ message: 'Producto no encontrado' });
             }
@@ -60,7 +60,7 @@ const productController = {
     // Actualizar un producto
    async update  (req, res){
         try {
-            const product = await ProductModel.findByIdAndUpdate(req.params.id, req.body, { new: true });
+            const product = await ProductoModel.findByIdAndUpdate(req.params.id, req.body, { new: true });
             if (!product) {
                 return res.status(404).json({ message: 'Producto no encontrado' });
             }
@@ -73,7 +73,7 @@ const productController = {
     // Eliminar un producto
     async delete  (req, res) {
         try {
-            const product = await ProductModel.findByIdAndDelete(req.params.id);
+            const product = await ProductoModel.findByIdAndDelete(req.params.id);
             if (!product) {
                 return res.status(404).json({ message: 'Producto no encontrado' });
             }
@@ -86,7 +86,7 @@ const productController = {
     // Insertar un comentario en un producto
     async insertComment  (req, res){
         try {
-            const product = await ProductModel.findById(req.params.id);
+            const product = await ProductoModel.findById(req.params.id);
             if (!product) {
                 return res.status(404).json({ message: 'Producto no encontrado' });
             }
@@ -103,7 +103,7 @@ const productController = {
     // Dar "Me gusta" a un producto
     async like  (req, res){
         try {
-            const product = await ProductModel.findById(req.params.id);
+            const product = await ProductoModel.findById(req.params.id);
             if (!product) {
                 return res.status(404).json({ message: 'Producto no encontrado' });
             }
@@ -121,7 +121,7 @@ const productController = {
     async create (req, res) {
         try {
             const { nombre, descripcion, imagen, precio, tipo, categoria, pokemonAttributes, pokeballAttributes, itemAttributes } = req.body;
-            const newProduct = new ProductModel({
+            const newProduct = new ProductoModel({
                 nombre,
                 descripcion,
                 imagen,
