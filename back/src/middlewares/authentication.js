@@ -2,7 +2,7 @@ const User = require("../models/UserModel.js");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const jwt_secret = process.env.JWT_SECRET;
-const Order = require("../models/Order.js");
+const Order = require("../models/OrderModel.js");
 
 const authentication = async (req, res, next) => {
     try {

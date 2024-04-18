@@ -1,9 +1,9 @@
-const ProductModel = require('../models/productoModel');
+const ProductModel = require('../models/ProductModel');
 
 
 const productController = {
     // Obtener todos los productos
-    getAll: async (req, res) => {
+   async getAll  (req, res){
         try {
             const products = await ProductModel.find();
             res.json(products);
@@ -13,7 +13,7 @@ const productController = {
     },
 
     // Obtener un producto por su ID
-    getById: async (req, res) => {
+    async getById  (req, res){
         try {
             const product = await ProductModel.findById(req.params.id);
             if (!product) {
@@ -26,18 +26,19 @@ const productController = {
     },
 
     // Buscar productos por nombre
-    getProductsByName: async (req, res) => {
+   async getProductsByName  (req, res){
         try {
-            const  nombre  = req.params.nombre;
-            const products = await ProductModel.find({ nombre });
-            res.json(products);
+            let nombre = req.params.nombre;
+            nombre = nombre.toUpperCase(); // Convertir a mayúsculas
+            const pokemon = await ProductModel.findOne({ nombre });
+            res.json(pokemon);
         } catch (error) {
             res.status(500).json({ error: error.message });
         }
     },
 
     // Editar un producto
-    edit: async (req, res) => {
+    async edit (req, res) {
         try {
             const product = await ProductModel.findById(req.params.id);
             if (!product) {
@@ -57,7 +58,7 @@ const productController = {
     },
 
     // Actualizar un producto
-    update: async (req, res) => {
+   async update  (req, res){
         try {
             const product = await ProductModel.findByIdAndUpdate(req.params.id, req.body, { new: true });
             if (!product) {
@@ -70,7 +71,7 @@ const productController = {
     },
 
     // Eliminar un producto
-    delete: async (req, res) => {
+    async delete  (req, res) {
         try {
             const product = await ProductModel.findByIdAndDelete(req.params.id);
             if (!product) {
@@ -83,7 +84,7 @@ const productController = {
     },
 
     // Insertar un comentario en un producto
-    insertComment: async (req, res) => {
+    async insertComment  (req, res){
         try {
             const product = await ProductModel.findById(req.params.id);
             if (!product) {
@@ -100,7 +101,7 @@ const productController = {
     },
 
     // Dar "Me gusta" a un producto
-    like: async (req, res) => {
+    async like  (req, res){
         try {
             const product = await ProductModel.findById(req.params.id);
             if (!product) {
@@ -117,7 +118,7 @@ const productController = {
     },
 
     // Crear un producto
-    create: async (req, res) => {
+    async create (req, res) {
         try {
             const { nombre, descripcion, imagen, precio, tipo, categoria, pokemonAttributes, pokeballAttributes, itemAttributes } = req.body;
             const newProduct = new ProductModel({
