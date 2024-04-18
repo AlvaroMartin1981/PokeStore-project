@@ -1,5 +1,5 @@
 const axios=require('axios')
-const PokemonModel = require('../models/PokemonModel')
+const ProductModel= require('../models/productoModel')
 
 const ObtenerPokemons = async (pagina) => {
   try {
@@ -100,24 +100,29 @@ const pokemonNumero = async (poke) => {
 
     const newPoke = {
       nombre: name,
-      tipo: tiposEspañol,
-      peso: peso,
-      altura: height,
-      imagen: img,
       descripcion: descripcionEspañol,
-      estadisticas: estadisticas,
-      id_pokedex: id,
-      legendario: descripcionData.is_legendary,
-      mythical: descripcionData.is_mythical,
-      habilidades: habilidades,
-      ratio_captura: descripcionData.capture_rate,
+      imagen: img,
       precio: sumaBaseStatNumero,
-      base_experience: base_experience,
-      cadena_evoluciones: evoluciones,
-      evolucionDe: evolucionDe,
-      categoria:'Pokemon'
-    };
-    await  PokemonModel.create(newPoke)
+      categoria: "pokemon", // Asumiendo que "Pokemon" es la categoría correcta para todos los Pokémon
+      pokemonAttributes: {
+          tipo: tiposEspañol,
+          peso: peso,
+          altura: height,
+          estadisticas: estadisticas,
+          id_pokedex: id,
+          legendario: descripcionData.is_legendary,
+          mythical: descripcionData.is_mythical,
+          habilidades: habilidades,
+          ratio_captura: descripcionData.capture_rate,
+          base_experience: base_experience,
+          cadena_evoluciones: evoluciones,
+          evolucionDe: evolucionDe,
+      },
+      reviews: [], // Inicialmente no hay comentarios
+      likes: [], // Inicialmente no hay "me gusta"
+  };
+  
+    await  ProductModel.create(newPoke)
     console.log(`Pokemon creado ${name}`);
   } catch (error) {
     console.error('Error al obtener detalles del Pokémon:', error);
