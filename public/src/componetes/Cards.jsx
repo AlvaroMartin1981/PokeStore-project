@@ -1,27 +1,37 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Cards = ({ products }) => {
-  // Verificar si los productos son undefined o null
   if (!products) {
     return <div>No hay productos disponibles.</div>;
   }
 
   return (
-    <div className="projects__container container grid"> {/* Cambié 'class' por 'className' */}
+    <div className="container_cards"> 
       {products.map((product) => (
-        <article key={product._id} className="projects__card"> {/* Agregué una 'key' única y cambié 'class' por 'className' */}
-          <div className="projects__image"> {/* Cambié 'class' por 'className' */}
-            <img src={product.imagen} alt={product.nombre} className="projects__img" width='150px'/> {/* Usé datos de 'product' para la URL de la imagen */}
+        <div className='card' key={product._id}> 
+          <div>
+            <Link to={`/product/${product._id}`}>
+              <img src={product.imagen} alt={product.nombre} width='150px'/> 
+            </Link>
           </div>
-          <div className="projects__content"> {/* Cambié 'class' por 'className' */}
-            <h2 className="projects__title">{product.nombre}</h2> {/* Usé datos de 'product' para el título */}
-            <p className="projects__description">{product.descripcion}</p> {/* Usé datos de 'product' para la descripción */}
+          <div className='text_card'> 
+            <h2>
+              <Link to={`/product/${product._id}`}>
+                {product.nombre}
+              </Link>
+            </h2> 
+            <h2>{product.categoria}</h2>
+            {typeof product.precio === 'number' ? (
+              <h3>{product.precio} €</h3>
+            ) : (
+              <h3>No disponible</h3>
+            )} 
           </div>
-        </article>
+        </div>
       ))}
     </div>
   );
 };
 
 export default Cards;
-

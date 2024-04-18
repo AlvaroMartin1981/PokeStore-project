@@ -35,7 +35,7 @@ const pokemonNumero = async (poke) => {
 
     // Obtener detalles del Pokemon y la descripción
     const descripcionEspañol = descripcionPokemon(descripcionData.flavor_text_entries);
-    const name = pokemonData.name.toUpperCase();
+    const name = pokemonData.name;
     const img = pokemonData.sprites.other['official-artwork'].front_default;
     const id = pokemonData.id;
 
@@ -57,8 +57,7 @@ const pokemonNumero = async (poke) => {
       (pokemonData.stats.reduce((total, stats) => {
         return total + stats.base_stat;
       }, 0) +
-        base_experience) /
-      10
+        base_experience) /2
     ).toLocaleString('es-ES', {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,
@@ -103,7 +102,7 @@ const pokemonNumero = async (poke) => {
       descripcion: descripcionEspañol,
       imagen: img,
       precio: sumaBaseStatNumero,
-      categoria: "pokemon", // Asumiendo que "Pokemon" es la categoría correcta para todos los Pokémon
+      categoria: "Pokemon", 
       pokemonAttributes: {
           tipo: tiposEspañol,
           peso: peso,
