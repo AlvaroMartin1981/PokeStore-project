@@ -1,5 +1,4 @@
-*{
-  font-family:"Helvetica Neue", Helvetica, Arial, sans-serif}
+
 
 
 .container_cards {
@@ -9,6 +8,7 @@
   padding:20px;
   gap:30px;
   justify-content: center;
+  font-family: Helvetica
  
 };
  
@@ -20,4 +20,18 @@
 .text_card{
   font-weight: 600;
   text-align: center;
+}
+.card_carro{
+  display: flex;
+  gap:5px;
+  justify-content: center;
+}
+.card_carro .card_btn{
+  color: white;
+  background-color: black;
+  border-radius: 5px;
+  font-size: 14px;
+  padding: 2px;
+
+
 }

@@ -12,6 +12,7 @@ const routerOrder =require ('./src/routes/orderRoutes')
 //Nos conectamos con la base de datos
 dbConnection();
 
+
 app.use(cors())
 //Middleware que usaremos para todas las rutas
 app.use(express.urlencoded({ extended: true }));
@@ -21,6 +22,7 @@ app.use('/user',routerUser);
 app.use('/pedidos',routerOrder)
 
 //levantamos el puerto
+
 
 app.listen(PORT, () => {
     console.log(`Server started on http://localhost:${PORT}`);
