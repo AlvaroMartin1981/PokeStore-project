@@ -15,8 +15,8 @@ export const ProductProvider = ({ children }) => {
         throw new Error('Failed to fetch products');
       }
       const data = await response.json();
-      const filteredPokemon = data.filter(product => product.categoria === 'pokemon');
-      const filteredItems = data.filter(product => product.categoria === 'item');
+      const filteredPokemon = data.filter(product => product.categoria === 'Pokemon');
+      const filteredItems = data.filter(product => product.categoria === 'Item');
       
       // Actualizar el estado con los datos filtrados
       setPokemon(filteredPokemon);

@@ -1,12 +1,54 @@
 
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  background-color: #333;
+}
 
+nav ul li {
+  display: inline-block;
+}
+
+nav ul li a {
+  display: block;
+  padding: 15px 20px;
+  color: #fff;
+  text-decoration: none;
+}
+
+nav ul li ul {
+  display: none;
+  position: absolute;
+  background-color: #333;
+}
+
+nav ul li:hover ul {
+  display: block;
+}
+
+nav ul li ul li {
+  display: block;
+}
+
+nav ul li ul li span {
+  cursor: pointer;
+}
+
+nav ul li ul li ul {
+  display: none;
+}
+
+nav ul li ul li:hover ul {
+  display: block;
+}
 
 .container_cards {
   display: flex;
   flex-wrap: wrap;
   margin:20px;
   padding:20px;
-  gap:30px;
+  gap:60px;
   justify-content: center;
   font-family: Helvetica
  
