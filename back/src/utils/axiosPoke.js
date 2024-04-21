@@ -1,5 +1,8 @@
 const axios=require('axios')
 const ProductModel= require('../models/Producto')
+const capitalizeFirstLetter = (string) => {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+};
 
 const ObtenerPokemons = async () => {
   const pagina ='https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0'
@@ -36,7 +39,7 @@ const pokemonNumero = async (poke) => {
 
     // Obtener detalles del Pokemon y la descripción
     const descripcionEspañol = descripcionPokemon(descripcionData.flavor_text_entries);
-    const name = pokemonData.name;
+    const name = capitalizeFirstLetter(pokemonData.name);
     const img = pokemonData.sprites.other['official-artwork'].front_default;
     const id = pokemonData.id;
 

@@ -1,4 +1,4 @@
-const ProductModel= require('../models/Producto')
+const ProductoModel= require('../models/Producto')
 
 const productController = {
     // Obtener todos los productos

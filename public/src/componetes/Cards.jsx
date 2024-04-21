@@ -6,18 +6,19 @@ const Cards = ({ products }) => {
   }
 
   return (
+    <>
     <div className="container_cards"> 
       {products.map((product) => (
         <div className='card' key={product._id}> 
           <div>
-            <Link to={`/product/${product._id}`}> {/* Aquí pasamos el ID del producto */}
+            <Link to={`/product/${product.nombre}`}> 
               <img src={product.imagen} alt={product.nombre} width='150px'/> 
             </Link>
           </div>
           <div className='text_card'> 
             <h2>
-              <Link to={`/product/${product._id}`}>{/* También aquí */}
-                {product.nombre}
+              <Link to={`/product/${product.nombre}`}>{/* También aquí */}
+              {product.id} - {product.nombre}
               </Link>
             </h2> 
             <h2>{product.categoria}</h2>
@@ -33,6 +34,7 @@ const Cards = ({ products }) => {
         </div>
       ))}
     </div>
+    </>
   );
 };
 
