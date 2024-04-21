@@ -22,9 +22,8 @@ const ProductSchema = new mongoose.Schema({
         type: String,
         enum: ["Pokemon", "Item"],
         required: true
-    },
+    }, tipo: [String],
     pokemonAttributes: {
-        tipo: [String],
         peso: Number,
         altura: Number,
         estadisticas: [

@@ -3,7 +3,7 @@ import React, { createContext, useContext, useEffect, useState } from 'react';
 const ProductContext = createContext();
 
 export const ProductProvider = ({ children }) => {
-  const [products, setProducts] = useState({});
+  const [products, setProducts] = useState([]);
   const [pokemon, setPokemon] = useState([]);
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);

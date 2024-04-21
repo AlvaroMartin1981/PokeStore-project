@@ -1,7 +1,8 @@
 const axios=require('axios')
-const ProductModel= require('../models/productoModel')
+const ProductModel= require('../models/Producto')
 
-const ObtenerPokemons = async (pagina) => {
+const ObtenerPokemons = async () => {
+  const pagina ='https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0'
   try {
     const response = await axios(pagina);
     const data = await response.data;
@@ -72,12 +73,12 @@ const pokemonNumero = async (poke) => {
     }
 
     if (descripcionData.capture_rate < 20) {
-      sumaBaseStatNumero += 120;
+      sumaBaseStatNumero += 100;
     } else if (
       descripcionData.capture_rate >= 20 &&
       descripcionData.capture_rate < 40
     ) {
-      sumaBaseStatNumero += 90;
+      sumaBaseStatNumero += 80;
     } else if (
       descripcionData.capture_rate >= 40 &&
       descripcionData.capture_rate < 60
@@ -103,12 +104,12 @@ const pokemonNumero = async (poke) => {
       imagen: img,
       precio: sumaBaseStatNumero,
       categoria: "Pokemon", 
+      tipo: tiposEspañol, 
+       id: id,
       pokemonAttributes: {
-          tipo: tiposEspañol,
           peso: peso,
           altura: height,
           estadisticas: estadisticas,
-          id_pokedex: id,
           legendario: descripcionData.is_legendary,
           mythical: descripcionData.is_mythical,
           habilidades: habilidades,
@@ -117,8 +118,8 @@ const pokemonNumero = async (poke) => {
           cadena_evoluciones: evoluciones,
           evolucionDe: evolucionDe,
       },
-      reviews: [], // Inicialmente no hay comentarios
-      likes: [], // Inicialmente no hay "me gusta"
+      reviews: [], 
+      likes: [], 
   };
   
     await  ProductModel.create(newPoke)
@@ -199,24 +200,24 @@ async function detalle(habilidad) {
 
 function traducirTipo(typeName) {
   const diccionarioTipos = {
-    normal: 'NORMAL',
-    fire: 'FUEGO',
-    water: 'AGUA',
-    electric: 'ELÉCTRICO',
-    grass: 'PLANTA',
-    ice: 'HIELO',
-    fighting: 'LUCHA',
-    poison: 'VENENO',
-    ground: 'TIERRA',
-    flying: 'VOLADOR',
-    psychic: 'PSÍQUICO',
-    bug: 'BICHO',
-    rock: 'ROCA',
-    ghost: 'FANTASMA',
-    dragon: 'DRAGÓN',
-    dark: 'SINIESTRO',
-    steel: 'ACERO',
-    fairy: 'HADA',
+    normal: 'Normal',
+    fire: 'Fuego',
+    water: 'Agua',
+    electric: 'Electrico',
+    grass: 'Planta',
+    ice: 'Hielo',
+    fighting: 'Lucha',
+    poison: 'Veneno',
+    ground: 'Tierra',
+    flying: 'Volador',
+    psychic: 'Psíquico',
+    bug: 'Bicho',
+    rock: 'Roca',
+    ghost: 'Fantasma',
+    dragon: 'Dragón',
+    dark: 'Siniestro',
+    steel: 'Acero',
+    fairy: 'Hada',
   };
   return diccionarioTipos[typeName];
 }
@@ -230,4 +231,4 @@ function descripcionPokemon(flavortextentries) {
     : 'No hay una descripción en español para este Pokémon';
 }
 
-module.exports= ObtenerPokemons
+  module.exports= ObtenerPokemons
