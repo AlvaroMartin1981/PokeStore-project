@@ -1,52 +1,27 @@
-const User = require("../models/UserModel.js");
-const jwt = require("jsonwebtoken");
-require("dotenv").config();
-const jwt_secret = process.env.JWT_SECRET;
-const Order = require("../models/OrderModel.js");
+const admin = require("../config/firebase");
 
 const authentication = async (req, res, next) => {
     try {
-        const token = req.headers.authorization;
-        const payload = jwt.verify(token, jwt_secret);
-        const user = await User.findOne({ _id: payload._id, tokens: token });
-        if (!user) {
-          return res.status(401).send({ message: "No estas autorizado" });
+        // Obtener el token de autorización del encabezado de la solicitud
+        const idToken = req.headers.authorization;
+        
+        // Verificar si se proporcionó un token
+        if (!idToken) {
+            return res.status(401).json({ error: "Acceso no autorizado. Token de autorización no proporcionado." });
         }
-        req.user = user;
+
+        // Verificar el token con Firebase Authentication
+        const decodedToken = await admin.auth().verifyIdToken(idToken);
+
+        // Adjuntar el UID del usuario decodificado a la solicitud
+        req.user = { uid: decodedToken.uid };
+
+        // Pasar al siguiente middleware o controlador
         next();
-      } catch (error) {
-        console.error(error);
-        return res
-          .status(500)
-          .send({ error, message: "Ha habido un problema con el token" });
-      }
-    };
-    
-    const isAdmin = async (req, res, next) => {
-      const admins = ["admin", "superadmin"];
-      if (!admins.includes(req.user.role)) {
-        return res.status(403).send({
-          message: "You do not have permission",
-        });
-      }
-      next();
-    };
-    const isAuthor = async (req, res, next) => {
-      try {
-        const order = await Order.findById(req.params._id);
-        if (order.userId.toString() !== req.user._id.toString()) {
-          return res.status(403).send({ message: "Este pedido no es tuyo" });
-        }
-        next();
-      } catch (error) {
-        console.error(error);
-        return res
-          .status(500)
-          .send({
-            error,
-            message: "Ha habido un problema al comprobar la autoría del pedido",
-          });
-      }
-    };
-    
-    module.exports = { authentication, isAdmin, isAuthor };
+    } catch (error) {
+        console.error("Error de autenticación:", error);
+        return res.status(403).json({ error: "Acceso no autorizado. Token de autorización inválido." });
+    }
+};
+
+module.exports = authentication;

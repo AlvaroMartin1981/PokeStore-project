@@ -43,9 +43,7 @@ const productController = {
             if (!product) {
                 return res.status(404).json({ message: 'Producto no encontrado' });
             }
-            // Realizar las modificaciones necesarias en el producto
-            // Aquí puedes actualizar los campos que necesites
-            // Por ejemplo:
+           
             product.nombre = req.body.nombre;
             product.descripcion = req.body.descripcion;
             // Guardar los cambios
