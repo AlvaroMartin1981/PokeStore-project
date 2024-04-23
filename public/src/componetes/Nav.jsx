@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useProducts } from '../usecontext/ContextCard.jsx';
+import { useProducts } from '../usecontext/ProductContext.jsx';
+import Carrito from  './Carrito.jsx'
 
 const Nav = () => {
   const { pokemon, items } = useProducts();
@@ -13,7 +14,9 @@ const Nav = () => {
 
   return (
   <>
+  <header>
   <nav>
+ 
     <ul>
       <li>
         <Link to="/pokemon">Pokemon</Link>
@@ -48,8 +51,11 @@ const Nav = () => {
         </ul>
       </li>
     </ul>
-  </nav>
+   </nav> 
+    <Carrito/>
+  
+  </header>
 </>
-)} //  
+)}   
 
  export default Nav
