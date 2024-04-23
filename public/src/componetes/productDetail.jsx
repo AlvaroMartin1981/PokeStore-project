@@ -1,4 +1,4 @@
-import { useProducts } from '../usecontext/ContextCard.jsx';
+import { useProducts } from '../usecontext/ProductContext.jsx';
 import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 
@@ -6,7 +6,6 @@ const ProductDetail = () => {
   const { products } = useProducts();
   const { nombre } = useParams();
 
-  // Encontrar el producto por ID
   const product = products.find(product => product.nombre === nombre);
   
   if (!product) {
@@ -15,7 +14,6 @@ const ProductDetail = () => {
 
   return (
     <>
-
     <div className="product-detail">
       <div>
         <img src={product.imagen} alt={product.nombre} width='150px'/>
@@ -43,7 +41,7 @@ const ProductDetail = () => {
               {product.pokemonAttributes.estadisticas.map((stat, index) => (
                 <li key={index}>
                   {stat.nombre}: {stat.valor}
-                  <progress value={stat.valor} max="150"></progress>
+                  <progress value={stat.valor} max="200"></progress>
                 </li>
               ))}
             </ul>
