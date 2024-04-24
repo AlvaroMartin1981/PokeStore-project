@@ -11,7 +11,7 @@ const dbConnection = async () => {
             writeConcern: {
               w: 'majority',
               j: true,
-              wtimeout: 1000
+              timeout: 1000
             }
           })
         console.log('Base de datos conectada con éxito');

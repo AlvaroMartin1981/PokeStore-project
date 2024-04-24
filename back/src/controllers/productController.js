@@ -28,7 +28,7 @@ const productController = {
    async getProductsByName  (req, res){
         try {
             let nombre = req.params.nombre;
-            nombre = nombre.toUpperCase(); // Convertir a mayúsculas
+            nombre = new RegExp('^' + nombre + '$', 'i');
             const pokemon = await ProductoModel.findOne({ nombre });
             res.json(pokemon);
         } catch (error) {
@@ -43,9 +43,7 @@ const productController = {
             if (!product) {
                 return res.status(404).json({ message: 'Producto no encontrado' });
             }
-            // Realizar las modificaciones necesarias en el producto
-            // Aquí puedes actualizar los campos que necesites
-            // Por ejemplo:
+           
             product.nombre = req.body.nombre;
             product.descripcion = req.body.descripcion;
             // Guardar los cambios
