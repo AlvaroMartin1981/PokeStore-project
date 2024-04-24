@@ -1,6 +1,7 @@
 const User = require("../models/UserModel");
-const admin = require("../config/firebase"); 
-require("dotenv").config();
+const { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } = require('firebase/auth');
+const app = require('../config/firebase');
+const auth = getAuth(app);
 
 const UserController = {
     async register(req, res, next) {
@@ -10,6 +11,10 @@ const UserController = {
                 return res.status(400).send({ message: "Por favor, proporcione un correo electrónico y una contraseña válidos." });
             }
 
+            // Crear una cuenta con correo electrónico y contraseña en Firebase
+            await createUserWithEmailAndPassword(auth, req.body.email, req.body.password);
+
+            // Crear el usuario en tu base de datos local
             const user = await User.create({ ...req.body, role: "user" });
             res.status(201).send({ message: "Usuario registrado con éxito", user });
         } catch (error) {
@@ -20,36 +25,33 @@ const UserController = {
 
     async login(req, res) {
         try {
+            console.log("Iniciando sesión...");
+
+            // Iniciar sesión con correo electrónico y contraseña en Firebase
+            const firebaseUserCredential = await signInWithEmailAndPassword(auth, req.body.email, req.body.password);
+
+            // Obtener el usuario localmente
             const user = await User.findOne({ email: req.body.email });
 
-            // Verificar si el usuario existe y tiene un rol asignado
-            if (!user || !user.role) {
-                return res.status(401).send({ message: "Credenciales inválidas" });
-            }
-
-            const firebaseUser = await admin.auth().getUserByEmail(req.body.email);
-
-            const customToken = await admin.auth().createCustomToken(firebaseUser.uid);
+            console.log("Inicio de sesión exitoso");
             
-            let isAdmin = user.role === 'admin';
 
-            // Guardar el token personalizado en el usuario
-            user.firebaseCustomToken = customToken;
-            await user.save();
-
-            res.send({ message: "Bienvenido/a " + user.name, firebaseCustomToken: customToken, isAdmin });
+           
+            console.log("Usuario de Firebase:", firebaseUserCredential.user);
         } catch (error) {
-            console.error(error);
+            console.error("Error al iniciar sesión:", error);
             res.status(500).send({ message: "Error al iniciar sesión" });
         }
     },
 
     async logout(req, res) {
         try {
-            // Eliminar el token personalizado de Firebase del usuario
-            await User.findByIdAndUpdate(req.user._id, { firebaseCustomToken: null });
+            // Cerrar sesión en Firebase
+            await signOut(auth);
 
-            res.send({ message: "Desconectado con éxito" });
+            console.log("Desconexión exitosa");
+
+            //res.send({ message: "Desconectado con éxito" });
         } catch (error) {
             console.error(error);
             res.status(500).send({ message: "Error al cerrar sesión" });
@@ -58,6 +60,7 @@ const UserController = {
 
     async getInfo(req, res) {
         try {
+            // Obtener información del usuario de la base de datos local
             const user = await User.findById(req.user._id)
                 .populate({
                     path: "orderIds",

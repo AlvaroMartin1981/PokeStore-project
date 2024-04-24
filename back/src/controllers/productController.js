@@ -28,7 +28,7 @@ const productController = {
    async getProductsByName  (req, res){
         try {
             let nombre = req.params.nombre;
-            nombre = nombre.toUpperCase(); // Convertir a mayúsculas
+            nombre = new RegExp('^' + nombre + '$', 'i');
             const pokemon = await ProductoModel.findOne({ nombre });
             res.json(pokemon);
         } catch (error) {
