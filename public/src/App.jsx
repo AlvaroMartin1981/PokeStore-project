@@ -1,5 +1,5 @@
 import './App.css'
-import Rutas from './Ruotes/routes.jsx'
+import Rutas from './Ruotes/Routes.jsx'
 import { ProductProvider } from './usecontext/ProductContext.jsx';
 import { CarritoProvider } from './usecontext/CarritoContext.jsx';
 

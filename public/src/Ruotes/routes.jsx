@@ -1,12 +1,12 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { useProducts } from '../usecontext/ProductContext.jsx';
-import Cards from '../componetes/Cards.jsx';
-import Nav from '../componetes/Nav.jsx';
-import ProductDetail from '../componetes/ProductDetail.jsx';
-import ProductType from '../componetes/ProductType.jsx';
-import Legendarios from '../componetes/Lengendario.jsx';
-import Mythical from '../componetes/Mythical.jsx';
+import Cards from '../Componentes/Cards.jsx';
+import Nav from '../Componentes/Nav.jsx';
+import ProductDetail from '../Componentes/productDetail.jsx';
+import ProductType from '../Componentes/ProductType.jsx';
+import Legendarios from '../Componentes/Lengendario.jsx';
+import Mythical from '../Componentes/Mythical.jsx';
 
 function Rutas() {
     const { pokemon, items } = useProducts();
@@ -22,6 +22,7 @@ function Rutas() {
                 <Route path="/pokemon/tipo/:tipo" element={<ProductType />} />
                 <Route path="/items/tipo/:tipo" element={<ProductType />} />
                 <Route path="/product/:nombre" element={<ProductDetail />} />
+                
             </Routes>
         </Router>
     );
