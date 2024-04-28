@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
-import { useCarrito } from '../usecontext/CarritoContext' 
+import { useCarrito } from '../../usecontext/CarritoContext' 
 import { useState } from 'react';
+import './Cards.css'
 
 const Cards = ({ products,searchTerm  }) => {
   const { añadir } = useCarrito(); 
@@ -30,6 +31,7 @@ const Cards = ({ products,searchTerm  }) => {
   }
   return ( 
   <>
+  <section  className="container">
     <div>
       <label htmlFor="orden">Ordenar por:</label>
       <select id="orden" value={orden} onChange={handleChangeOrden}>
@@ -68,6 +70,7 @@ const Cards = ({ products,searchTerm  }) => {
           </div>
         ))}
       </div>
+      </section>
     </>
   );
 };

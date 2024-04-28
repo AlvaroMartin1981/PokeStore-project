@@ -25,7 +25,7 @@ dbConnection();
   cookie: {secure: false}
   })
 );
-
+*/
 
 app.use(cors())
 //Middleware que usaremos para todas las rutas

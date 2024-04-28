@@ -1,5 +1,5 @@
 import { useProducts } from '../usecontext/ProductContext.jsx';
-import Cards from './Cards.jsx';
+import Cards from './Cards/Cards.jsx';
 
 const Mythical = () => {
   const { pokemon } = useProducts();

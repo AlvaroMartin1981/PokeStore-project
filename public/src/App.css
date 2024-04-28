@@ -1,54 +1,4 @@
-header{
-  display: flex;
-  justify-content: space-between;
-  background-color: #333;
-  color: #fff;
-  align-items: center;
-}
-nav ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
 
-}
-
-nav ul li {
-  display: inline-block;
-}
-
-nav ul li a {
-  display: block;
-  padding: 15px 20px;
-  color: #fff;
-  text-decoration: none;
-  font-weight: 700;
-}
-
-nav ul li ul {
-  display: none;
-  position: absolute;
-  background-color: #333;
-}
-
-nav ul li:hover ul {
-  display: block;
-}
-
-nav ul li ul li {
-  display: block;
-}
-
-nav ul li ul li span {
-  cursor: pointer;
-}
-
-nav ul li ul li ul {
-  display: none
-}
-
-nav ul li ul li:hover ul {
-  display: block;
-}
 .cart-container {
   position: relative;
 }
@@ -135,37 +85,4 @@ nav ul li ul li:hover ul {
   margin-top: 10px;
   text-align: right;
   font-weight: 700;
-}
-
-.container_cards {
-  display: flex;
-  flex-wrap: wrap;
-  margin:20px;
-  padding:20px;
-  gap:60px;
-  justify-content: center;
-  font-family: Helvetica
-};
-.card{
-  margin-bottom: 100px;
-  display: flex;
-}
-
-.text_card{
-  font-weight: 600;
-  text-align: center;
-}
-.card_carro{
-  display: flex;
-  gap:5px;
-  justify-content: center;
-}
-.card_carro .card_btn{
-  color: white;
-  background-color: black;
-  border-radius: 5px;
-  font-size: 14px;
-  padding: 2px;
-
-
 }

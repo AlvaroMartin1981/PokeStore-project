@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { useProducts } from '../usecontext/ProductContext.jsx';
-import Cards from './Cards.jsx';
+import Cards from './Cards/Cards.jsx';
 
 const ProductType = () => {
   const { products } = useProducts();

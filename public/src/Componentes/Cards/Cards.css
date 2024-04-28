@@ -1,0 +1,38 @@
+.container{
+    position: relative;
+    margin:100px;
+
+}
+.container_cards {
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+    margin:20px;
+    padding:20px;
+    gap:60px;
+    justify-content: center;
+    font-family: Helvetica
+  };
+  .card{
+    margin-bottom: 100px;
+    display: flex;
+  }
+  
+  .text_card{
+    font-weight: 600;
+    text-align: center;
+  }
+  .card_carro{
+    display: flex;
+    gap:5px;
+    justify-content: center;
+  }
+  .card_carro .card_btn{
+    color: white;
+    background-color: black;
+    border-radius: 5px;
+    font-size: 14px;
+    padding: 2px;
+  
+  
+  }

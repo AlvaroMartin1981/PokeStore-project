@@ -1,0 +1,64 @@
+.front_page {
+    position: relative; 
+}
+  
+.front_page::after {
+    content: ""; 
+    position: absolute; 
+    top: 0; 
+    left: 0;
+    width: 100%; 
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.front_page img{
+    width: 100%;
+    height: 500px;
+}
+ h2{
+    text-align: center;
+    font-size: 50px;
+    font-weight: 900;
+ }
+.container_home {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.container_home > div {
+    margin: 10px;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.container_home_text{
+    text-align: center;
+}
+.container_home_text h3 {
+    font-size: 30px;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.container_home_text h4 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-top: -0px;
+}
+.container_home_text p {
+    font-size: 18px;
+    font-weight: 500;
+    margin-top: -10px;
+}
+.container_home a {
+    text-decoration: none;
+    color: #000000; /* Color azul para los enlaces */
+    transition: color 0.3s ease; /* Efecto de transición para el color del enlace */
+}
+
+.container_home a:hover {
+    color: #0056b3; /* Cambia el color al pasar el mouse por encima */
+}
