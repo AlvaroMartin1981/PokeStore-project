@@ -1,30 +1,30 @@
-import React, { useState, useEffect } from 'react';
-import { useCarrito } from '../usecontext/CarritoContext';
+import { useState } from 'react';
+import { useCarrito } from '../../usecontext/CarritoContext';
+import './Trolley.css';
 
-const CartList = () => {
+const Trolley = () => {
   const { carrito, eliminar, vaciarCarrito } = useCarrito(); 
   const [mostrarCarrito, setMostrarCarrito] = useState(false);
-
-
 
   const toggleCarrito = () => {
     setMostrarCarrito(!mostrarCarrito);
   };
 
   const handleEliminarProducto = (id) => {
-    eliminar(id); // Llamamos a la función eliminar con el ID del producto a eliminar
+    eliminar(id); 
   };
 
   const totalPrecio = carrito.reduce((total, producto) => total + producto.precio * producto.cantidad, 0);
 
   return (
-    <div className="cart-container"  onMouseLeave={toggleCarrito}>
-      <button className="cart-toggle" onMouseEnter={toggleCarrito} >
+    <>
+    <div className="trolley-container"  onMouseLeave={toggleCarrito}>
+      <button className="trolley-toggle" onMouseEnter={toggleCarrito} >
         Carrito ({carrito.length})
       </button>
       {mostrarCarrito && (
-        <>
-          <table className="cart-items">
+        <div className='trolley-table'>
+          <table className="trolley-items">
             <thead>
               <tr>
                 <th>Imagen</th>
@@ -41,21 +41,22 @@ const CartList = () => {
                   <td>{producto.nombre}</td>
                   <td>{producto.precio} €</td>
                   <td>{producto.cantidad}</td>
-                  <td><button className="btn_carrito" onClick={() => handleEliminarProducto(producto.id)}>X</button></td>
+                  <td><button className="btn_trolley" onClick={() => handleEliminarProducto(producto.id)}>X</button></td>
                 </tr>
               ))}
             </tbody>
           </table>
           {carrito.length > 0 && (
-            <button onClick={vaciarCarrito} className="empty-cart-button">
+            <button onClick={vaciarCarrito} className="empty-trolley-button">
               Vaciar Carrito
             </button>
           )}
-          <div className="cart-total">Total:  {totalPrecio} €</div>
-        </>
+          <div className="trolley-total">Total:  {totalPrecio} €</div>
+        </div>
       )}
     </div>
+    </>
   );
 };
 
-export default CartList;
+export default Trolley;

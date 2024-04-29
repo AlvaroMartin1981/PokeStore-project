@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
 import { useCarrito } from '../../usecontext/CarritoContext' 
 import { useState } from 'react';
-import './Cards.css'
+import './Cards.css';
 
-const Cards = ({ products,searchTerm  }) => {
+const Cards = ({ products}) => {
   const { añadir } = useCarrito(); 
   const [productosOrdenados, setProductosOrdenados] = useState(products); 
   const [orden, setOrden] = useState('nombreAsc'); 

@@ -1,31 +1,18 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useProducts } from '../../usecontext/ProductContext.jsx';
-import Carrito from '../Carrito.jsx';
-import SearchBar from '../SearchBar.jsx';
+import Trolley from '../Trolley/Trolley.jsx';
+import SearchBar from '../SearchBar/SearchBar.jsx';
 import './Navbar.css';
 
 const Nav = () => {
   const { pokemon, items } = useProducts();
-  const [searchResults, setSearchResults] = useState([]);
 
   const pokemonTypes = Array.from(new Set(pokemon.map(p => p.tipo).flat()));
   const itemTypes = Array.from(new Set(items.map(i => i.tipo).flat()));
 
   const [showPokemonTypes, setShowPokemonTypes] = useState(false);
   const [showItemTypes, setShowItemTypes] = useState(false);
-  const handleSearch = (term) => {
-    const filteredPokemon = pokemon.filter((poke) =>
-      poke.nombre.toLowerCase().includes(term.toLowerCase())
-    );
-    const filteredItems = items.filter((item) =>
-      item.nombre.toLowerCase().includes(term.toLowerCase())
-    );
-
-    const searchResults = [...filteredPokemon, ...filteredItems];
-
-    setSearchResults(searchResults);
-  };
 
   return (
     <>
@@ -51,8 +38,8 @@ const Nav = () => {
             </ul>
           </li>
         </ul>
-        <SearchBar handleSearch={handleSearch} />
-        <Carrito />
+        <SearchBar />
+        <Trolley />
       </nav>
     </>
   );
