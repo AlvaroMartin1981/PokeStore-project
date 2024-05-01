@@ -89,7 +89,7 @@ const UserController = {
         try {
           // Buscar usuarios con el rol de administrador
           const admins = await User.findAdmins();
-    
+            next()
           // Verificar si existen administradores
           if (admins.length > 0) {
             // Ya hay al menos un administrador en la base de datos
@@ -149,7 +149,7 @@ const UserController = {
             console.error('Error al obtener la información del usuario:', error);
             res.status(500).json({ message: 'Error al obtener la información del usuario' });
         }
-    },
+    }
 
 };
 
