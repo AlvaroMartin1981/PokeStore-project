@@ -32,7 +32,7 @@ const Cards = ({ products}) => {
   return ( 
   <>
   <section  className="container">
-    <div>
+    <div className='cards_select'>
       <label htmlFor="orden">Ordenar por:</label>
       <select id="orden" value={orden} onChange={handleChangeOrden}>
         <option value="nombreAsc">Nombre (A-Z)</option>
@@ -50,17 +50,19 @@ const Cards = ({ products}) => {
               </Link>
             </div>
             <div className="text_card">
-              <h2>
+              <h3>
                 <Link to={`/product/${product.nombre}`}>
                   {product.id} - {product.nombre}
                 </Link>
-              </h2>
-              <h2>{product.categoria}</h2>
+              </h3>
+              <Link to={`/product/${product.categoria}`}>
+              <h4>{product.categoria}</h4>
+              </Link>
               {typeof product.precio === "number" ? (
                 <div className="card_carro">
-                  <h3>{product.precio}€</h3>
+                  <h5>{product.precio}€</h5>
                   <button className="card_btn" onClick={() => añadir(product)}>
-                    Añadir
+                  🛒 
                   </button>
                 </div>
               ) : (

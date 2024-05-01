@@ -30,8 +30,10 @@ const UserSchema = new mongoose.Schema(
 );
 
 const User = mongoose.model("User", UserSchema);
-
-
+/*userSchema.statics.findAdmins = async function() {
+    return this.find({ role: 'admin' });
+  };
+*/
 
 module.exports = User;
     

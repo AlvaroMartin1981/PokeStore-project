@@ -8,12 +8,10 @@ export const  UserProvider = ({children}) =>{
     const [user , setUser] = useState(null);
     const [loading, setLoading] = useState(true);
 
-  
-
     useEffect(() =>{
         const fetchUserData = async () => {
             try {
-                const response = await fetch('http://localhost:2999/user')
+                const response = await fetch('http://localhost:2999/user/user')
                 if(!response.ok) {
                     throw new Error('Failed to fetch user');
                 }
@@ -30,15 +28,15 @@ export const  UserProvider = ({children}) =>{
       },[])
 
       if (loading) {
-        return <div> Loading ... </div>;
+        return <div> Cargando... </div>;
       }
         
    return(
-       <UserContext.Provider value={{user}}> 
+       <UserContext.Provider value={{user, setUser}}> 
         {children}
        </UserContext.Provider>
     );
 
 };    
 
-export const  UseUser = ()=> useContext(UserContext);
+export const  useUser = ()=> useContext(UserContext);

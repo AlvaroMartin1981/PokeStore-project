@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useProducts } from '../../usecontext/ProductContext.jsx';
-import Trolley from '../Trolley/Trolley.jsx';
+import Cart from '../Cart/Cart.jsx';
 import SearchBar from '../SearchBar/SearchBar.jsx';
 import './Navbar.css';
 
@@ -39,7 +39,7 @@ const Nav = () => {
           </li>
         </ul>
         <SearchBar />
-        <Trolley />
+        <Cart />
       </nav>
     </>
   );

@@ -1,38 +1,75 @@
 .container{
-    position: relative;
-    margin:100px;
+    position:relative;
+    padding: 10px 30px;
+}
+
+.cards_select{
+  position: relative;
+  font-size: 17px;
+cursor: pointer;
+font-weight: 600;
+padding: 0px 10px;
 
 }
+
+.cards_select label{
+  padding: 0px 10px;
+}
+select{
+  font-size: 14px;
+  cursor: pointer;
+  padding: 1px 3px;
+}
+
 .container_cards {
     display: flex;
     flex-wrap: wrap;
     position: relative;
-    margin:20px;
-    padding:20px;
-    gap:60px;
+    padding:60px 20px;
+    gap:30px;
     justify-content: center;
     font-family: Helvetica
-  };
+  }
   .card{
     margin-bottom: 100px;
     display: flex;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px;
   }
-  
+  .card a{
+    text-decoration: none;
+    color: black;
+  }
+  .card img{
+    display: flex;
+    align-items: center;
+  }
+
   .text_card{
     font-weight: 600;
-    text-align: center;
+    text-align: center; 
   }
+.text_card h4{
+  margin-top: -10px;
+} 
+  
   .card_carro{
     display: flex;
-    gap:5px;
-    justify-content: center;
+    justify-content:center;
+    align-items: center;
+    gap:15px;
+    margin-top: -30px;
+    font-size: 20px;
+    color: black;
+    font-weight: 600;
   }
-  .card_carro .card_btn{
+
+
+ .card_btn{
     color: white;
     background-color: black;
     border-radius: 5px;
-    font-size: 14px;
     padding: 2px;
-  
-  
   }

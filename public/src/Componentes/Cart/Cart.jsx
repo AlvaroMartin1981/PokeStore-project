@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useCarrito } from '../../usecontext/CarritoContext';
-import './Trolley.css';
+import './Cart.css';
 
-const Trolley = () => {
+const Cart = () => {
   const { carrito, eliminar, vaciarCarrito } = useCarrito(); 
   const [mostrarCarrito, setMostrarCarrito] = useState(false);
 
@@ -18,13 +18,13 @@ const Trolley = () => {
 
   return (
     <>
-    <div className="trolley-container"  onMouseLeave={toggleCarrito}>
-      <button className="trolley-toggle" onMouseEnter={toggleCarrito} >
-        Carrito ({carrito.length})
+    <div className="Cart-container"  onMouseLeave={toggleCarrito}>
+      <button className="Cart-toggle" onMouseEnter={toggleCarrito} >
+      🛒 ({carrito.length})
       </button>
       {mostrarCarrito && (
-        <div className='trolley-table'>
-          <table className="trolley-items">
+        <div className='Cart-table'>
+          <table className="Cart-items">
             <thead>
               <tr>
                 <th>Imagen</th>
@@ -41,17 +41,19 @@ const Trolley = () => {
                   <td>{producto.nombre}</td>
                   <td>{producto.precio} €</td>
                   <td>{producto.cantidad}</td>
-                  <td><button className="btn_trolley" onClick={() => handleEliminarProducto(producto.id)}>X</button></td>
+                  <td><button className="btn_Cart" onClick={() => handleEliminarProducto(producto.id)}>🗑️</button></td>
                 </tr>
               ))}
             </tbody>
           </table>
+          <div className='Cart_text'>
           {carrito.length > 0 && (
-            <button onClick={vaciarCarrito} className="empty-trolley-button">
+            <button onClick={vaciarCarrito} className="empty-Cart-button">
               Vaciar Carrito
             </button>
           )}
-          <div className="trolley-total">Total:  {totalPrecio} €</div>
+          <div className="Cart-total">Total:  {totalPrecio} €</div>
+        </div>
         </div>
       )}
     </div>
@@ -59,4 +61,4 @@ const Trolley = () => {
   );
 };
 
-export default Trolley;
+export default Cart;
