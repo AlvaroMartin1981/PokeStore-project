@@ -10,11 +10,9 @@ const routerUser= require ('./src/routes/usersRoutes')
 const routerOrder =require ('./src/routes/orderRoutes')
 const hashedSecret = require('./src/config/config')
 
-
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-//Nos conectamos con la base de datos
 dbConnection();
 
 app.use(session({
@@ -25,17 +23,12 @@ app.use(session({
   })
 );
 
-
 app.use(cors());
-//Middleware que usaremos para todas las rutas
 
 app.use('/productos',routerProduct); 
 app.use('/user',routerUser);
 app.use('/pedidos',routerOrder);
 
-//levantamos el puerto
-
-
 app.listen(PORT, () => {
-    console.log(`Server started on http://localhost:${PORT}`);
+  console.log(`Server started on http://localhost:${PORT}`);
 })

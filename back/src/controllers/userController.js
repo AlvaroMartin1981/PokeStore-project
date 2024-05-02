@@ -1,45 +1,20 @@
+const { getAuth, verifyIdToken, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } = require('firebase/auth');
 const User = require("../models/UserModel");
-const { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } = require('firebase/auth');
 const app = require('../config/firebase');
-const { onAuthStateChanged } = require('firebase/auth');
 
 const auth = getAuth(app);
 
-// Función para guardar el usuario en la base de datos local
-const saveUserToDatabase = async (firebaseUser) => {
-    try {
-        // Verifica si el usuario ya existe en la base de datos local
-        const existingUser = await User.findOne({ email: firebaseUser.email });
-        if (!existingUser) {
-            // Si no existe, crea un nuevo usuario en la base de datos local
-            await User.create({ email: firebaseUser.email, role: "user" });
-        }
-    } catch (error) {
-        console.error('Error al guardar el usuario en la base de datos:', error);
-    }
-};
-
-// Observa el cambio de estado de la autenticación
-onAuthStateChanged(auth, async (firebaseUser) => {
-    if (firebaseUser) {
-        // Guarda el usuario en la base de datos local
-        await saveUserToDatabase(firebaseUser);
-    }
-});
 const UserController = {
     async register(req, res, next) {
         try {
-            // Validar los datos de entrada antes de crear un nuevo usuario
-            if (!req.body.email || !req.body.password) {
-                return res.status(400).send({ message: "Por favor, proporcione un correo electrónico y una contraseña válidos." });
+            if (!req.body.email || !req.body.password || !req.body.name) {
+                return res.status(400).json({ message: "Por favor, proporcione un correo electrónico, una contraseña y un nombre válidos." });
             }
 
-            // Crear una cuenta con correo electrónico y contraseña en Firebase
             await createUserWithEmailAndPassword(auth, req.body.email, req.body.password);
 
-            // Crear el usuario en tu base de datos local
-            const user = await User.create({ ...req.body, role: "user" });
-            res.status(201).send({ message: "Usuario registrado con éxito", user });
+            const user = await User.create({ email: req.body.email, password: req.body.password, name: req.body.name, role: "user" });
+            res.status(201).json({ message: "Usuario registrado con éxito", user });
         } catch (error) {
             console.error(error);
             next(error);
@@ -48,96 +23,46 @@ const UserController = {
 
     async login(req, res) {
         try {
-            console.log("Iniciando sesión...");
-    
-            // Iniciar sesión con correo electrónico y contraseña en Firebase
-            const firebaseUserCredential = await signInWithEmailAndPassword(auth, req.body.email, req.body.password);
-    
-            // Obtener el usuario localmente
-            const user = await User.findOne({ email: req.body.email });
-    
-            console.log("Inicio de sesión exitoso");
-    
-            // Enviar una respuesta exitosa junto con los datos del usuario
-            res.status(200).send({
-                message: "Inicio de sesión exitoso",
-                user: user // Aquí puedes enviar cualquier dato adicional del usuario que necesites en el frontend
-            });
+            const { email, password } = req.body;
+
+            const userCredential = await signInWithEmailAndPassword(auth, email, password);
+            const user = userCredential.user;
+
+            res.status(200).json({ message: "Inicio de sesión exitoso", user });
         } catch (error) {
             console.error("Error al iniciar sesión:", error);
-            // Enviar una respuesta de error al frontend
-            res.status(500).send({ message: "Error al iniciar sesión" });
+            res.status(500).json({ message: "Error al iniciar sesión" });
         }
     },
-    
 
     async logout(req, res) {
         try {
-            // Cerrar sesión en Firebase
+            const idToken = req.headers.authorization; // Token enviado desde el frontend
+
+            // Verificar y validar el token
+            const decodedToken = await verifyIdToken(auth, idToken);
+
+            // Cerrar sesión utilizando Firebase Auth
             await signOut(auth);
+            console.log('Cuerpo de la solicitud recibida:', req.body);
 
-            console.log("Desconexión exitosa");
-
-            //res.send({ message: "Desconectado con éxito" });
+            res.json({ message: "Desconectado con éxito" });
         } catch (error) {
             console.error(error);
-            res.status(500).send({ message: "Error al cerrar sesión" });
+            res.status(500).json({ message: "Error al cerrar sesión" });
         }
     },
 
-    async checkAdminExistence(req, res, next) {
-        try {
-          // Buscar usuarios con el rol de administrador
-          const admins = await User.findAdmins();
-    
-          // Verificar si existen administradores
-          if (admins.length > 0) {
-            // Ya hay al menos un administrador en la base de datos
-            res.status(200).json({ message: 'Ya hay administradores en la base de datos' });
-          } else {
-            // No hay administradores en la base de datos
-            res.status(404).send({ message: 'No se encontraron administradores en la base de datos' });
-          }
-        } catch (error) {
-          console.error(error);
-          res.status(500).send({ message: 'Error al buscar administradores en la base de datos' });
-        }
-      },
-
-    async createAdmin(req, res) {
-        try {
-            // Validar si el usuario autenticado es un administrador
-            if (req.user.role !== 'admin') {
-                return res.status(403).json({ message: 'No tienes permisos para crear administradores.' });
-            }
-    
-            // Crear un nuevo administrador en la base de datos
-            const admin = await User.create({ email: req.body.email, password: req.body.password, role: 'admin' });
-    
-            res.status(201).json({ message: 'Administrador creado exitosamente', admin });
-        } catch (error) {
-            console.error('Error al crear administrador:', error);
-            res.status(500).json({ message: 'Error al crear administrador' });
-        }
-    },
-  
     async getInfo(req, res) {
         try {
-            if (!req.user) {
-                return res.status(401).json({ message: 'Acceso no autorizado. Debes iniciar sesión.' });
-            }
-    
-            // Obtener información del usuario de la base de datos local
             const user = await User.findById(req.user._id);
 
             if (!user) {
                 return res.status(404).json({ message: 'Usuario no encontrado' });
             }
-    
-    
-            // Obtener el nombre de usuario del correo electrónico
+
             const username = user.email.split('@')[0];
-    
+
             res.status(200).json({
                 user: {
                     id: user._id,
@@ -148,14 +73,13 @@ const UserController = {
                     role: user.role, 
                 },
                 message: 'Información del usuario obtenida exitosamente',
-                authenticated: true // Indica que el usuario está autenticado
+                authenticated: true
             });
         } catch (error) {
             console.error('Error al obtener la información del usuario:', error);
             res.status(500).json({ message: 'Error al obtener la información del usuario' });
         }
     }
-
 };
 
 module.exports = UserController;

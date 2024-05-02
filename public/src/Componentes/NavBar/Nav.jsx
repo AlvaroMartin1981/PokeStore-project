@@ -4,6 +4,9 @@ import { useProducts } from '../../usecontext/ProductContext.jsx';
 import { useUser } from '../../usecontext/UserContext.jsx'
 import Cart from '../Cart/Cart.jsx';
 import SearchBar from '../SearchBar/SearchBar.jsx';
+import LoginForm from '../Forms/LoginForm.jsx';
+import RegisterForm from '../Forms/RegisterForm.jsx';
+import Logout from '../Logout.jsx';
 import './Navbar.css';
 
 const Nav = () => {
@@ -45,11 +48,13 @@ const Nav = () => {
         <SearchBar />
         <Cart />
         {user ? (
+          <>
           <li>Welcome, {user.name}</li>
+          <Logout />
+        </>
         ) : (
           <>
             <li><Link to="/login" >Login</Link></li>
-            <li><Link to="/admin">Admin</Link></li>
             <li><Link to="/register">Register</Link></li>
           </>
         )}

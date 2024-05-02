@@ -10,7 +10,6 @@ import Legendarios from '../Componentes/Lengendario.jsx';
 import Mythical from '../Componentes/Mythical.jsx';
 import Home from '../Pages/Home.jsx';
 import Footer from '../Componentes/Footer/Footer.jsx';
-import AdminForm from '../Componentes/Forms/AdminForm.jsx';
 import LoginForm from '../Componentes/Forms/LoginForm.jsx';
 import RegisterForm from '../Componentes/Forms/RegisterForm.jsx'
 
@@ -18,12 +17,6 @@ function Rutas() {
     const { pokemon, items } = useProducts();
     const { user } = useUser();
 
-    const isAuthenticated = () => {
-        const authenticated = user !== null;
-        console.log('¿Usuario autenticado?', authenticated);
-        return authenticated;
-    }
-   
     return (
         <>
         <Router>
@@ -37,9 +30,8 @@ function Rutas() {
                 <Route path="/pokemon/tipo/:tipo" element={<ProductType />} />
                 <Route path="/items/tipo/:tipo" element={<ProductType />} />
                 <Route path="/product/:nombre" element={<ProductDetail />} />
-                <Route path="/login" element={isAuthenticated() ? <Navigate to="/pokemon" /> : <LoginForm />} />
-                <Route path="/register" element={isAuthenticated() ? <Navigate to="/pokemon" /> : <RegisterForm />} />
-                <Route path="/admin" element={<AdminForm />} />
+                <Route path="/login" element={<LoginForm />} />
+                <Route path="/register" element={<RegisterForm />} />
             </Routes>
             <Footer/>   
         </Router>

@@ -1,11 +1,12 @@
-
-import React, { useState, useContext } from 'react';
-import { useUser } from '../../usecontext/UserContext'; 
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useUser } from '../../usecontext/UserContext.jsx'
 
 const LoginForm = () => {
-  const { setUser } = useContext(useUser); 
+  const { user, setUser } = useUser();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate(); 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -22,7 +23,9 @@ const LoginForm = () => {
       }
       const data = await response.json();
       console.log('Inicio de sesión exitoso:', data);
-      setUser(data.user); 
+      localStorage.setItem('token', 'your_token_here')
+      setUser(data.user);
+      navigate('/pokemon'); // Redirige al usuario a la ruta '/pokemon' después del inicio de sesión
     } catch (error) {
       console.error('Error al iniciar sesión:', error);
     }
