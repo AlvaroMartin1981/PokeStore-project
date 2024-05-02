@@ -1,9 +1,8 @@
 import React, { useState, useContext } from 'react';
-import { Redirect } from 'react-router-dom'; 
-import { UserContext } from './UserProvider';
+import { useUser } from '../../usecontext/UserContext'
 
 const RegisterForm = () => {
-  const { setUser } = useContext(UserContext);
+  const { setUser } = useContext(useUser);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [redirectToProducts, setRedirectToProducts] = useState(false); 

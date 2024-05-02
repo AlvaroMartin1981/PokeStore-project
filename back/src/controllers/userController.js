@@ -89,7 +89,7 @@ const UserController = {
         try {
           // Buscar usuarios con el rol de administrador
           const admins = await User.findAdmins();
-            next()
+    
           // Verificar si existen administradores
           if (admins.length > 0) {
             // Ya hay al menos un administrador en la base de datos
@@ -123,12 +123,17 @@ const UserController = {
   
     async getInfo(req, res) {
         try {
+            if (!req.user) {
+                return res.status(401).json({ message: 'Acceso no autorizado. Debes iniciar sesión.' });
+            }
+    
             // Obtener información del usuario de la base de datos local
             const user = await User.findById(req.user._id);
-    
+
             if (!user) {
                 return res.status(404).json({ message: 'Usuario no encontrado' });
             }
+    
     
             // Obtener el nombre de usuario del correo electrónico
             const username = user.email.split('@')[0];

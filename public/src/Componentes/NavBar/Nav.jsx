@@ -1,18 +1,22 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useProducts } from '../../usecontext/ProductContext.jsx';
+import { useUser } from '../../usecontext/UserContext.jsx'
 import Cart from '../Cart/Cart.jsx';
 import SearchBar from '../SearchBar/SearchBar.jsx';
 import './Navbar.css';
 
 const Nav = () => {
   const { pokemon, items } = useProducts();
+  const {user} = useUser();
 
   const pokemonTypes = Array.from(new Set(pokemon.map(p => p.tipo).flat()));
   const itemTypes = Array.from(new Set(items.map(i => i.tipo).flat()));
 
   const [showPokemonTypes, setShowPokemonTypes] = useState(false);
   const [showItemTypes, setShowItemTypes] = useState(false);
+  const [showLoginForm, setShowLoginForm] = useState(false);
+  const [showRegisterForm, setShowRegisterForm] = useState(false);
 
   return (
     <>
@@ -40,6 +44,17 @@ const Nav = () => {
         </ul>
         <SearchBar />
         <Cart />
+        {user ? (
+          <li>Welcome, {user.name}</li>
+        ) : (
+          <>
+            <li><Link to="/login" >Login</Link></li>
+            <li><Link to="/admin">Admin</Link></li>
+            <li><Link to="/register">Register</Link></li>
+          </>
+        )}
+         {showLoginForm && <LoginForm />}
+      {showRegisterForm && <RegisterForm />}
       </nav>
     </>
   );

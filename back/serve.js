@@ -8,23 +8,22 @@ const cors=require ('cors')
 const routerProduct= require ('./src/routes/productRoutes');
 const routerUser= require ('./src/routes/usersRoutes')
 const routerOrder =require ('./src/routes/orderRoutes')
+const hashedSecret = require('./src/config/config')
 
-//const hashedSecret = require('./src/config/config')
-//const MongoStore = require('connect-mongo');
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-
 
 //Nos conectamos con la base de datos
 dbConnection();
 
-/*app.use(session({
+app.use(session({
   secret: hashedSecret,
   resave: true,
   saveUninitialized: true,
   cookie: {secure: false}
   })
-);*/
+);
 
 
 app.use(cors());
@@ -39,4 +38,4 @@ app.use('/pedidos',routerOrder);
 
 app.listen(PORT, () => {
     console.log(`Server started on http://localhost:${PORT}`);
-});
+})

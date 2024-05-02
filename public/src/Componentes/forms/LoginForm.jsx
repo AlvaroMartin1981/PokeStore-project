@@ -1,9 +1,9 @@
 
 import React, { useState, useContext } from 'react';
-import { UserContext } from './UserProvider'; 
+import { useUser } from '../../usecontext/UserContext'; 
 
 const LoginForm = () => {
-  const { setUser } = useContext(UserContext); 
+  const { setUser } = useContext(useUser); 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
