@@ -10,7 +10,6 @@ import Legendarios from '../Componentes/Lengendario.jsx';
 import Mythical from '../Componentes/Mythical.jsx';
 import Home from '../Pages/Home.jsx';
 import Footer from '../Componentes/Footer/Footer.jsx';
-import LoginForm from '../Componentes/Forms/LoginForm.jsx';
 import RegisterForm from '../Componentes/Forms/RegisterForm.jsx'
 
 function Rutas() {
@@ -30,7 +29,6 @@ function Rutas() {
                 <Route path="/pokemon/tipo/:tipo" element={<ProductType />} />
                 <Route path="/items/tipo/:tipo" element={<ProductType />} />
                 <Route path="/product/:nombre" element={<ProductDetail />} />
-                <Route path="/login" element={<LoginForm />} />
                 <Route path="/register" element={<RegisterForm />} />
             </Routes>
             <Footer/>   

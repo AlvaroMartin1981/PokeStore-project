@@ -1,25 +1,26 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useProducts } from '../../usecontext/ProductContext.jsx';
 import { useUser } from '../../usecontext/UserContext.jsx'
 import Cart from '../Cart/Cart.jsx';
 import SearchBar from '../SearchBar/SearchBar.jsx';
 import LoginForm from '../Forms/LoginForm.jsx';
-import RegisterForm from '../Forms/RegisterForm.jsx';
 import Logout from '../Logout.jsx';
 import './Navbar.css';
 
 const Nav = () => {
   const { pokemon, items } = useProducts();
-  const {user} = useUser();
+  const { user } = useUser();
 
   const pokemonTypes = Array.from(new Set(pokemon.map(p => p.tipo).flat()));
   const itemTypes = Array.from(new Set(items.map(i => i.tipo).flat()));
 
   const [showPokemonTypes, setShowPokemonTypes] = useState(false);
   const [showItemTypes, setShowItemTypes] = useState(false);
-  const [showLoginForm, setShowLoginForm] = useState(false);
-  const [showRegisterForm, setShowRegisterForm] = useState(false);
+  const getUsernameFromEmail = (email) => {
+    return email.split('@')[0];
+  };
+
 
   return (
     <>
@@ -46,20 +47,20 @@ const Nav = () => {
           </li>
         </ul>
         <SearchBar />
+        <div className='nav_info_person'>
         <Cart />
         {user ? (
           <>
-          <li>Welcome, {user.name}</li>
-          <Logout />
-        </>
+            <li>Welcome, {getUsernameFromEmail(user.email)}</li>
+            {console.log(user)}
+            <Logout />
+          </>
         ) : (
           <>
-            <li><Link to="/login" >Login</Link></li>
-            <li><Link to="/register">Register</Link></li>
+             <LoginForm />
           </>
         )}
-         {showLoginForm && <LoginForm />}
-      {showRegisterForm && <RegisterForm />}
+        </div>
       </nav>
     </>
   );

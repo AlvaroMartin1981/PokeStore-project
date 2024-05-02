@@ -1,16 +1,16 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import './RegisterForm.css';
 
 const RegisterForm = () => {
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const [Error, setError] =  useState('');
+    const [error, setError] =  useState('');
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
         name: '',
         email: '',
         password: ''
     });
-    const [registered, setRegistered] = useState(false);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -20,7 +20,6 @@ const RegisterForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setIsSubmitting(true);
-        console.log('Datos a enviar:', formData); // Verifica que los datos estén correctos aquí
         try {
             const response = await fetch('http://localhost:2999/user/register', {
                 method: 'POST',
@@ -33,6 +32,8 @@ const RegisterForm = () => {
                 throw new Error('Error al registrar usuario');
             }
             // Usuario registrado exitosamente
+            const userData = await response.json(); // Obtener datos de usuario y token
+            localStorage.setItem('token', userData.token); // Guardar el token en el localStorage
             navigate('/pokemon');
         } catch (error) {
             console.error('Error al registrar usuario:', error.message);
@@ -40,14 +41,6 @@ const RegisterForm = () => {
         }
         setIsSubmitting(false);
     };
-    
-
-    useEffect(() => {
-        if (registered) {
-            navigate('/pokemon');
-        }
-    }, [registered, navigate]);
-
 
     return (
         <form onSubmit={handleSubmit}>
@@ -63,7 +56,8 @@ const RegisterForm = () => {
                 <label htmlFor="password">Contraseña:</label>
                 <input type="password" id="password" name="password" value={formData.password} onChange={handleChange} required />
             </div>
-            <button type="submit">Registrarse</button>
+            {error && <p className="error-message">{error}</p>}
+            <button type="submit" disabled={isSubmitting}>Registrarse</button>
         </form>
     );
 };

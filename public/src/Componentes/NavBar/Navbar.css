@@ -65,3 +65,13 @@ ul ul.show {
   opacity: 1;
   visibility: visible;
 }
+
+.nav_info_person{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px
+}
+li{
+  list-style: none;
+}
