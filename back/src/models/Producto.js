@@ -55,7 +55,8 @@ const ProductSchema = new mongoose.Schema({
 
     reviews: [{
         userId: { type: ObjectId, ref: 'User' },
-        comment: String
+        comment: String,
+        name: String
     }],
     likes: [{ type: ObjectId }],
 }, { timestamps: true });
@@ -64,7 +65,7 @@ ProductSchema.index({
     nombre: "text",
 });
 
-// Crear el modelo de producto
+
 const ProductModel = mongoose.model('Product', ProductSchema);
 
 module.exports = ProductModel;

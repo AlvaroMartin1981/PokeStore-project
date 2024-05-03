@@ -1,19 +1,27 @@
 import { useProducts } from '../../usecontext/ProductContext';
 import { useCarrito } from '../../usecontext/CarritoContext';
+import { useUser } from '../../usecontext/UserContext';
+import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import ProductCommentForm from '../ProductComment/PorductComment.jsx'
 import './ProductDetail.css';
 
 const ProductDetail = () => {
   const { añadir } = useCarrito();
   const { products } = useProducts();
   const { nombre } = useParams();
+  const { user } = useUser();
+  const [comments, setComments] = useState([]);
 
   const product = products.find(product => product.nombre === nombre);
   
   if (!product) {
     return <div>Producto no encontrado.</div>;
   }
+  const handleCommentSubmit = () => {
 
+    setComments([]);
+  };
   return (
     <>  
     <div className='detail'>
@@ -90,12 +98,27 @@ const ProductDetail = () => {
       )}
       </div>
       <div>
-      <div className='card_likes'>
-        {product.likes.length > 0 && <p>Likes: {product.likes.length}</p>}
-        {product.reviews.length > 0 && <p>Reviews: {product.reviews.length}</p>}
-        {product.likes.length === 0 && product.reviews.length === 0 && <p>Este producto aún no tiene ni likes ni reviews</p>}
+      <div>
+  <div className='card_likes'>
+    {product.likes.length > 0 && <p>Likes: {product.likes.length}</p>}
+    {product.reviews.length > 0 && (
+  <div>
+    <h3>Reviews:</h3>
+    {product.reviews.map((review, index) => (
+      <div key={index}>
+        <p><strong>{review.name || 'Usuario desconocido'}</strong>: {review.comment}</p>
       </div>
+    ))}
+  </div>
+
+)}
+  {console.log(product)}
+    {!product.reviews.length && <p>Este producto aún no tiene reviews</p>}
+  </div>
+</div>
+
     </div>
+    {user && <ProductCommentForm productId={product._id} onCommentSubmit={handleCommentSubmit} />}
     </>
   );
 };

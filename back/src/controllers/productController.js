@@ -43,10 +43,8 @@ const productController = {
             if (!product) {
                 return res.status(404).json({ message: 'Producto no encontrado' });
             }
-           
             product.nombre = req.body.nombre;
             product.descripcion = req.body.descripcion;
-            // Guardar los cambios
             await product.save();
             res.json(product);
         } catch (error) {
@@ -87,9 +85,7 @@ const productController = {
             if (!product) {
                 return res.status(404).json({ message: 'Producto no encontrado' });
             }
-            // Aquí puedes añadir la lógica para insertar un comentario en el producto
-            // Por ejemplo:
-            product.reviews.push({ userId: req.body.userId, comment: req.body.comment });
+            product.reviews.push({ userId: req.body.userId, comment: req.body.comment,name:req.body.name });
             await product.save();
             res.json(product);
         } catch (error) {
@@ -104,8 +100,6 @@ const productController = {
             if (!product) {
                 return res.status(404).json({ message: 'Producto no encontrado' });
             }
-            // Aquí puedes añadir la lógica para incrementar el contador de "Me gusta"
-            // Por ejemplo:
             product.likes.push(req.body.userId);
             await product.save();
             res.json(product);
