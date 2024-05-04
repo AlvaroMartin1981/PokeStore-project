@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useCarrito } from '../../usecontext/CarritoContext';
+import { FaCartShopping } from "react-icons/fa6";
 import './Cart.css';
 
 const Cart = () => {
@@ -20,7 +21,7 @@ const Cart = () => {
     <>
     <div className="Cart-container"  onMouseLeave={toggleCarrito}>
       <button className="Cart-toggle" onMouseEnter={toggleCarrito} >
-      🛒 ({carrito.length})
+      <FaCartShopping /> ({carrito.length})
       </button>
       {mostrarCarrito && (
         <div className='Cart-table'>

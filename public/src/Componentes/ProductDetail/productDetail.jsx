@@ -16,7 +16,7 @@ const ProductDetail = () => {
   const product = products.find(product => product.nombre === nombre);
   
   if (!product) {
-    return <div>Producto no encontrado.</div>;
+    return <div><h2>Producto no encontrado.</h2></div>;
   }
   const handleCommentSubmit = () => {
 
@@ -112,8 +112,11 @@ const ProductDetail = () => {
   </div>
 
 )}
-  {console.log(product)}
-    {!product.reviews.length && <p>Este producto aún no tiene reviews</p>}
+    {!product.reviews.length && !product.likes.length &&( 
+      <div className='no_reviews' >
+          <h4>Este producto aún no tiene ni likes ni reviews.<Link to='/register'> Registrate</Link> o <Link to='/login'> logeate </Link>para ser el primero.</h4>
+        </div>
+      ) }
   </div>
 </div>
 

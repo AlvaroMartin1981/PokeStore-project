@@ -1,75 +1,73 @@
 .container{
-    position:relative;
-    padding: 10px 30px;
+  position:relative;
+  padding: auto
 }
 
 .cards_select{
-  position: relative;
-  font-size: 17px;
+position: relative;
+font-size: 17px;
 cursor: pointer;
 font-weight: 600;
-padding: 0px 10px;
+padding:auto;
 
 }
 
 .cards_select label{
-  padding: 0px 10px;
+padding: 0px 10px;
 }
 select{
-  font-size: 14px;
-  cursor: pointer;
-  padding: 1px 3px;
+font-size: 14px;
+cursor: pointer;
+padding: 1px 3px;
 }
 
 .container_cards {
-    display: flex;
-    flex-wrap: wrap;
-    position: relative;
-    padding:60px 20px;
-    gap:30px;
-    justify-content: center;
-    font-family: Helvetica
-  }
-  .card{
-    margin-bottom: 100px;
-    display: flex;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    flex-direction: column;
-    justify-content: center;
-    padding: 10px;
-  }
-  .card a{
-    text-decoration: none;
-    color: black;
-  }
-  .card img{
-    display: flex;
-    align-items: center;
-  }
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+  justify-content: center;
+  font-family: Helvetica;
+}
+.card{
+  margin:20px;  display: flex;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  flex-direction: column;
+  justify-content: center;
+}
+.card a{
+  text-decoration: none;
+  color: black;
+}
+.card img{
+  display: flex;
+  align-items: center;
+}
 
-  .text_card{
-    font-weight: 600;
-    text-align: center; 
-  }
+.text_card{
+  font-weight: 600;
+  text-align: center; 
+}
+.text_card h3{
+    font-size:30px;
+    padding: 0px;
+    margin-top: -20px;
+}
+.card_categoria{
+  margin-top: -20px;
+}
 .text_card h4{
-  margin-top: -10px;
-} 
-  
-  .card_carro{
-    display: flex;
-    justify-content:center;
-    align-items: center;
-    gap:15px;
-    margin-top: -30px;
-    font-size: 20px;
-    color: black;
-    font-weight: 600;
-  }
-
-
- .card_btn{
-    color: white;
-    background-color: black;
-    border-radius: 5px;
-    padding: 2px;
-  }
+  font-size: 24px;
+}
+.card_carro{
+  display: flex;
+  justify-content:center;
+  align-items: center;
+  gap:15px;
+  font-weight: 700;
+  margin-top: -50px;
+  font-size: 25px;
+  color: black;
+}
+.cart-shopping:hover{
+  color: blue;
+}

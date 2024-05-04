@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
-import { useCarrito } from '../../usecontext/CarritoContext' 
+import { useCarrito } from '../../usecontext/CarritoContext';
+import { FaCartShopping } from "react-icons/fa6";
 import { useState } from 'react';
 import './Cards.css';
 
@@ -46,7 +47,7 @@ const Cards = ({ products}) => {
           <div className="card" key={product._id}>
             <div>
               <Link to={`/product/${product.nombre}`}>
-                <img src={product.imagen} alt={product.nombre} width="150px" />
+                <img src={product.imagen} alt={product.nombre} width='300px'/>
               </Link>
             </div>
             <div className="text_card">
@@ -56,17 +57,17 @@ const Cards = ({ products}) => {
                 </Link>
               </h3>
               <Link to={`/product/${product.categoria}`}>
-              <h4>{product.categoria}</h4>
+              <h4 className='card_categoria'>{product.categoria}</h4>
               </Link>
               {typeof product.precio === "number" ? (
                 <div className="card_carro">
-                  <h5>{product.precio}€</h5>
-                  <button className="card_btn" onClick={() => añadir(product)}>
-                  🛒 
-                  </button>
+                  <h4>{product.precio} €</h4>
+                  <FaCartShopping  className='cart-shopping'   onClick={() => añadir(product)} />
                 </div>
               ) : (
-                <h3>No disponible</h3>
+                <div className='card_carro'>
+                <h4>No disponible</h4>
+                </div>
               )}
             </div>
           </div>

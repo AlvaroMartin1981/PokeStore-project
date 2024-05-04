@@ -11,6 +11,7 @@ import './Navbar.css';
 const Nav = () => {
   const { pokemon, items } = useProducts();
   const { user } = useUser();
+  const [showForm, setShowForm] = useState(false);
 
   const pokemonTypes = Array.from(new Set(pokemon.map(p => p.tipo).flat()));
   const itemTypes = Array.from(new Set(items.map(i => i.tipo).flat()));
@@ -20,7 +21,9 @@ const Nav = () => {
   const getUsernameFromEmail = (email) => {
     return email.split('@')[0];
   };
-
+  const toggleForm = () => {
+    setShowForm(!showForm);
+  };
 
   return (
     <>
@@ -56,8 +59,12 @@ const Nav = () => {
             <Logout />
           </>
         ) : (
-          <>
+          <> <div onMouseEnter={toggleForm} className="login-form-container" >
+          <button >Login</button>
+          {showForm && (
              <LoginForm />
+            )}
+            </div>
           </>
         )}
         </div>

@@ -102,3 +102,9 @@ a {
     font-weight: 400;
 
 }
+.no_reviews {
+    text-align: center;
+}
+.no_reviews h4{
+    font-weight: 400;
+}
