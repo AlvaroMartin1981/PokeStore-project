@@ -9,7 +9,7 @@ export const UserProvider = ({ children }) => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await fetch('http://localhost:2999/user/user');
+        const response = await fetch('https://pokestorebackend-production.up.railway.app/user/user');
         const data = await response.json();
 
         // Verificar si la respuesta es exitosa

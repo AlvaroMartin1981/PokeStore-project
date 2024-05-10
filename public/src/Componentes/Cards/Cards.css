@@ -48,9 +48,9 @@ padding: 1px 3px;
   text-align: center; 
 }
 .text_card h3{
+  position: relative;
     font-size:30px;
     padding: 0px;
-    margin-top: -20px;
 }
 .card_categoria{
   margin-top: -20px;
@@ -70,4 +70,8 @@ padding: 1px 3px;
 }
 .cart-shopping:hover{
   color: blue;
+}
+.mensaje{
+  font-size: 10px;
+  margin-top: -20px;
 }

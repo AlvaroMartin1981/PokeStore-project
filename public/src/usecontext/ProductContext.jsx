@@ -11,7 +11,7 @@ export const ProductProvider = ({ children }) => {
 
   const fetchProducts = async () => {
     try {
-      const response = await fetch('http://localhost:2999/productos');
+      const response = await fetch('https://pokestorebackend-production.up.railway.app/productos');
       if (!response.ok) {
         throw new Error('Failed to fetch products');
       }

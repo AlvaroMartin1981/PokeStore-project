@@ -5,10 +5,14 @@ import { useState } from 'react';
 import './Cards.css';
 
 const Cards = ({ products}) => {
-  const { añadir } = useCarrito(); 
+  const { añadir, mensaje } = useCarrito(); 
   const [productosOrdenados, setProductosOrdenados] = useState(products); 
   const [orden, setOrden] = useState('nombreAsc'); 
+  const [productoAñadido, setProductoAñadido] = useState(null);
 
+  const handleClick = (id) => {
+    setProductoAñadido(id);
+  };
   const handleChangeOrden = (e) => {
     setOrden(e.target.value);
     ordenarProductos(e.target.value);
@@ -60,20 +64,30 @@ const Cards = ({ products}) => {
               <h4 className='card_categoria'>{product.categoria}</h4>
               </Link>
               {typeof product.precio === "number" ? (
+                <>
                 <div className="card_carro">
-                  <h4>{product.precio} €</h4>
-                  <FaCartShopping  className='cart-shopping'   onClick={() => añadir(product)} />
+                 <h4>{product.precio} €</h4>
+                      <FaCartShopping className='cart-shopping' onClick={() => {
+                        añadir(product);
+                        handleClick(product.id);
+                      }} /> 
+                      </div>
+                      <div className='mensaje'>
+                    {productoAñadido === product.id && mensaje && <p>{mensaje}</p>}
+                   
                 </div>
+                </>
               ) : (
                 <div className='card_carro'>
                 <h4>No disponible</h4>
                 </div>
               )}
             </div>
-          </div>
+          </div> 
         ))}
       </div>
       </section>
+      ;
     </>
   );
 };

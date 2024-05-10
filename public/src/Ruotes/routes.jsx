@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 import { useProducts } from '../usecontext/ProductContext.jsx';
 import Cards from '../Componentes/Cards/Cards.jsx';
@@ -12,12 +12,13 @@ import Footer from '../Componentes/Footer/Footer.jsx';
 import RegisterForm from '../Componentes/Forms/RegisterForm.jsx'
 import LoginForm from '../Componentes/Forms/LoginForm.jsx';
 
+
 const ScrollTop=()=>{
-    const {pathname}=useLocation();
+    const location = useLocation(); 
 
     useEffect(()=>{
         window.scrollTo(0, 0);
-      },[pathname])
+      },[location.pathname])
       return null
     }
 
