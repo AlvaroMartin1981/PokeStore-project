@@ -27,6 +27,9 @@ const Nav = () => {
     <>
       <nav>
         <ul>
+          <li>
+          <Link to="/">Home</Link>
+          </li> 
           <li onMouseEnter={() => setShowPokemonTypes(true)} onMouseLeave={() => setShowPokemonTypes(false)}>
             <Link to="/pokemon">Pokemon</Link>
             <ul className={showPokemonTypes ? 'show' : ''}>

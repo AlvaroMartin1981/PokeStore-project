@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useCarrito } from '../../usecontext/CarritoContext';
 import { FaCartShopping } from "react-icons/fa6";
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import './Cards.css';
 
 const Cards = ({ products}) => {
@@ -17,6 +17,10 @@ const Cards = ({ products}) => {
     setOrden(e.target.value);
     ordenarProductos(e.target.value);
   };
+  
+  useEffect(() => {
+    ordenarProductos(orden); 
+  }, [orden, products]); 
 
   const ordenarProductos = (tipoOrden) => {
     let sortedProducts = [...products];
@@ -48,25 +52,24 @@ const Cards = ({ products}) => {
     </div>
       <div className="container_cards">
         {productosOrdenados.map((product) => (
-          <div className="card" key={product._id}>
+          <div className="card" key={product._id}> 
+            <div className="text_card">
+              <h4 className='card-title'>
+                <Link to={`/product/${product.nombre}`}>
+                  {product.id} - {product.nombre}
+                </Link>
+              </h4>
+             </div>
             <div>
               <Link to={`/product/${product.nombre}`}>
                 <img src={product.imagen} alt={product.nombre} width='300px'/>
               </Link>
             </div>
-            <div className="text_card">
-              <h3>
-                <Link to={`/product/${product.nombre}`}>
-                  {product.id} - {product.nombre}
-                </Link>
-              </h3>
-              <Link to={`/product/${product.categoria}`}>
-              <h4 className='card_categoria'>{product.categoria}</h4>
-              </Link>
+            <div>
               {typeof product.precio === "number" ? (
                 <>
                 <div className="card_carro">
-                 <h4>{product.precio} €</h4>
+                 <h4>{product.precio} €</h4> 
                       <FaCartShopping className='cart-shopping' onClick={() => {
                         añadir(product);
                         handleClick(product.id);
@@ -78,12 +81,15 @@ const Cards = ({ products}) => {
                 </div>
                 </>
               ) : (
+                <>
                 <div className='card_carro'>
                 <h4>No disponible</h4>
                 </div>
+                </>
               )}
+              </div>
             </div>
-          </div> 
+
         ))}
       </div>
       </section>

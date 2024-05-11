@@ -1,13 +1,14 @@
 nav{
   display: flex;
   justify-content: space-between;
-  background-color: #ffffffaf;
+  background-color: #ffffff81;
   color: #000000;
   align-items: center;
   position: relative;
   width: 100%;
   top: 0;
   z-index: 100; 
+  padding: 10px;
 }
 .menu-icon {
   display: block;
@@ -89,21 +90,25 @@ nav ul {
   margin: 0;
   padding: 0;
   position: relative;
+  padding: 0px 10px;
+  display: flex;
+  flex-direction: row;
 }
 
 nav ul li {
-  display: inline-block;
+
   margin-right: 20px;
   position: relative;
   z-index: 1000;
 }
 nav ul li a {
   display: block;
-  padding: 10px 20px;
+  padding: 10px;
   color: #000000;
   text-decoration: none;
   font-weight: 700;
-    z-index: 1000;
+  z-index: 1000;
+  font-size: 20px;
 }
 nav ul li ul {
   display: none;

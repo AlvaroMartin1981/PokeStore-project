@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useProducts } from '../usecontext/ProductContext.jsx';
-import { Link } from 'react-router-dom';
-import pokemonBaner from '../assets/pokemonBaner.jpeg';
+import pokemonBaner from '../assets/Imagenes/pokemonBaner.jpeg';
 import './Home.css';
+import Product from '../Componentes/Product.jsx';
 
 const Home = () => {
     const { pokemon, items } = useProducts();
@@ -59,62 +59,23 @@ const Home = () => {
         setMysticPokemon(getRandomMysticPokemon());
     }, [pokemon, items]);
 
-    function renderProduct(product) {
-        if (!product) {
-            return <div>Cargando...</div>;
-        }
-
-        const { nombre, tipo, imagen, categoria, pokemonAttributes } = product;
-        let categoryLink = '';
-
-        if (categoria === 'Item') {
-            categoryLink = '/items';
-        } else {
-            if (pokemonAttributes && pokemonAttributes.legendario) {
-                categoryLink = '/pokemon/legendarios';
-            } else if (pokemonAttributes && pokemonAttributes.mythical) {
-                categoryLink = '/pokemon/misticos';
-            } else {
-                categoryLink = '/pokemon/tipo';
-            }
-
-        }
-
-        const displayTipo = categoria === 'Item' ? product.tipo : 
-                           (pokemonAttributes && pokemonAttributes.legendario) ? 'Legendario' : 
-                           (pokemonAttributes && pokemonAttributes.mythical) ? 'Místico' : tipo && tipo.length > 0 ? tipo[0] : '';
-
-        return (
-            <div className='container_home'key={nombre}>
-                <Link to={categoryLink}>
-                    <img src={imagen} alt={nombre} style={{ width: '300px' }} />
-                    <div className='container_home_text'>
-                    <h3>{categoria} - {displayTipo}</h3>
-                        
-                    </div>
-                </Link>
-            </div>
-        );
-    }
-
     return (
         <>
             <section className='front_page'>
                 <img src={pokemonBaner} alt='Pokemon_baner' />
             </section>
-             <section>
-                    <h2>  NOVEDADES</h2>
-              
-            <div className='container_home'>
-                {renderProduct(legendaryPokemon)}
-                {renderProduct(mysticPokemon)}
-                {renderProduct(randomPokemon1)}
-                {renderProduct(randomPokemon2)}
-                {renderProduct(randomPokemon3)}
-                {renderProduct(randomItem1)}
-                {renderProduct(randomItem2)}
-                {renderProduct(randomItem3)}
-            </div>
+            <section>
+                <h2>NOVEDADES</h2>
+                <div className='container_home'>
+                    <Product product={legendaryPokemon} />
+                    <Product product={mysticPokemon} />
+                    <Product product={randomPokemon1} />
+                    <Product product={randomPokemon2} />
+                    <Product product={randomPokemon3} />
+                    <Product product={randomItem1} />
+                    <Product product={randomItem2} />
+                    <Product product={randomItem3} />
+                </div>
             </section>
         </>
     );
