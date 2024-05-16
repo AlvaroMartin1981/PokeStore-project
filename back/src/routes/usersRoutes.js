@@ -5,10 +5,6 @@ const routerUser = express.Router()
 
 routerUser.post("/register",UserController.register)
 routerUser.post("/login",UserController.login)
-routerUser.get("/user", UserController.getInfo);
-routerUser.delete("/logout",authentication, UserController.logout)
-routerUser.get("/info",authentication, UserController.getInfo)
-
 
 
 module.exports = routerUser

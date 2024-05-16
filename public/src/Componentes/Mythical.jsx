@@ -2,9 +2,9 @@ import { useProducts } from '../usecontext/ProductContext.jsx';
 import Cards from './Cards/Cards.jsx';
 
 const Mythical = () => {
-  const { pokemon } = useProducts();
+  const products = useProducts();
 
-  const mythicalPokemon = pokemon.filter(pokemon => pokemon.pokemonAttributes.mythical);
+  const mythicalPokemon = products.filter(pokemon => pokemon.mythical);
 
   if (!mythicalPokemon.length) {
     return <div>No hay Pokémon Misticos disponibles.</div>;

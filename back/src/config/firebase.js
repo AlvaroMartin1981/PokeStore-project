@@ -9,6 +9,6 @@ const firebaseConfig = {
   appId: process.env.FB_APPID
 };
 
-const app = firebase.initializeApp(firebaseConfig);
+const firebaseapp = firebase.initializeApp(firebaseConfig);
 
-module.exports = app
+module.exports = firebaseapp

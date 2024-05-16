@@ -31,20 +31,20 @@ padding: 1px 3px;
 }
 
 .card{
-  margin:20px;  display: flex;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.233);
+  position: relative;
+  margin:10px;  
+  display: flex;
   flex-direction: column;
   justify-content: center;
   background-color: white;
+  position: relative;
 }
 
 .card a{
   text-decoration: none;
   color: black;
 }
-.card img{
-  margin-top: -20px;
-}
+
 
 .text_card{
   font-weight: 600;
@@ -52,25 +52,78 @@ padding: 1px 3px;
   margin-top: 0px;
 }
 .card-title{
-  font-size:24px;
+  font-size:20px;
   text-align: center;
   margin: 10px;
 }
-
+.card img{
+  filter: drop-shadow(0px 4px 6px rgba(0, 0, 0, 0.811));
+}
 
 .card_carro{
   display: flex;
   justify-content:center;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
-  gap:30px;
   font-weight: 600;
-  margin: -40px 10px 5px 10px;
-  font-size: 25px;
+  margin: -30px 10px 5px 10px;
+  font-size: 18px;
   color: black;
 }
+.card_carro h4{
+  font-size: 18px;
+}
+.card_carro span{
+  font-weight: 500;
+}
 
+.card_btn button {
+  margin-top: 10px;
+  padding: 5px;
+  font-size: 13px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  background-color: black;
+  cursor: pointer;
+}
+.star-container {
+  display: flex;
+  font-size: 25px; /* Tamaño de la estrella */
+  color: grey;
+  justify-content: center;
+  margin: -20px 10px 10px 10px;
+}
 
+.star {
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+  width: 20px;
+  height: 1em;
+}
+
+.star.filled {
+  color: yellow; /* Color de las estrellas llenas */
+}
+
+.star.partial {
+  overflow: hidden;
+  margin-left: -0.5em; 
+  color: yellow;
+  top:0;
+  left:0 /* Color de la parte llena */
+}
+.card_btn button:hover {
+  background-color: #333; 
+}
+.card_btn{
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  margin-top:-30px;
+  margin-bottom: 10px;
+}
 
 
 .cart-shopping:hover{
@@ -78,7 +131,7 @@ padding: 1px 3px;
 }
 .mensaje p{
 text-align: center;
-  font-size: 15px;
+  font-size: 13px;
   font-weight: 600;
-  margin-top: -40px;
+  margin-top: -0px;
 }

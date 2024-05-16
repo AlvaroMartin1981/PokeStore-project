@@ -1,20 +1,29 @@
-import React, { useState, useEffect } from 'react';
+import { useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import './RegisterForm.css';
 
-const RegisterForm = () => {
+const RegisterForm = ({role}) => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [error, setError] =  useState('');
     const navigate = useNavigate();
+    let rol = role
+    
     const [formData, setFormData] = useState({
         name: '',
+        username:'',
         email: '',
-        password: ''
+        password: '',
+        role:rol,
+        wishList:[],
     });
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
+        let formattedValue = value;
+        if (name === 'username' && !value.startsWith('@')) {
+        formattedValue = '@' + value;
+    }
+    setFormData({ ...formData, [name]: formattedValue });
     };
 
     const handleSubmit = async (e) => {
@@ -31,22 +40,27 @@ const RegisterForm = () => {
             if (!response.ok) {
                 throw new Error('Error al registrar usuario');
             }
-            // Usuario registrado exitosamente
-            const userData = await response.json(); // Obtener datos de usuario y token
-            localStorage.setItem('token', userData.token); // Guardar el token en el localStorage
+           
+            const userData = await response.json(); 
+            localStorage.setItem('token', userData.token); 
             navigate('/pokemon');
         } catch (error) {
             console.error('Error al registrar usuario:', error.message);
-            setError('Error al registrar usuario. Inténtelo de nuevo.');
+            setError(error);
         }
         setIsSubmitting(false);
     };
 
     return (
+        <>
         <form onSubmit={handleSubmit}>
             <div>
                 <label htmlFor="name">Nombre:</label>
                 <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} required />
+            </div>
+            <div>
+                <label htmlFor="username">Username:</label>
+                <input type="text" id="username" name="username" value={formData.username} onChange={handleChange} required />
             </div>
             <div>
                 <label htmlFor="email">Correo electrónico:</label>
@@ -59,6 +73,7 @@ const RegisterForm = () => {
             {error && <p className="error-message">{error}</p>}
             <button type="submit" disabled={isSubmitting}>Registrarse</button>
         </form>
+        </>
     );
 };
 

@@ -1,44 +1,19 @@
 nav{
   display: flex;
   justify-content: space-between;
-  background-color: #ffffff81;
-  color: #000000;
+  background-color: #ffffffdc;
+  color: #ffffff;
   align-items: center;
-  position: relative;
   width: 100%;
   top: 0;
   z-index: 100; 
   padding: 10px;
 }
-.menu-icon {
-  display: block;
-  cursor: pointer;
-  position: relative;
-  z-index: 100;
-  width: 30px;
-  height: 25px;
-  margin-right: 15px;
-  margin: 10px;
-}
-  
-.menu-line {
-  width: 100%;
-  height: 3px;
-  background-color: #333;
-  margin-bottom: 5px;
-  transition: all 0.3s ease;
-}
-
-  
-@media screen and (min-width: 768px) {
-      .menu-icon {
-      display: none;
-  }
-}
 
 @media screen and (max-width: 767px) {
   
   nav {
+    display: flex;
     flex-direction: column; 
     align-items: flex-start;
     padding: 5px; 
@@ -52,36 +27,14 @@ nav{
     display: flex;
     flex-direction: column;
     z-index: 1000;
+    flex-wrap: nowrap;
   }
 
   nav ul li {
     margin: 0; 
     padding: 0;
     z-index: 2000;
-    background-color: white;
-  }
-  nav ul li ul {
-    z-index: 2000;
-    background-color: white;
-    gap:5px;
-    margin: 0; 
-    padding: 0;
-  }
-  nav a {
-    font-size: 16px; 
-  }
-  ul li ul{
-    display: none;
-    position: relative;
-    top: auto;
-    left: auto;
-    padding: 10px;
-    border: 1px solid #ccc;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    margin-top: 5px;
-    column-count: 3; 
-    column-gap: 1px;
+    font-size: 14;
   }
 }
 
@@ -93,66 +46,31 @@ nav ul {
   padding: 0px 10px;
   display: flex;
   flex-direction: row;
+  gap: 4px;
 }
 
 nav ul li {
-
   margin-right: 20px;
-  position: relative;
   z-index: 1000;
 }
 nav ul li a {
-  display: block;
-  padding: 10px;
+  display: flex;
+  padding: 10px 0px;
   color: #000000;
   text-decoration: none;
-  font-weight: 700;
+  font-weight: 500;
   z-index: 1000;
-  font-size: 20px;
-}
-nav ul li ul {
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  padding: 10px;
-  border: 1px solid #ccc;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  z-index: 20000;
+  font-size: 18px;
 }
 
-nav ul li:hover ul {
-  display: block;
-}
-
-ul ul {
-  display: inline-block;
-  position: absolute;
-  left: 0px ;
-  top: 100%;
-  left: 0;
-  background: white;
-  border: 1px solid #ccc;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
-  column-count: 6; 
-  column-gap: 10px;
-  font-size: 10px;
-}
-
-ul ul.show {
-  opacity: 1;
-  visibility: visible;
-}
 
 .nav_info_person{
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 10px
-}
-li{
-  list-style: none;
+  gap: 10px;
+  margin-right: 40px;
+  font-weight: 500;
+  z-index: 10000;
+  color: #000000;
 }

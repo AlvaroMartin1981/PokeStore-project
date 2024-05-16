@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 require('dotenv').config();
 //const ObtenerPokemons =require('../utils/axiosPoke')
-//const obtenerItems=require('../utils/axiosItems')
 
 const dbConnection = async () => {
     try {
@@ -14,13 +13,11 @@ const dbConnection = async () => {
               timeout: 1000
             }
           })
+          //ObtenerPokemons()
         console.log('Base de datos conectada con éxito');
-       
-      
     } catch (error) {
         console.error(error);
         throw new Error('Error a la hora de iniciar la base de datos');
     }
 };
-
 module.exports = dbConnection;

@@ -24,42 +24,54 @@ const ProductSchema = new mongoose.Schema({
         required: true
     }, 
     tipo: [String],
-    id: Number,
-    pokemonAttributes: {
-        peso: Number,
-        altura: Number,
-        estadisticas: [
-            {
-                nombre: String,
-                valor: Number,
-            },
-        ],
-        legendario: Boolean,
-        mythical: Boolean,
-        habilidades: [
-            {
-                nombre: String,
-                descripcion: String,
-            },
-        ],
-        ratio_captura: Number,
-        base_experience: Number,
-        cadena_evoluciones: [
-            {
-                especie: String,
-                nivel: Number,
-            },
-        ],
-        evolucionDe: String,
-    },
-
+    id_pokedex: Number,
+    peso: Number,
+    altura: Number,
+    estadisticas: [
+        {
+            nombre: String,
+            valor: Number,
+        },
+    ],
+    legendario: Boolean,
+    mythical: Boolean,
+    habilidades: [
+        {
+            nombre: String,
+            descripcion: String,
+        },
+    ],
+    ratio_captura: Number,
+    base_experience: Number,
+    cadena_evoluciones: [
+        {
+            especie: String,
+            nivel: Number,
+        },
+    ],
+    evolucionDe: String,
     reviews: [{
-        userId: { type: ObjectId, ref: 'User' },
+        userId: { 
+            type: ObjectId,
+             ref: 'User' 
+            },
         comment: String,
-        name: String
+        username: String
     }],
-    likes: [{ type: ObjectId }],
-}, { timestamps: true });
+    likes: [{ 
+        userId: { 
+            type: ObjectId,
+             ref: 'User' 
+            },
+            likes: { 
+                type: Number,
+                default: 0
+            },
+        likesCount: {
+            type: Number,
+            default: 0
+     }}],
+     }, { timestamps: true });
 
 ProductSchema.index({
     nombre: "text",

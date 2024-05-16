@@ -37,7 +37,7 @@ const Cart = () => {
             </thead>
             <tbody>
               {carrito.map((producto) => (
-                <tr key={producto.id}>
+                <tr key={producto._id}>
                   <td><img src={producto.imagen} alt={producto.nombre} width="50" /></td>
                   <td>{producto.nombre}</td>
                   <td>{producto.precio} €</td>

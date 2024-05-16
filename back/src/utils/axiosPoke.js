@@ -100,7 +100,8 @@ const pokemonNumero = async (poke) => {
     } else if (descripcionData.capture_rate > 100) {
       sumaBaseStatNumero -= 20;
     }
-
+    const random = randomLikes();
+    const likesCount=RandomlikesCount()
     const newPoke = {
       nombre: name,
       descripcion: descripcionEspañol,
@@ -108,21 +109,22 @@ const pokemonNumero = async (poke) => {
       precio: sumaBaseStatNumero,
       categoria: "Pokemon", 
       tipo: tiposEspañol, 
-       id: id,
-      pokemonAttributes: {
-          peso: peso,
-          altura: height,
-          estadisticas: estadisticas,
-          legendario: descripcionData.is_legendary,
-          mythical: descripcionData.is_mythical,
-          habilidades: habilidades,
-          ratio_captura: descripcionData.capture_rate,
-          base_experience: base_experience,
-          cadena_evoluciones: evoluciones,
-          evolucionDe: evolucionDe,
-      },
+      id_pokedex: id,
+      peso: peso,
+      altura: height,
+      estadisticas: estadisticas,
+      legendario: descripcionData.is_legendary,
+      mythical: descripcionData.is_mythical,
+      habilidades: habilidades,
+      ratio_captura: descripcionData.capture_rate,
+      base_experience: base_experience,
+      cadena_evoluciones: evoluciones,
+      evolucionDe: evolucionDe,
       reviews: [], 
-      likes: [], 
+      likes: [{ 
+        likes:random,
+        likesCount:likesCount
+      }]
   };
   
     await  ProductModel.create(newPoke)
@@ -233,5 +235,12 @@ function descripcionPokemon(flavortextentries) {
     ? descripcionEspañol.flavor_text
     : 'No hay una descripción en español para este Pokémon';
 }
+function randomLikes() {
+  const randomNumber = Math.random() * 2; 
+  return parseFloat((randomNumber + 2).toFixed(1)); 
+}
 
+function RandomlikesCount() {
+  return Math.floor(Math.random() * 20) + 1;
+}
   module.exports= ObtenerPokemons

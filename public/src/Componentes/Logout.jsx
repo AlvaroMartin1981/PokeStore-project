@@ -1,9 +1,9 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useUser } from '../usecontext/UserContext.jsx';
+import { useUser } from '../usecontext/UserContext';
 
 const Logout = () => {
-  const { setUser } = useUser();
+  const { setUser } =useUser();
   const navigate = useNavigate();
 
   const handleLogout = () => {

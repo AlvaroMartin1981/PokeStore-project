@@ -20,6 +20,8 @@
   background-color: rgba(253, 254, 255, 0.945);
   display: flex;
   flex-direction: column;
+  z-index: 10000;
+  color: #000000;
  
 }
 .Cart-items {
@@ -34,7 +36,7 @@
 }
 
 .Cart-items th {
-  background-color: #333;
+  background-color: #000000;
   color: #fff;
 }
 
@@ -49,7 +51,7 @@
   align-items: center;
 }
 .empty-Cart-button {
-  background-color: #333;
+  background-color: #020202;
   color: #fff;
   border: none;
   cursor: pointer;

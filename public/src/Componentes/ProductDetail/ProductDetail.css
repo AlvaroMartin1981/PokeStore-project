@@ -10,10 +10,6 @@
     gap:30px;
     flex-direction: row;
 }
-
-.product-detail img {
-    min-width: 200px;
-}
   
 .text_card_detail{
     padding: 0px 20px;

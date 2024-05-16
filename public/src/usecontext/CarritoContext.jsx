@@ -15,7 +15,7 @@ export const CarritoProvider = ({ children }) => {
 
   const [mensaje, setMensaje] = useState('');
   const añadir = (producto) => {
-    let productosEnCarrito = carrito.find((p) => p.id === producto.id);
+    let productosEnCarrito = carrito.find((p) => p.id === producto.id_pokedex);
 
     if (!productosEnCarrito) {
       setCarrito([...carrito, { ...producto, cantidad: 1 }]);

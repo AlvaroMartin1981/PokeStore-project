@@ -28,7 +28,7 @@ const Product = ({ product }) => {
     return (
         <div className='container_home' key={nombre}>
             <Link to={categoryLink}>
-                <img src={imagen} alt={nombre} style={{ width: '300px' }} />
+                <img src={imagen} alt={nombre} style={{ width: '200px' }} />
                 <div className='container_home_text'>
                     <h3>{categoria} - {displayTipo}</h3>
                 </div>

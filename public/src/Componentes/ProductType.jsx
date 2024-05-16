@@ -3,7 +3,7 @@ import { useProducts } from '../usecontext/ProductContext.jsx';
 import Cards from './Cards/Cards.jsx';
 
 const ProductType = () => {
-  const { products } = useProducts();
+  const  products  = useProducts();
   const { tipo } = useParams();
 
   const filteredProducts = products.filter(product => product.tipo.includes(tipo));

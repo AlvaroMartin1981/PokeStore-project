@@ -9,28 +9,25 @@ const UserSchema = new mongoose.Schema(
         },
         email:{
             type :String ,
-            match:  [/.+\@.+\..+/],
             unique: true,
             required: true
             
         },
-        password: {
+        username:{
             type: String,
-            required: true
-        }, 
+            unique: true,
+        },
         role: {
             type: String,
             enum: ['admin', 'user'],
-            default:'user'
         },
-        tokens:[],
-        orderIds: [{type: ObjectId, ref: "Order"}],
+        tokens:{ type: String } ,
         wishList: [{type: ObjectId, ref:"Product"}],
     },
     {timestamps:true}
 );
 
-const User = mongoose.model("User", UserSchema);
+const User = mongoose.model("Users", UserSchema);
 
 module.exports = User;
     

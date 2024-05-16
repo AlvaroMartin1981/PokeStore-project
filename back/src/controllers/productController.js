@@ -79,19 +79,37 @@ const productController = {
     },
 
     // Insertar un comentario en un producto
-    async insertComment  (req, res){
+    async insertComment(req, res) {
         try {
             const product = await ProductoModel.findById(req.params.id);
             if (!product) {
                 return res.status(404).json({ message: 'Producto no encontrado' });
             }
-            product.reviews.push({ userId: req.body.userId, comment: req.body.comment,name:req.body.name });
+    
+            // Verifica si el usuario proporcionó un nombre en el cuerpo de la solicitud
+            const name = req.body.username || "Usuario Anónimo";
+    
+            // Crea el nuevo comentario con el nombre del usuario (o un nombre de usuario predeterminado si no se proporciona)
+            const newReview = {
+                userId: req.body.userId,
+                comment: req.body.comment,
+                username: name
+            };
+    
+            // Agrega el nuevo comentario al producto
+            product.reviews.push(newReview);
+    
+            // Guarda los cambios en la base de datos
             await product.save();
+    
+            // Envía una respuesta JSON con el producto actualizado
             res.json(product);
         } catch (error) {
+            // Si ocurre un error, envía una respuesta de error con el mensaje de error
             res.status(500).json({ error: error.message });
         }
     },
+
 
     // Dar "Me gusta" a un producto
     async like  (req, res){

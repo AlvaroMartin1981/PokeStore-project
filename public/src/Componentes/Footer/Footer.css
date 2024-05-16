@@ -5,16 +5,15 @@ footer {
     text-align: center;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;;
+    justify-content: space-between;
 }
 
 footer div {
     margin-bottom: 10px;
 }
 
-footer p{
-  
-    margin: 5px;
+footer div p{
+    margin-top: -10px;
 }
 .footer_link a {
     color: #fff;

@@ -8,7 +8,7 @@ import './ProductDetail.css';
 
 const ProductDetail = () => {
   const { añadir } = useCarrito();
-  const { products } = useProducts();
+  const  products  = useProducts();
   const { nombre } = useParams();
   const { user } = useUser();
   const [comments, setComments] = useState([]);
@@ -29,15 +29,14 @@ const ProductDetail = () => {
     
         <div className="product-detail"> 
            <div>
-        <img src={product.imagen} alt={product.nombre} />
+        <img src={product.imagen} alt={product.nombre} width='400px'/>
         </div>
         <div className='text_card_detail'>
-          <h2>{product.id} - {product.nombre}</h2>
+          <h2>{product.id_pokedex} - {product.nombre}</h2>
           <div className='descripcion_detail'>
             <h4>{product.categoria}</h4>
             <h4>{product.descripcion}</h4>
             <h4>{product.tipo.map(tipo => `${tipo}`).join(' ')}</h4>
-            {typeof product.precio === 'number' ? (
               <div className='detail_precio'>
                 <h3>Precio: {product.precio} €</h3>
                 <div className='btn_detail'>
@@ -45,25 +44,21 @@ const ProductDetail = () => {
                   <button onClick={() => añadir(product)}>Añadir a la lista</button>
                 </div>
               </div>
-            ) : (
-              <h3>No disponible</h3>
-            )} 
           </div>
         </div>
       </div>
       </div>
-      {product.categoria === 'Pokemon' && (
         <div className='detail_pokemon'>
           <div className='detail_habilidades'>
             <h4>Habilidades:</h4>
             <ul>
-              {product.pokemonAttributes.habilidades.map((habilidad, index) => (
+              {product.habilidades.map((habilidad, index) => (
                 <li key={index}><span className='detail_stats_nombre'>{habilidad.nombre}:</span> {habilidad.descripcion}</li>
               ))}
             </ul>
             <h4>Estadísticas:</h4>
             <ul>
-              {product.pokemonAttributes.estadisticas.map((stat, index) => (
+              {product.estadisticas.map((stat, index) => (
                 <li key={index}>
                   <span className='detail_stats_nombre'>{stat.nombre}: </span>
                   <progress value={stat.valor} max="200"> </progress>{stat.valor}
@@ -72,11 +67,11 @@ const ProductDetail = () => {
             </ul>
           </div>
           <div className='detail_caracteristicas'>
-            {product.pokemonAttributes.cadena_evoluciones.length > 1 && (
+            {product.cadena_evoluciones.length > 1 && (
               <>
                 <h4>Cadena Evolutiva:</h4>
                 <ul>
-                  {product.pokemonAttributes.cadena_evoluciones.map((evolucion, index) => (
+                  {product.cadena_evoluciones.map((evolucion, index) => (
                     <li key={index}><span className='detail_stats_nombre'>
                       <Link to={`/product/${evolucion.especie.charAt(0).toUpperCase() + evolucion.especie.slice(1)}`}>
                         {evolucion.especie.charAt(0).toUpperCase() + evolucion.especie.slice(1)}
@@ -87,26 +82,26 @@ const ProductDetail = () => {
                 </ul>
               </>
             )}
-            <h4>Peso:<span className='detail_result'> {product.pokemonAttributes.peso} kg</span></h4>
-            <h4>Altura: <span className='detail_result'>{product.pokemonAttributes.altura} m</span></h4>
-            <h4>Ratio de captura: <span className='detail_result'>{product.pokemonAttributes.ratio_captura}</span></h4>
-            <h4>Pokemon Legendario: <span className='detail_result'> {product.pokemonAttributes.legendario === true ? 'Sí' : 'No'}</span></h4>
-            <h4>Pokemon Místico: <span className='detail_result'>{product.pokemonAttributes.mythical === true ? 'Sí' : 'No'}</span></h4>
-            <h4>Experiencia Base:<span className='detail_result'> {product.pokemonAttributes.base_experience} puntos</span></h4>
+            <h4>Peso:<span className='detail_result'> {product.peso} kg</span></h4>
+            <h4>Altura: <span className='detail_result'>{product.altura} m</span></h4>
+            <h4>Ratio de captura: <span className='detail_result'>{product.ratio_captura}</span></h4>
+            <h4>Pokemon Legendario: <span className='detail_result'> {product.legendario === true ? 'Sí' : 'No'}</span></h4>
+            <h4>Pokemon Místico: <span className='detail_result'>{product.mythical === true ? 'Sí' : 'No'}</span></h4>
+            <h4>Experiencia Base:<span className='detail_result'> {product.base_experience} puntos</span></h4>
           </div>
         </div>
-      )}
       </div>
       <div>
       <div>
   <div className='card_likes'>
-    {product.likes.length > 0 && <p>Likes: {product.likes.length}</p>}
+  {product.likes.length > 0 && <p>Valor:{product.likes[0].likes} Likes: {product.likes[0].likesCount}</p>}
+
     {product.reviews.length > 0 && (
   <div>
     <h3>Reviews:</h3>
     {product.reviews.map((review, index) => (
       <div key={index}>
-        <p><strong>{review.name || 'Usuario desconocido'}</strong>: {review.comment}</p>
+        <p><strong>{review.username|| 'Usuario desconocido'}</strong>: {review.comment}</p>
       </div>
     ))}
   </div>
