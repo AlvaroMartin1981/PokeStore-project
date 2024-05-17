@@ -5,11 +5,11 @@ import { useProducts } from '../../usecontext/ProductContext.jsx';
 import Cart from '../Cart/Cart.jsx';
 import SearchBar from '../SearchBar/SearchBar.jsx';
 import LoginForm from '../Forms/LoginForm.jsx';
-import Logout from '../Logout.jsx';
+
 import './Navbar.css';
 
 const Nav = () => {
-  const { user } = useUser();
+  const { user,Logout } = useUser();
   const products = useProducts();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -64,7 +64,7 @@ const Nav = () => {
             <>
               <h3>Welcome, {user.name}</h3>
               <Link to="/myprofile" className="profile-icon">👤</Link>
-              <Logout />
+              <button onClick={()=>Logout()}>Cerrar sesion</button>
             </>
           ) : (
             <LoginForm />

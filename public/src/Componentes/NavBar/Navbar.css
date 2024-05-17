@@ -17,6 +17,7 @@
   display: flex;
   list-style: none;
   gap: 1rem;
+  color: white;
 }
 
 .nav-links.open {

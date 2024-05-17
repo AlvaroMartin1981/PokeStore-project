@@ -88,7 +88,6 @@ const productController = {
 
     // Insertar un comentario en un producto
     async insertComment(req, res) {
-        trasync insertComment(req, res) {
     try {
         const product = await ProductoModel.findById(req.params.id);
         const { userId, comment, rating, username } = req.body;
@@ -124,7 +123,7 @@ const productController = {
         // Si ocurre un error, envía una respuesta de error con el mensaje de error
         res.status(500).json({ error: error.message });
     }
-}
+},
     // Crear un producto
     async create (req, res) {
         try {

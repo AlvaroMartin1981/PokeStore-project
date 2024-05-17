@@ -1,5 +1,6 @@
 .login-form-container {
   position: relative;
+  z-index: 10000;
 }
 
 .login-form {
@@ -16,6 +17,7 @@
 
 .login-form-container:hover .login-form {
   display: block;
+  z-index: 100000;
 }
 
 .login-form h4{

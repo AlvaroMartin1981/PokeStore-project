@@ -107,6 +107,7 @@ const ProductDetail = () => {
               {comments.map((review, index) => (
                 <div key={index}>
                   <p><strong>{review.username || 'Usuario desconocido'}</strong>: {review.comment}</p>
+                  <p>{review.rating}</p>
                 </div>
               ))}
             </div>
