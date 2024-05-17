@@ -56,21 +56,22 @@ const ProductSchema = new mongoose.Schema({
              ref: 'User' 
             },
         comment: String,
-        username: String
+        username: String,
+        rating:Number
     }],
     likes: [{ 
-        userId: { 
-            type: ObjectId,
-             ref: 'User' 
-            },
-            likes: { 
-                type: Number,
-                default: 0
+        likes: { 
+            type: Number,
+             default: 0
             },
         likesCount: {
             type: Number,
             default: 0
-     }}],
+     },
+        star:{
+            type: Number,
+            default: 0
+        }}],
      }, { timestamps: true });
 
 ProductSchema.index({

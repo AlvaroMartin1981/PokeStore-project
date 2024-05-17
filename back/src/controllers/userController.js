@@ -70,6 +70,19 @@ const UserController = {async register(req, res, next) {
             res.status(500).json({ message: "Error al iniciar sesión" });
         }
     },
+
+    async getUserProfile (req, res){
+        try {
+          const userDoc = await getDoc(doc(fireDb, 'usuario', req.user.uid));
+          if (!userDoc.exists) {
+            return res.status(404).json({ message: 'Usuario no encontrado' });
+          }
+          const userData = userDoc.data();
+          res.json({ user: userData });
+        } catch (error) {
+          res.status(500).json({ message: 'Error del servidor', error });
+        }
+    }
 };
 
 module.exports = UserController;

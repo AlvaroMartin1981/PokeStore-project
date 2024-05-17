@@ -1,5 +1,13 @@
 const ProductoModel= require('../models/Producto')
 
+function calcularStar(rating, likesCount) {
+    // Calcula el promedio ponderado
+    const promedio = rating / likesCount;
+
+    // Asegúrate de que star esté dentro del rango del 1 al 5
+    return Math.min(Math.max(promedio, 1), 5);
+}
+
 const productController = {
     // Obtener todos los productos
    async getAll  (req, res){
@@ -82,46 +90,35 @@ const productController = {
     async insertComment(req, res) {
         try {
             const product = await ProductoModel.findById(req.params.id);
+            const { userId, comment, rating, username } = req.body;
             if (!product) {
                 return res.status(404).json({ message: 'Producto no encontrado' });
             }
     
-            // Verifica si el usuario proporcionó un nombre en el cuerpo de la solicitud
-            const name = req.body.username || "Usuario Anónimo";
-    
             // Crea el nuevo comentario con el nombre del usuario (o un nombre de usuario predeterminado si no se proporciona)
-            const newReview = {
-                userId: req.body.userId,
-                comment: req.body.comment,
-                username: name
+            let newReview = {
+                userId,
+                comment,
+                username,
+                rating
             };
-    
-            // Agrega el nuevo comentario al producto
             product.reviews.push(newReview);
+    
+            // Incrementa el contador de likes
+            product.likes[0].likesCount += 1;
+            product.likes[0].likes += rating;
+    
+            // Calcula el nuevo valor de star basado en rating y likesCount
+            const valor = calcularStar(rating, product.likes[0].likesCount);
+    
+            // Asigna el nuevo valor de star al producto
+            product.likes[0].star = valor;
     
             // Guarda los cambios en la base de datos
             await product.save();
-    
-            // Envía una respuesta JSON con el producto actualizado
             res.json(product);
         } catch (error) {
             // Si ocurre un error, envía una respuesta de error con el mensaje de error
-            res.status(500).json({ error: error.message });
-        }
-    },
-
-
-    // Dar "Me gusta" a un producto
-    async like  (req, res){
-        try {
-            const product = await ProductoModel.findById(req.params.id);
-            if (!product) {
-                return res.status(404).json({ message: 'Producto no encontrado' });
-            }
-            product.likes.push(req.body.userId);
-            await product.save();
-            res.json(product);
-        } catch (error) {
             res.status(500).json({ error: error.message });
         }
     },

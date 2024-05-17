@@ -9,7 +9,6 @@ routerProduct.get('/nombre/:nombre', productController.getProductsByName);
 
 // Rutas protegidas con autenticación
 routerProduct.post('/:id/comentario', productController.insertComment);
-routerProduct.post('/:id/like', productController.like);
 
 // Rutas protegidas solo para administradores
 routerProduct.put('/:id/editar', authentication, productController.edit);

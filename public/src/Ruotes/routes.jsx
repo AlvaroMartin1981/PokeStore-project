@@ -9,11 +9,11 @@ import Legendarios from '../Componentes/Lengendario.jsx';
 import Mythical from '../Componentes/Mythical.jsx';
 import Home from '../Pages/Home/Home.jsx';
 import Footer from '../Componentes/Footer/Footer.jsx';
-import RegisterForm from '../Componentes/Forms/RegisterForm.jsx';
-import LoginForm from '../Componentes/Forms/LoginForm.jsx';
+import RegisterForm from '../Pages/Auht/RegisterForm.jsx';
+import LoginForm from '../Pages/Auht/LoginPages.jsx';
 import TypeComponent from '../Pages/TypesPages/TypesPages.jsx';
-import CreateProduct from '../Pages/Product/CreateProduct.jsx';
-import UpdateProduct from '../Pages/Product/UpdateProduct.jsx'
+//import CreateProduct from '../Pages/Product/CreateProduct.jsx';
+import UpdateProduct from '../Pages/CU-Product/UpdateProduct.jsx'
 
 
 const ScrollTop=()=>{
@@ -42,7 +42,7 @@ function Rutas() {
                 <Route path="/pokemon/tipo/:tipo" element={<ProductType />} />
                 <Route path="/product/:nombre" element={<ProductDetail />} />
                 <Route path="/user/register" element={<RegisterForm role='user'/>} />
-                <Route path="/user/login" element={<LoginForm />} />
+                <Route path="/login" element={<LoginForm />} />
                 <Route path="/admin/register" element={<RegisterForm role='admin' />} />
                 <Route path='/admin/edit/:id' element={<UpdateProduct/>}/>
 
