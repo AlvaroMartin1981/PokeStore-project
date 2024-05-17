@@ -88,41 +88,43 @@ const productController = {
 
     // Insertar un comentario en un producto
     async insertComment(req, res) {
-        try {
-            const product = await ProductoModel.findById(req.params.id);
-            const { userId, comment, rating, username } = req.body;
-            if (!product) {
-                return res.status(404).json({ message: 'Producto no encontrado' });
-            }
-    
-            // Crea el nuevo comentario con el nombre del usuario (o un nombre de usuario predeterminado si no se proporciona)
-            let newReview = {
-                userId,
-                comment,
-                username,
-                rating
-            };
-            product.reviews.push(newReview);
-    
-            // Incrementa el contador de likes
-            product.likes[0].likesCount += 1;
-            product.likes[0].likes += rating;
-    
-            // Calcula el nuevo valor de star basado en rating y likesCount
-            const valor = calcularStar(rating, product.likes[0].likesCount);
-    
-            // Asigna el nuevo valor de star al producto
-            product.likes[0].star = valor;
-    
-            // Guarda los cambios en la base de datos
-            await product.save();
-            res.json(product);
-        } catch (error) {
-            // Si ocurre un error, envía una respuesta de error con el mensaje de error
-            res.status(500).json({ error: error.message });
+        trasync insertComment(req, res) {
+    try {
+        const product = await ProductoModel.findById(req.params.id);
+        const { userId, comment, rating, username } = req.body;
+        if (!product) {
+            return res.status(404).json({ message: 'Producto no encontrado' });
         }
-    },
 
+        // Crea el nuevo comentario
+        let newReview = {
+            userId,
+            comment,
+            username,
+            rating
+        };
+        product.reviews.push(newReview);
+
+        // Incrementa el contador de likes
+        product.likes[0].likesCount += 1;
+        product.likes[0].likes += rating;
+
+        // Calcula el nuevo valor de star basado en rating y likesCount
+        const valor = calcularStar(rating, product.likes[0].likesCount);
+
+        // Asigna el nuevo valor de star al producto
+        product.likes[0].star = valor;
+
+        // Guarda los cambios en la base de datos
+        await product.save();
+
+        // Devuelve el comentario recién creado
+        res.json(newReview);
+    } catch (error) {
+        // Si ocurre un error, envía una respuesta de error con el mensaje de error
+        res.status(500).json({ error: error.message });
+    }
+}
     // Crear un producto
     async create (req, res) {
         try {
