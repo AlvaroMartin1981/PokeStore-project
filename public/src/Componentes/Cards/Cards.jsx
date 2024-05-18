@@ -1,53 +1,57 @@
 import { Link } from 'react-router-dom';
 import { useCarrito } from '../../usecontext/CarritoContext';
-import { useState,useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useUser } from '../../usecontext/UserContext';
 import './Cards.css';
 
-const Cards = ({ products}) => {
-  const {user} =useUser()
-  const { añadir, mensaje } = useCarrito(); 
-  const [productosOrdenados, setProductosOrdenados] = useState(products); 
-  const [orden, setOrden] = useState('idAsc'); 
+const Cards = ({ products }) => {
+  const { user } = useUser();
+  const { añadir, mensaje } = useCarrito();
+  const [productosOrdenados, setProductosOrdenados] = useState(products);
+  const [orden, setOrden] = useState('idAsc');
   const [productoAñadido, setProductoAñadido] = useState(null);
 
-  const handleClick = (id) => {
-    setProductoAñadido(id);
-  };
   const handleChangeOrden = (e) => {
     setOrden(e.target.value);
-    ordenarProductos(e.target.value);
   };
-  
+
   useEffect(() => {
-    ordenarProductos(orden); 
-  }, [orden, products]); 
+    ordenarProductos(orden);
+  }, [orden, products]);
 
   const ordenarProductos = (tipoOrden) => {
-    let sortedProducts = [...products];
-    if (tipoOrden === 'nombreAsc') {
+    const sortedProducts = [...products];
+    switch (tipoOrden) {
+      case 'nombreAsc':
         sortedProducts.sort((a, b) => a.nombre.localeCompare(b.nombre));
-    } else if (tipoOrden === 'nombreDesc') {
+        break;
+      case 'nombreDesc':
         sortedProducts.sort((a, b) => b.nombre.localeCompare(a.nombre));
-    } else if (tipoOrden === 'precioAsc') {
+        break;
+      case 'precioAsc':
         sortedProducts.sort((a, b) => a.precio - b.precio);
-    } else if (tipoOrden === 'precioDesc') {
+        break;
+      case 'precioDesc':
         sortedProducts.sort((a, b) => b.precio - a.precio);
-    } else if (tipoOrden === 'idAsc') {
+        break;
+      case 'idAsc':
         sortedProducts.sort((a, b) => a.id_pokedex - b.id_pokedex);
-    } else if (tipoOrden === 'idDesc') {
+        break;
+      case 'idDesc':
         sortedProducts.sort((a, b) => b.id_pokedex - a.id_pokedex);
-    } else if (tipoOrden === 'valorAsc') {
-      sortedProducts.sort((a, b) => a.likes[0].likes - b.likes[0].likes);
-  } else if (tipoOrden === 'valorDesc') {
-      sortedProducts.sort((a, b) => b.likes[0].likes - a.likes[0].likes);
-  }
+        break;
+      case 'valorAsc':
+        sortedProducts.sort((a, b) => a.likes[0].likes - b.likes[0].likes);
+        break;
+      case 'valorDesc':
+        sortedProducts.sort((a, b) => b.likes[0].likes - a.likes[0].likes);
+        break;
+      default:
+        break;
+    }
     setProductosOrdenados(sortedProducts);
-};
+  };
 
- if (!productosOrdenados) { 
-    return <div>Cargando...</div>;
-  }
   return (
     <>
       <section className="container">
@@ -66,8 +70,8 @@ const Cards = ({ products}) => {
         </div>
         <div className="container_cards">
           {productosOrdenados.map((product) => (
-            <div className="card" key={product._id}> 
-              <img src={product.imagen} alt={product.nombre} width='200px'/>  
+            <div className="card" key={product._id}>
+              <img src={product.imagen} alt={product.nombre} width='200px' />
               <div className="text_card">
                 <h3 className='card-title'>
                   <Link to={`/product/${product.nombre}`}>
@@ -91,7 +95,7 @@ const Cards = ({ products}) => {
                 </div>
               </div>
               <div className="card_carro">
-                <h4><span>Precio: </span>{product.precio} € *</h4> 
+                <h4><span>Precio: </span>{product.precio} € *</h4>
                 <div className='card_btn'>
                   {user && user.role === 'admin' ? (
                     <>
@@ -101,25 +105,27 @@ const Cards = ({ products}) => {
                   ) : (
                     <>
                       <Link to={`/product/${product.nombre}`}>
-                        <button>Mas Detalles</button>
+                        <button>Más Detalles</button>
                       </Link>
                       <button onClick={() => {
-                          añadir(product);
-                          handleClick(product.id_pokedex);
+                        añadir(product);
+                        setProductoAñadido(product.id_pokedex);
                       }}>Añadir al carrito</button>
                     </>
                   )}
-                  </div>
+                </div>
+                {productoAñadido === product.id_pokedex && mensaje && (
                   <div className='mensaje'>
-                    {productoAñadido === product.id_pokedex && mensaje && <p>{mensaje}</p>}
+                    <p>{mensaje}</p>
                   </div>
+                )}
               </div>
             </div>
           ))}
         </div>
       </section>
     </>
-  );  
+  );
 };
 
 export default Cards;
