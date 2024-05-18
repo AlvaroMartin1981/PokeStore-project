@@ -3,7 +3,6 @@ import { createContext, useContext, useState, useEffect } from 'react';
 const CarritoContext = createContext();
 
 export const CarritoProvider = ({ children }) => {
-
   const [carrito, setCarrito] = useState(() => {
     try {
       const storedCarrito = localStorage.getItem('carrito');
@@ -14,6 +13,7 @@ export const CarritoProvider = ({ children }) => {
   });
 
   const [mensaje, setMensaje] = useState('');
+
   const añadir = (producto) => {
     let productosEnCarrito = carrito.find((p) => p.id === producto.id_pokedex);
 
@@ -25,17 +25,31 @@ export const CarritoProvider = ({ children }) => {
       const index = carrito.indexOf(productosEnCarrito);
       const nuevoCarrito = [...carrito];
       nuevoCarrito[index] = productosEnCarrito;
-      setCarrito(nuevoCarrito);
       setMensaje(`Has añadido un ${producto.nombre} más al carrito.`);
     }
   };
 
   const eliminar = (id) => {
+    const productoEliminado = carrito.find((producto) => producto.id === id);
     setCarrito(carrito.filter((producto) => producto.id !== id));
+    if (productoEliminado) {
+      setMensaje(`Has eliminado ${productoEliminado.nombre} del carrito.`);
+    }
+  };
+
+  const ajustarCantidad = (id, cantidad) => {
+    const nuevoCarrito = carrito.map((producto) => {
+      if (producto.id === id) {
+        return { ...producto, cantidad: Math.max(1, cantidad) }; // Asegurar que la cantidad no sea menor que 1
+      }
+      return producto;
+    });
+    setCarrito(nuevoCarrito);
   };
 
   const vaciarCarrito = () => {
     setCarrito([]);
+    setMensaje('Has vaciado el carrito.');
   };
 
   const guardarCarritoLocalStorage = () => {
@@ -46,8 +60,18 @@ export const CarritoProvider = ({ children }) => {
     guardarCarritoLocalStorage();
   }, [carrito]);
 
+  // Opcional: Limpiar el mensaje después de un tiempo
+  useEffect(() => {
+    if (mensaje) {
+      const timer = setTimeout(() => {
+        setMensaje('');
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [mensaje]);
+
   return (
-    <CarritoContext.Provider value={{ carrito, añadir, eliminar, vaciarCarrito,mensaje }}>
+    <CarritoContext.Provider value={{ carrito, añadir, eliminar, ajustarCantidad, vaciarCarrito, mensaje }}>
       {children}
     </CarritoContext.Provider>
   );
