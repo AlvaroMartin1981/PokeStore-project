@@ -1,3 +1,4 @@
+
 import { createContext, useContext, useState, useEffect } from 'react';
 
 const CarritoContext = createContext();
@@ -63,20 +64,4 @@ export const CarritoProvider = ({ children }) => {
   // Opcional: Limpiar el mensaje después de un tiempo
   useEffect(() => {
     if (mensaje) {
-      const timer = setTimeout(() => {
-        setMensaje('');
-      }, 3000);
-      return () => clearTimeout(timer);
-    }
-  }, [mensaje]);
-
-  return (
-    <CarritoContext.Provider value={{ carrito, añadir, eliminar, ajustarCantidad, vaciarCarrito, mensaje }}>
-      {children}
-    </CarritoContext.Provider>
-  );
-};
-
-export const useCarrito = () => {
-  return useContext(CarritoContext);
-};
+      const
