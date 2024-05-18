@@ -1,0 +1,35 @@
+.carrito-page {
+  padding: 20px;
+}
+
+.carrito-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.carrito-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.carrito-item img {
+  margin-right: 20px;
+}
+
+.carrito-item div {
+  flex-grow: 1;
+}
+
+.carrito-item button {
+  margin-top: 10px;
+  background-color: #ff6347;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+}
+
+.carrito-item button:hover {
+  background-color: #e55347;
+}
