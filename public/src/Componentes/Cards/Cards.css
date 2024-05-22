@@ -1,71 +1,138 @@
-.container {
-  padding: 20px;
+.container{
+  position:relative;
+  padding: auto
 }
 
-.cards_select {
-  margin-bottom: 20px;
+.cards_select{
+position: relative;
+font-size: 17px;
+cursor: pointer;
+font-weight: 600;
+padding:auto;
+
+}
+
+.cards_select label{
+padding: 0px 10px;
+}
+
+select{
+font-size: 14px;
+cursor: pointer;
+padding: 1px 3px;
 }
 
 .container_cards {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
+  position: relative;
+  justify-content: center;
+  font-family: Helvetica;
 }
 
-.card {
-  border: 1px solid #ccc;
-  padding: 20px;
-  width: 200px;
+.card{
+  position: relative;
+  margin:10px;  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: white;
+  position: relative;
+}
+
+.card a{
+  text-decoration: none;
+  color: black;
+}
+
+
+.text_card{
+  font-weight: 600;
   text-align: center;
+  margin-top: 0px;
+}
+.card-title{
+  font-size:20px;
+  text-align: center;
+  margin: 10px;
+}
+.card img{
+  filter: drop-shadow(0px 4px 6px rgba(0, 0, 0, 0.811));
 }
 
-.text_card {
+.card_carro{
+  display: flex;
+  justify-content:center;
+  flex-direction: column;
+  align-items: center;
+  font-weight: 600;
+  margin: -30px 10px 5px 10px;
+  font-size: 18px;
+  color: black;
+}
+.card_carro h4{
+  font-size: 18px;
+}
+.card_carro span{
+  font-weight: 500;
+}
+
+.card_btn button {
   margin-top: 10px;
+  padding: 5px;
+  font-size: 13px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  background-color: black;
+  cursor: pointer;
 }
-
 .star-container {
   display: flex;
+  font-size: 25px; /* Tamaño de la estrella */
+  color: grey;
   justify-content: center;
-  margin-top: 10px;
+  margin: -20px 10px 10px 10px;
 }
 
 .star {
-  font-size: 20px;
-  color: #ddd;
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+  width: 20px;
+  height: 1em;
 }
 
 .star.filled {
-  color: gold;
+  color: yellow; /* Color de las estrellas llenas */
 }
 
 .star.partial {
+  overflow: hidden;
   position: relative;
-  overflow: hidden;
-  display: inline-block;
-  color: gold;
+  margin-left: 0.5em; 
+  color: yellow;
+  top:0;
+  left:0  
 }
-
-.star.partial:after {
-  content: '★';
-  position: absolute;
-  left: 0;
-  top: 0;
-  white-space: nowrap;
-  overflow: hidden;
+.card_btn button:hover {
+  background-color: #333; 
 }
-
-.card_carro {
-  margin-top: 10px;
-}
-
-.card_btn {
-  margin-top: 10px;
+.card_btn{
   display: flex;
   justify-content: space-between;
+  gap: 20px;
+  margin-top:-30px;
+  margin-bottom: 10px;
 }
 
-.mensaje {
-  margin-top: 10px;
-  color: green;
-  font-size: 14px;
+
+.cart-shopping:hover{
+  color: rgb(249, 249, 255);
+}
+.mensaje p{
+text-align: center;
+  font-size: 13px;
+  font-weight: 600;
+  margin-top: -0px;
 }

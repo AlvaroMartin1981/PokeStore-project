@@ -1,4 +1,3 @@
-
 import { createContext, useContext, useState, useEffect } from 'react';
 
 const CarritoContext = createContext();
@@ -26,6 +25,7 @@ export const CarritoProvider = ({ children }) => {
       const index = carrito.indexOf(productosEnCarrito);
       const nuevoCarrito = [...carrito];
       nuevoCarrito[index] = productosEnCarrito;
+      setCarrito(nuevoCarrito);
       setMensaje(`Has añadido un ${producto.nombre} más al carrito.`);
     }
   };
@@ -40,7 +40,7 @@ export const CarritoProvider = ({ children }) => {
 
   const ajustarCantidad = (id, cantidad) => {
     const nuevoCarrito = carrito.map((producto) => {
-      if (producto.id === id) {
+      if (producto.pokedex_id === id) {
         return { ...producto, cantidad: Math.max(1, cantidad) }; // Asegurar que la cantidad no sea menor que 1
       }
       return producto;
@@ -64,4 +64,18 @@ export const CarritoProvider = ({ children }) => {
   // Opcional: Limpiar el mensaje después de un tiempo
   useEffect(() => {
     if (mensaje) {
-      const
+      const timer = setTimeout(() => {
+        setMensaje('');
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [mensaje]);
+
+  return (
+    <CarritoContext.Provider value={{ carrito, añadir, eliminar, ajustarCantidad, vaciarCarrito, mensaje }}>
+      {children}
+    </CarritoContext.Provider>
+  );
+};
+
+export const useCarrito = () => useContext(CarritoContext);

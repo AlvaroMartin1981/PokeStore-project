@@ -1,15 +1,10 @@
 import { useState } from 'react';
 import { useCarrito } from '../../usecontext/CarritoContext';
-import { FaCartShopping } from "react-icons/fa6";
 import './Cart.css';
 
 const Cart = () => {
   const { carrito, eliminar, vaciarCarrito, ajustarCantidad, mensaje } = useCarrito();
   const [mostrarCarrito, setMostrarCarrito] = useState(false);
-
-  const toggleCarrito = () => {
-    setMostrarCarrito(!mostrarCarrito);
-  };
 
   const handleEliminarProducto = (id) => {
     eliminar(id);
@@ -21,7 +16,7 @@ const Cart = () => {
     <>
       <div className="Cart-container" onMouseLeave={() => setMostrarCarrito(false)}>
         <button className="Cart-toggle" onMouseEnter={() => setMostrarCarrito(true)}>
-          <FaCartShopping /> ({carrito.length})
+           ({carrito.length})
         </button>
         {mostrarCarrito && (
           <div className="Cart-table">
@@ -38,16 +33,16 @@ const Cart = () => {
               </thead>
               <tbody>
                 {carrito.map((producto) => (
-                  <tr key={producto.id}>
+                  <tr key={producto.pokedex_id}>
                     <td><img src={producto.imagen} alt={producto.nombre} width="50" /></td>
                     <td>{producto.nombre}</td>
                     <td>{producto.precio} €</td>
                     <td>
-                      <button className="cantidad-btn" onClick={() => ajustarCantidad(producto.id, producto.cantidad - 1)}>-</button>
+                      <button className="cantidad-btn" onClick={() => ajustarCantidad(producto.pokedex_id, producto.cantidad - 1)}>-</button>
                       {producto.cantidad}
-                      <button className="cantidad-btn" onClick={() => ajustarCantidad(producto.id, producto.cantidad + 1)}>+</button>
+                      <button className="cantidad-btn" onClick={() => ajustarCantidad(producto.pokedex_id, producto.cantidad + 1)}>+</button>
                     </td>
-                    <td><button className="btn_Cart" onClick={() => handleEliminarProducto(producto.id)}>🗑️</button></td>
+                    <td><button className="btn_Cart" onClick={() => handleEliminarProducto(producto.pokedex_id)}>🗑️</button></td>
                   </tr>
                 ))}
               </tbody>
@@ -67,4 +62,4 @@ const Cart = () => {
   );
 };
 
-export default Cart;
+export default Cart;x1

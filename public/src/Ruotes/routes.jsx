@@ -13,7 +13,7 @@ import RegisterForm from '../Pages/Auht/RegisterForm.jsx';
 import LoginForm from '../Pages/Auht/LoginPages.jsx';
 import TypeComponent from '../Pages/TypesPages/TypesPages.jsx';
 //import CreateProduct from '../Pages/Product/CreateProduct.jsx';
-import UpdateProduct from '../Pages/CU-Product/UpdateProduct.jsx'
+//import UpdateProduct from '../Pages/CU-Product/UpdateProduct.jsx'
 
 
 const ScrollTop=()=>{
@@ -44,7 +44,7 @@ function Rutas() {
                 <Route path="/user/register" element={<RegisterForm role='user'/>} />
                 <Route path="/login" element={<LoginForm />} />
                 <Route path="/admin/register" element={<RegisterForm role='admin' />} />
-                <Route path='/admin/edit/:id' element={<UpdateProduct/>}/>
+             
 
             </Routes>
             <Footer/>   

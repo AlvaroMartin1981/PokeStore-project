@@ -4,7 +4,7 @@
 
 .Cart-toggle {
   background-color: #007bff;
-  color: white;
+  color: rgb(0, 0, 0);
   border: none;
   padding: 10px 15px;
   cursor: pointer;
@@ -19,6 +19,7 @@
   right: 0;
   background-color: white;
   border: 1px solid #ccc;
+  color: black;
   padding: 20px;
   width: 300px;
   z-index: 1000;
