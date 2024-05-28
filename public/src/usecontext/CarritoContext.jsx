@@ -3,6 +3,7 @@ import { createContext, useContext, useState, useEffect } from 'react';
 const CarritoContext = createContext();
 
 export const CarritoProvider = ({ children }) => {
+  const [mensaje, setMensaje] = useState('');
   const [carrito, setCarrito] = useState(() => {
     try {
       const storedCarrito = localStorage.getItem('carrito');
@@ -12,11 +13,8 @@ export const CarritoProvider = ({ children }) => {
     }
   });
 
-  const [mensaje, setMensaje] = useState('');
-
   const añadir = (producto) => {
     let productosEnCarrito = carrito.find((p) => p.id === producto.id_pokedex);
-
     if (!productosEnCarrito) {
       setCarrito([...carrito, { ...producto, cantidad: 1 }]);
       setMensaje(`Has añadido ${producto.nombre} al carrito.`);
@@ -40,8 +38,8 @@ export const CarritoProvider = ({ children }) => {
 
   const ajustarCantidad = (id, cantidad) => {
     const nuevoCarrito = carrito.map((producto) => {
-      if (producto.pokedex_id === id) {
-        return { ...producto, cantidad: Math.max(1, cantidad) }; // Asegurar que la cantidad no sea menor que 1
+      if (producto.id_pokedex === id) {
+        return { ...producto, cantidad: Math.max(cantidad, 1) }; // Asegurar que la cantidad no sea menor que 1
       }
       return producto;
     });
@@ -61,7 +59,6 @@ export const CarritoProvider = ({ children }) => {
     guardarCarritoLocalStorage();
   }, [carrito]);
 
-  // Opcional: Limpiar el mensaje después de un tiempo
   useEffect(() => {
     if (mensaje) {
       const timer = setTimeout(() => {

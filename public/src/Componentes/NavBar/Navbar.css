@@ -1,68 +1,82 @@
+/* General Styles */
 .navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem;
-  background-color: #333;
-  color: white;
-}
-
-.hamburger {
-  display: none;
-  cursor: pointer;
-  font-size: 2rem;
-}
-
-.nav-links {
-  display: flex;
-  list-style: none;
-  gap: 1rem;
-  color: white;
-}
-
-.nav-links.open {
-  display: block;
-}
-
-.dropdown {
-  position: relative;
-}
-
-.dropdown-menu {
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  background-color: white;
-  color: black;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
-
-.dropdown:hover .dropdown-menu,
-.dropdown-menu:hover {
-  display: block;
-}
-
-.nav-info-person {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-  .hamburger {
-    display: block;
-  }
-  .nav-links {
-    display: none;
-    flex-direction: column;
-    gap: 0;
-  }
-  .nav-links.open {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #c7bdbd;
+    color: #202020;
   }
-}
+  
+  .nav-links {
+    display: flex;
+    list-style: none;
+  }
+  
+  .nav-links li {
+    margin: 0 15px;
+  }
+  
+  .nav-info-person {
+    display: flex;
+    align-items: center;
+  }
+  
+  .nav-info-person h3 {
+    margin-right: 10px;
+  }
+  
+  /* Responsive Styles */
+  .hamburger {
+    display: none;
+    cursor: pointer;
+  }
+  
+  @media (max-width: 768px) {
+    .hamburger {
+      display: block;
+    }
+  
+    .nav-links {
+      display: none;
+      flex-direction: column;
+      width: 100%;
+      background-color: #333;
+      position: absolute;
+      top: 60px;
+      left: 0;
+    }
+  
+    .nav-links.open {
+      display: flex;
+    }
+  
+    .nav-links li {
+      margin: 10px 0;
+    }
+  
+    .search-container {
+      flex-grow: 1;
+    }
+  
+    .search-input {
+      width: 70%;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .search-input {
+      width: 50%;
+    }
+  
+    .nav-info-person {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .nav-info-person button,
+    .nav-info-person h3 {
+      margin-top: 10px;
+    }
+  }
+  

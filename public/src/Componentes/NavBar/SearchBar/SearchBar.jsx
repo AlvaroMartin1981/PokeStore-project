@@ -23,21 +23,19 @@ const SearchBar = () => {
   };
 
   return (
-    <>
-      <div className="search-container">
-        <input
-          type="text"
-          className="search-input"
-          placeholder="Buscar productos..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          onKeyDown={handleKeyPress}
-        />
-        <button className="search-button" onClick={handleSearch}>
-          Buscar
-        </button>
-      </div>
-    </>
+    <div className="search-container">
+      <input
+        type="text"
+        className="search-input"
+        placeholder="Buscar productos..."
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        onKeyDown={handleKeyPress}
+      />
+      <button className="search-button" onClick={handleSearch}>
+        Buscar
+      </button>
+    </div>
   );
 };
 

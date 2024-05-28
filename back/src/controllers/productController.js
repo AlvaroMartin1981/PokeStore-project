@@ -44,24 +44,8 @@ const productController = {
         }
     },
 
-    // Editar un producto
-    async edit (req, res) {
-        try {
-            const product = await ProductoModel.findById(req.params.id);
-            if (!product) {
-                return res.status(404).json({ message: 'Producto no encontrado' });
-            }
-            product.nombre = req.body.nombre;
-            product.descripcion = req.body.descripcion;
-            await product.save();
-            res.json(product);
-        } catch (error) {
-            res.status(500).json({ error: error.message });
-        }
-    },
-
     // Actualizar un producto
-   async update  (req, res){
+    async  update(req, res) {
         try {
             const product = await ProductoModel.findByIdAndUpdate(req.params.id, req.body, { new: true });
             if (!product) {
@@ -72,7 +56,6 @@ const productController = {
             res.status(500).json({ error: error.message });
         }
     },
-
     // Eliminar un producto
     async delete  (req, res) {
         try {
@@ -127,7 +110,26 @@ const productController = {
     // Crear un producto
     async create (req, res) {
         try {
-            const { nombre, descripcion, imagen, precio, tipo, categoria, pokemonAttributes, pokeballAttributes, itemAttributes } = req.body;
+            const {
+                nombre,
+                descripcion,
+                imagen,
+                precio,
+                tipo,
+                categoria,
+                id_pokedex,
+                peso,
+                altura,
+                estadisticas,
+                legendario,
+                mythical,
+                habilidades,
+                ratio_captura,
+                base_experience,
+                cadena_evoluciones,
+                evolucionDe
+            } = req.body;
+    
             const newProduct = new ProductoModel({
                 nombre,
                 descripcion,
@@ -135,16 +137,25 @@ const productController = {
                 precio,
                 tipo,
                 categoria,
-                pokemonAttributes,
-                pokeballAttributes,
-                itemAttributes
+                id_pokedex,
+                peso,
+                altura,
+                estadisticas,
+                legendario,
+                mythical,
+                habilidades,
+                ratio_captura,
+                base_experience,
+                cadena_evoluciones,
+                evolucionDe
             });
+    
             await newProduct.save();
             res.json(newProduct);
         } catch (error) {
-            res.status(500).json({ error: error.message });
+            res.status500().json({ error: error.message });
         }
-    },
+    }    
 };
 
 module.exports = productController;

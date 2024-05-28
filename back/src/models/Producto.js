@@ -20,7 +20,7 @@ const ProductSchema = new mongoose.Schema({
     },
     categoria: {
         type: String,
-        enum: ["Pokemon", "Item"],
+        enum: "Pokemon",
         required: true
     }, 
     tipo: [String],

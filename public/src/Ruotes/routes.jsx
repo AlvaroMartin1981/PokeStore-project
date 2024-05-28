@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 import { useProducts } from '../usecontext/ProductContext.jsx';
 import Cards from '../Componentes/Cards/Cards.jsx';
-import Nav from '../Componentes/NavBar/Nav.jsx';
+import Nav from '../Componentes/NavBar/Navbar.jsx';
 import ProductDetail from '../Componentes/ProductDetail/productDetail.jsx';
 import ProductType from '../Componentes/ProductType.jsx';
 import Legendarios from '../Componentes/Lengendario.jsx';

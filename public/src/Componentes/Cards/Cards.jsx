@@ -92,7 +92,7 @@ const Cards = ({ products }) => {
                       }
                     </span>
                   ))}
-                </div>
+                </div><p>({product.likes[0].likes})</p>
               </div>
               <div className="card_carro">
                 <h4><span>Precio: </span>{product.precio} € *</h4>
