@@ -3,15 +3,15 @@
 }
 
 .Cart-toggle {
-  background-color: #007bff;
-  color: rgb(0, 0, 0);
+  background-color: transparent;
+  color: black;
   border: none;
   padding: 10px 15px;
   cursor: pointer;
 }
 
 .Cart-toggle:hover {
-  background-color: #0056b3;
+  background-color: #f0f0f0;
 }
 
 .Cart-table {

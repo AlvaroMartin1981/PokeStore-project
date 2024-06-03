@@ -236,9 +236,10 @@ function descripcionPokemon(flavortextentries) {
     : 'No hay una descripción en español para este Pokémon';
 }
 function randomLikes() {
-  const randomNumber = Math.random() * 20; 
+  const randomNumber = Math.random() * 3;
   return parseFloat((randomNumber + 2).toFixed(1)); 
 }
+
 
 function RandomlikesCount() {
   return Math.floor(Math.random() * 20) + 1;

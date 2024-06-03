@@ -12,8 +12,7 @@ import Footer from '../Componentes/Footer/Footer.jsx';
 import RegisterForm from '../Pages/Auht/RegisterForm.jsx';
 import LoginForm from '../Pages/Auht/LoginPages.jsx';
 import TypeComponent from '../Pages/TypesPages/TypesPages.jsx';
-//import CreateProduct from '../Pages/Product/CreateProduct.jsx';
-//import UpdateProduct from '../Pages/CU-Product/UpdateProduct.jsx'
+import ProductForm from '../Pages/ProductForm/ProductForm.jsx';
 
 
 const ScrollTop=()=>{
@@ -40,12 +39,12 @@ function Rutas() {
                 <Route path="/pokemon/misticos" element={<Mythical />} />
                 <Route path="/pokemon/tipo" element={ <TypeComponent/>} />
                 <Route path="/pokemon/tipo/:tipo" element={<ProductType />} />
-                <Route path="/product/:nombre" element={<ProductDetail />} />
+                <Route path="/pokemon/:nombre" element={<ProductDetail />} />
                 <Route path="/user/register" element={<RegisterForm role='user'/>} />
                 <Route path="/login" element={<LoginForm />} />
                 <Route path="/admin/register" element={<RegisterForm role='admin' />} />
-             
-
+                <Route path="/pokemon/new" element={<ProductForm isEdit={false} />} />
+                <Route path="/pokemon/edit/:nombre" element={<ProductForm isEdit={true} />} />
             </Routes>
             <Footer/>   
         </Router>

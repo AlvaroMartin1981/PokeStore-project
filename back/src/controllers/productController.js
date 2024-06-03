@@ -1,16 +1,12 @@
-const ProductoModel= require('../models/Producto')
+const ProductoModel = require('../models/Producto');
 
 function calcularStar(rating, likesCount) {
-    // Calcula el promedio ponderado
     const promedio = rating / likesCount;
-
-    // Asegúrate de que star esté dentro del rango del 1 al 5
     return Math.min(Math.max(promedio, 1), 5);
 }
 
 const productController = {
-    // Obtener todos los productos
-   async getAll  (req, res){
+    async getAll(req, res) {
         try {
             const products = await ProductoModel.find();
             res.json(products);
@@ -19,10 +15,11 @@ const productController = {
         }
     },
 
-    // Obtener un producto por su ID
-    async getById  (req, res){
+
+    async getProductsByName(req, res) {
         try {
-            const product = await ProductoModel.findById(req.params.id);
+            const nombre = req.params.nombre;
+            const product = await ProductoModel.findOne({ nombre: new RegExp(`^${nombre}$`, 'i') });
             if (!product) {
                 return res.status(404).json({ message: 'Producto no encontrado' });
             }
@@ -32,22 +29,10 @@ const productController = {
         }
     },
 
-    // Buscar productos por nombre
-   async getProductsByName  (req, res){
+    async update(req, res) {
         try {
-            let nombre = req.params.nombre;
-            nombre = new RegExp('^' + nombre + '$', 'i');
-            const pokemon = await ProductoModel.findOne({ nombre });
-            res.json(pokemon);
-        } catch (error) {
-            res.status(500).json({ error: error.message });
-        }
-    },
-
-    // Actualizar un producto
-    async  update(req, res) {
-        try {
-            const product = await ProductoModel.findByIdAndUpdate(req.params.id, req.body, { new: true });
+            const nombre = req.params.nombre;
+            const product = await ProductoModel.findOneAndUpdate({ nombre: new RegExp(`^${nombre}$`, 'i') }, req.body, { new: true });
             if (!product) {
                 return res.status(404).json({ message: 'Producto no encontrado' });
             }
@@ -56,10 +41,11 @@ const productController = {
             res.status(500).json({ error: error.message });
         }
     },
-    // Eliminar un producto
-    async delete  (req, res) {
+
+    async delete(req, res) {
         try {
-            const product = await ProductoModel.findByIdAndDelete(req.params.id);
+            const nombre = req.params.nombre;
+            const product = await ProductoModel.findOneAndDelete({ nombre: new RegExp(`^${nombre}$`, 'i') });
             if (!product) {
                 return res.status(404).json({ message: 'Producto no encontrado' });
             }
@@ -69,93 +55,83 @@ const productController = {
         }
     },
 
-    // Insertar un comentario en un producto
     async insertComment(req, res) {
-    try {
-        const product = await ProductoModel.findById(req.params.id);
-        const { userId, comment, rating, username } = req.body;
-        if (!product) {
-            return res.status(404).json({ message: 'Producto no encontrado' });
-        }
-
-        // Crea el nuevo comentario
-        let newReview = {
-            userId,
-            comment,
-            username,
-            rating
-        };
-        product.reviews.push(newReview);
-
-        // Incrementa el contador de likes
-        product.likes[0].likesCount += 1;
-        product.likes[0].likes += rating;
-
-        // Calcula el nuevo valor de star basado en rating y likesCount
-        const valor = calcularStar(rating, product.likes[0].likesCount);
-
-        // Asigna el nuevo valor de star al producto
-        product.likes[0].star = valor;
-
-        // Guarda los cambios en la base de datos
-        await product.save();
-
-        // Devuelve el comentario recién creado
-        res.json(newReview);
-    } catch (error) {
-        // Si ocurre un error, envía una respuesta de error con el mensaje de error
-        res.status(500).json({ error: error.message });
-    }
-},
-    // Crear un producto
-    async create (req, res) {
         try {
-            const {
-                nombre,
-                descripcion,
-                imagen,
-                precio,
-                tipo,
-                categoria,
-                id_pokedex,
-                peso,
-                altura,
-                estadisticas,
-                legendario,
-                mythical,
-                habilidades,
-                ratio_captura,
-                base_experience,
-                cadena_evoluciones,
-                evolucionDe
-            } = req.body;
-    
-            const newProduct = new ProductoModel({
-                nombre,
-                descripcion,
-                imagen,
-                precio,
-                tipo,
-                categoria,
-                id_pokedex,
-                peso,
-                altura,
-                estadisticas,
-                legendario,
-                mythical,
-                habilidades,
-                ratio_captura,
-                base_experience,
-                cadena_evoluciones,
-                evolucionDe
-            });
-    
-            await newProduct.save();
-            res.json(newProduct);
+            const nombre = req.params.nombre;
+            const product = await ProductoModel.findOne({ nombre: new RegExp(`^${nombre}$`, 'i') });
+            const { userId, comment, rating, username } = req.body;
+            if (!product) {
+                return res.status(404).json({ message: 'Producto no encontrado' });
+            }
+
+            let newReview = {
+                userId,
+                comment,
+                username,
+                rating
+            };
+            product.reviews.push(newReview);
+
+            product.likes[0].likesCount += 1;
+            product.likes[0].likes += rating;
+
+            const valor = calcularStar(product.likes[0].likes, product.likes[0].likesCount);
+
+            product.likes[0].star = valor;
+
+            await product.save();
+
+            res.json(newReview);
         } catch (error) {
-            res.status500().json({ error: error.message });
+            res.status(500).json({ error: error.message });
         }
-    }    
-};
+    },
+
+        async create(req, res) {
+            try {
+                const {
+                    nombre,
+                    descripcion,
+                    imagen,
+                    precio,
+                    tipo,
+                    id_pokedex,
+                    peso,
+                    altura,
+                    estadisticas,
+                    legendario,
+                    mythical,
+                    habilidades,
+                    ratio_captura,
+                    base_experience
+                } = req.body;
+
+                const newProduct = {
+                    nombre,
+                    descripcion,
+                    imagen,
+                    precio,
+                    tipo,
+                    id_pokedex,
+                    peso,
+                    altura,
+                    estadisticas,
+                    legendario,
+                    mythical,
+                    habilidades,
+                    ratio_captura,
+                    likes: [{ likes: 0, likesCount: 0 }],
+                    base_experience
+                };
+                 await ProductoModel.create(newProduct)
+                 console.log(newProduct)
+                 const products = await ProductoModel.find();
+            res.json(products);
+            } catch (error) {
+                res.status(500).json({ error: error.message });
+                console.log(error)
+            }
+        }
+    };
 
 module.exports = productController;

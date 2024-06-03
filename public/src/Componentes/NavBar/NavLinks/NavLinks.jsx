@@ -21,13 +21,13 @@ const NavLinks = ({ isMenuOpen }) => {
   };
 
   return (
-    <div className='navLinks'>
+    <div className="navLinks">
       <ul className={`nav-links ${isMenuOpen ? 'open' : ''}`}>
         <li><Link to="/">Home</Link></li>
         <li><Link to="/pokemon">Pokemon</Link></li>
-        <li 
-          className="dropdown" 
-          onMouseEnter={handleDropdownToggle} 
+        <li
+          className="dropdown"
+          onMouseEnter={handleDropdownToggle}
           onMouseLeave={handleDropdownToggle}
         >
           <span>Tipos</span>

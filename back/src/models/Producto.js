@@ -18,13 +18,31 @@ const ProductSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.Mixed,
         required: true
     },
-    categoria: {
-        type: String,
-        enum: "Pokemon",
-        required: true
-    }, 
-    tipo: [String],
-    id_pokedex: Number,
+    tipo: [{
+        type:String,
+    enum:["Planta",
+    "Veneno",
+    "Fuego",
+    "Volador",
+    "Agua",
+    "Bicho",
+    "Normal",
+    "Electrico",
+    "Tierra",
+    "Hada",
+    "Lucha",
+    "Psíquico",
+    "Roca",
+    "Acero",
+    "Hielo",
+    "Fantasma",
+    "Dragón", 
+    "Siniestro"]}],
+    id_pokedex: {
+        type:Number,
+        required: true,
+        unique: true
+    },
     peso: Number,
     altura: Number,
     estadisticas: [

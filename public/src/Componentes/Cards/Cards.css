@@ -92,8 +92,11 @@ padding: 1px 3px;
   color: grey;
   justify-content: center;
   margin: -20px 10px 10px 10px;
+  align-items: center;
 }
-
+.star-container p{
+font-size: 20px;
+}
 .star {
   cursor: pointer;
   position: relative;
@@ -103,17 +106,9 @@ padding: 1px 3px;
 }
 
 .star.filled {
-  color: yellow; /* Color de las estrellas llenas */
+  color: yellow; 
 }
 
-.star.partial {
-  overflow: hidden;
-  position: relative;
-  margin-left: 0.5em; 
-  color: yellow;
-  top:0;
-  left:0  
-}
 .card_btn button:hover {
   background-color: #333; 
 }
