@@ -1,6 +1,6 @@
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useCarrito } from '../../usecontext/CarritoContext';
-import { useState, useEffect } from 'react';
 import { useUser } from '../../usecontext/UserContext';
 import './Cards.css';
 
@@ -80,19 +80,22 @@ const Cards = ({ products }) => {
                 </h3>
               </div>
               <div>
-                <div className="star-container">
-                  {[...Array(5)].map((_, index) => (
-                    <span
-                      key={index}
-                      className={`star ${index < Math.floor(product.likes[0].likes) ? 'filled' : ''}`}
-                    >
-                      ★
-                      {index === Math.floor(product.likes[0].likes) - 1 && product.likes[0].likes % 1 !== 0 &&
-                        <span className="star partial" style={{ width: `${(product.likes[0].likes % 1) * 100}%` }}>★</span>
-                      }
-                    </span>
-                  ))}
-                </div>
+              {product.likes[0].likesCount > 0 ? (
+  <div className="star-container">
+    {[...Array(5)].map((_, index) => (
+      <span
+        key={index}
+        className={`star ${index < Math.floor(product.likes[0].likes) ? 'filled' : ''}`}
+      >
+        ★
+      </span>
+    ))}
+    <p>({product.likes[0].likes})</p>
+  </div>
+) : (
+  <p>Este producto aún no tiene valoración.</p>
+)}
+
               </div>
               <div className="card_carro">
                 <h4><span>Precio: </span>{product.precio} € *</h4>
