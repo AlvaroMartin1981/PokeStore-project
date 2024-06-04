@@ -1,68 +1,74 @@
 import React, { useEffect, useState } from 'react';
-import { useProducts } from '../../usecontext/ProductContext.jsx';
-import pokemonBaner from '../../assets/Imagenes/pokemonBaner.jpeg';
+import { Link } from 'react-router-dom';
+import { useProducts } from '../../usecontext/ProductContext';
+import Cards from '../../Componentes/Cards/Cards.jsx';
+import PokemonBaner from '../../assets/Imagenes/pokemonBaner.jpeg'; 
 import './Home.css';
-import Product from '../../Componentes/Product.jsx';
 
 const Home = () => {
-    const products  = useProducts();
-    const [randomPokemon1, setRandomPokemon1] = useState(null);
-    const [randomPokemon2, setRandomPokemon2] = useState(null);
-    const [randomPokemon3, setRandomPokemon3] = useState(null);
-    const [legendaryPokemon, setLegendaryPokemon] = useState(null);
-    const [mysticPokemon, setMysticPokemon] = useState(null);
+  const products = useProducts();
+  const [bestRated, setBestRated] = useState([]);
+  const [mostCommented, setMostCommented] = useState([]);
+  const [newest, setNewest] = useState([]);
+  const [topTypes, setTopTypes] = useState([]);
 
-    useEffect(() => {
-        // Obtener una selección aleatoria de Pokémon
-        const getRandomPokemon = () => {
-            const randomIndex = Math.floor(Math.random() * products.length);
-            return products[randomIndex];
-        };
+  useEffect(() => {
+    if (products.length > 0) {
+      setBestRated(products.filter(p => p.likes[0].likesCount > 0).sort((a, b) => b.likes[0].likes - a.likes[0].likes).slice(0, 5));
+      setMostCommented(products.filter(p => p.reviews.length > 0).sort((a, b) => b.reviews.length - a.reviews.length).slice(0, 5));
+      setNewest(products.slice(-5).reverse());
 
+      // Obtener tipos más vendidos al azar
+      const uniqueTypes = [...new Set(products.map(product => product.tipo[0]))];
+      const randomTypes = uniqueTypes.sort(() => 0.5 - Math.random()).slice(0, 5);
+      const topTypesProducts = randomTypes.map(type => ({
+        type,
+        image: products.find(product => product.tipo.includes(type)).imagen
+      }));
+      setTopTypes(topTypesProducts);
+    }
+  }, [products]);
 
-        // Obtener un Pokémon legendario aleatorio
-        const getRandomLegendaryPokemon = () => {
-            const legendaryPokemons = products.filter(p =>  p.legendario);
-            const randomIndex = Math.floor(Math.random() * legendaryPokemons.length);
-            return legendaryPokemons[randomIndex] || null;
-        };
-
-        // Obtener un Pokémon mítico aleatorio
-        const getRandomMysticPokemon = () => {
-            const mysticPokemons = products.filter(p => p.mythical);
-            const randomIndex = Math.floor(Math.random() * mysticPokemons.length);
-            return mysticPokemons[randomIndex] || null;
-        };
-
-        // Establecer los Pokémon aleatorios
-        setRandomPokemon1(getRandomPokemon());
-        setRandomPokemon2(getRandomPokemon());
-        setRandomPokemon3(getRandomPokemon());
-
-        // Establecer el Pokémon legendario aleatorio
-        setLegendaryPokemon(getRandomLegendaryPokemon());
-
-        // Establecer el Pokémon mítico aleatorio
-        setMysticPokemon(getRandomMysticPokemon());
-    }, []);
-
-    return (
-        <>
-            <section className='front_page'>
-                <img src={pokemonBaner} alt='Pokemon_baner' />
-            </section>
-            <section>
-                <h2>NOVEDADES</h2>
-                <div className='container_home'>
-                    <Product product={legendaryPokemon} />
-                    <Product product={mysticPokemon} />
-                    <Product product={randomPokemon1} />
-                    <Product product={randomPokemon2} />
-                    <Product product={randomPokemon3} />
-                </div>
-            </section>
-        </>
-    );
+  return (
+    <>
+      <div className="home-container">
+        <img src={PokemonBaner} alt="Background" className="background-image" />
+        <section className="text">
+          <h1 className="welcome-text">
+            ¡Bienvenido a nuestra tienda exclusiva de Pokémon!
+          </h1>
+          <p className="intro-text">
+            En nuestro mundo, los Pokémon son más que simples criaturas: son compañeros de aventuras, amigos leales y poderosos aliados en tu viaje para convertirte en el mejor entrenador. En nuestra tienda, te ofrecemos la oportunidad de llevar a casa a tus Pokémon favoritos, desde los más populares hasta los legendarios más raros.
+          </p>
+        </section>
+        <section className="home-section">
+          <h2>Novedades</h2>
+          <Cards products={newest} />
+        </section>
+        <section className="home-section">
+          <h2>Pokémon Mejor Valorados</h2>
+          <Cards products={bestRated} />
+        </section>
+        <section className="home-section">
+          <h2>Pokémon con Más Comentarios</h2>
+          <Cards products={mostCommented} />
+        </section>
+        <section className="home-section">
+          <h2>Tipos Más Vendidos</h2>
+          <div className="types-container">
+            {topTypes.map(({ type, image }) => (
+              <div key={type} className="type-card">
+                <Link to={`/pokemon/tipo/${type}`}>
+                  <img src={image} alt={type} className="type-image" />
+                  <h3 className="type-title">{type}</h3>
+                </Link>
+              </div>
+            ))}
+          </div>
+        </section>
+      </div>
+    </>
+  );
 };
 
 export default Home;

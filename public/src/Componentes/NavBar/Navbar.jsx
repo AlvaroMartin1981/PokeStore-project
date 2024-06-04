@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useUser } from '../../usecontext/UserContext.jsx';
 import Cart from './Cart/Cart.jsx';
@@ -18,10 +18,7 @@ const Navbar = () => {
 
   return (
     <div className="navbar">
-      <div className="hamburger" onClick={handleMenuToggle}>
-        ☰
-      </div>
-      <NavLinks isMenuOpen={isMenuOpen} />
+      <NavLinks isMenuOpen={isMenuOpen} handleMenuToggle={handleMenuToggle} />
       <SearchBar />
       <div className='nav-info-person'>
         <Cart />

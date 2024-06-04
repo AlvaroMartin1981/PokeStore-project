@@ -1,6 +1,6 @@
 import React from 'react';
 import { useCarrito } from '../../usecontext/CarritoContext';
-import './CarritoPage.css';
+import './CarritoPages.css';
 import { Link } from 'react-router-dom';
 
 const CarritoPage = () => {

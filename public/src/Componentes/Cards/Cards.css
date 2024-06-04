@@ -89,13 +89,16 @@ padding: 1px 3px;
 .star-container {
   display: flex;
   font-size: 25px; /* Tamaño de la estrella */
-  color: grey;
+  color: rgb(0, 0, 0);
   justify-content: center;
-  margin: -20px 10px 10px 10px;
+  margin-top:-35px;
+  margin-bottom: -10px;
   align-items: center;
 }
-.star-container p{
-font-size: 20px;
+.likes-container {
+  margin-left: 5px; 
+ margin-top: 10px;
+  font-size: 18px; /* Espacio entre las estrellas y likes-container */
 }
 .star {
   cursor: pointer;
@@ -109,13 +112,14 @@ font-size: 20px;
   color: yellow; 
 }
 
+
 .card_btn button:hover {
   background-color: #333; 
 }
 .card_btn{
   display: flex;
   justify-content: space-between;
-  gap: 20px;
+  gap: 15px;
   margin-top:-30px;
   margin-bottom: 10px;
 }

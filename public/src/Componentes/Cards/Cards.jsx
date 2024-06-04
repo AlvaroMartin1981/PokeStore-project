@@ -4,7 +4,7 @@ import { useCarrito } from '../../usecontext/CarritoContext';
 import { useUser } from '../../usecontext/UserContext';
 import './Cards.css';
 
-const Cards = ({ products }) => {
+const Cards = ({ products, showSort }) => {
   const { user } = useUser();
   const { añadir, mensaje } = useCarrito();
   const [productosOrdenados, setProductosOrdenados] = useState(products);
@@ -55,19 +55,21 @@ const Cards = ({ products }) => {
   return (
     <>
       <section className="container">
-        <div className='cards_select'>
-          <label htmlFor="orden">Ordenar por:</label>
-          <select id="orden" value={orden} onChange={handleChangeOrden}>
-            <option value="nombreAsc">Nombre (A-Z)</option>
-            <option value="nombreDesc">Nombre (Z-A)</option>
-            <option value="precioAsc">Precio (Menor a Mayor)</option>
-            <option value="precioDesc">Precio (Mayor a Menor)</option>
-            <option value="idAsc">ID (Menor a Mayor)</option>
-            <option value="idDesc">ID (Mayor a Menor)</option>
-            <option value='valorAsc'>Valoraciones (Menor a Mayor)</option>
-            <option value='valorDesc'>Valoraciones (Mayor a Menor)</option>
-          </select>
-        </div>
+        {showSort && (
+          <div className='cards_select'>
+            <label htmlFor="orden">Ordenar por:</label>
+            <select id="orden" value={orden} onChange={handleChangeOrden}>
+              <option value="nombreAsc">Nombre (A-Z)</option>
+              <option value="nombreDesc">Nombre (Z-A)</option>
+              <option value="precioAsc">Precio (Menor a Mayor)</option>
+              <option value="precioDesc">Precio (Mayor a Menor)</option>
+              <option value="idAsc">ID (Menor a Mayor)</option>
+              <option value="idDesc">ID (Mayor a Menor)</option>
+              <option value='valorAsc'>Valoraciones (Menor a Mayor)</option>
+              <option value='valorDesc'>Valoraciones (Mayor a Menor)</option>
+            </select>
+          </div>
+        )}
         <div className="container_cards">
           {productosOrdenados.map((product) => (
             <div className="card" key={product._id}>
@@ -80,22 +82,24 @@ const Cards = ({ products }) => {
                 </h3>
               </div>
               <div>
-              {product.likes[0].likesCount > 0 ? (
-  <div className="star-container">
-    {[...Array(5)].map((_, index) => (
-      <span
-        key={index}
-        className={`star ${index < Math.floor(product.likes[0].likes) ? 'filled' : ''}`}
-      >
-        ★
-      </span>
-    ))}
-    <p>({product.likes[0].likes})</p>
-  </div>
-) : (
-  <p>Este producto aún no tiene valoración.</p>
-)}
-
+                {product.likes[0].likesCount > 0 ? (
+                 <div className="star-container">
+                 {[...Array(5)].map((_, index) => (
+                   <span
+                     key={index}
+                     className={`star ${index < Math.floor(product.likes[0].likes) ? 'filled' : ''}`}
+                   >
+                     ★
+                   </span>
+                 ))}
+                 <div className="likes-container">
+                   <p>({product.likes[0].likes})</p>
+                 </div>
+               </div>
+               
+                ) : (
+                  <p>Este producto aún no tiene valoración.</p>
+                )}
               </div>
               <div className="card_carro">
                 <h4><span>Precio: </span>{product.precio} € *</h4>

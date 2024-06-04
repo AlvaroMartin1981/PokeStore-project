@@ -10,7 +10,7 @@ const Legendarios = () => {
     return <div>No hay Pokémon legendarios disponibles.</div>;
   }
 
-  return (<Cards products={legendaryPokemon} />)
+  return (<Cards products={legendaryPokemon} showSort={true}/>)
 };
 
 export default Legendarios;

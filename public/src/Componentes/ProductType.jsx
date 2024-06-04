@@ -12,7 +12,7 @@ const ProductType = () => {
     return <div>No hay productos disponibles.</div>;
   }
 
-  return (<Cards products={filteredProducts} />);
+  return (<Cards products={filteredProducts} showSort={true}/>);
 };
 
 export default ProductType;

@@ -1,38 +1,23 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Product = ({ product }) => {
-    if (!product) {
-        return <div>Cargando...</div>;
+const Product = ({ tipos }) => {
+    if (!tipos || tipos.length === 0) {
+        return <div>No hay tipos disponibles.</div>;
     }
-
-    const { nombre, tipo, imagen, categoria, pokemonAttributes } = product;
-    let categoryLink = '';
-
-    if (categoria === 'Item') {
-        categoryLink = `/items/tipo/${tipo}`;
-    } else {
-        if (pokemonAttributes && pokemonAttributes.legendario) {
-            categoryLink = '/pokemon/legendarios';
-        } else if (pokemonAttributes && pokemonAttributes.mythical) {
-            categoryLink = '/pokemon/misticos';
-        } else {
-            categoryLink = `/pokemon/tipo/${tipo[0]}`;
-        }
-    }
-
-    const displayTipo = categoria === 'Item' ? product.tipo :
-        (pokemonAttributes && pokemonAttributes.legendario) ? 'Legendario' :
-        (pokemonAttributes && pokemonAttributes.mythical) ? 'Místico' : tipo && tipo.length > 0 ? tipo[0] : '';
 
     return (
-        <div className='container_home' key={nombre}>
-            <Link to={categoryLink}>
-                <img src={imagen} alt={nombre} style={{ width: '200px' }} />
-                <div className='container_home_text'>
-                    <h3>{categoria} - {displayTipo}</h3>
+        <div className="product-container">
+            {tipos.map((tipo, index) => (
+                <div className="product-card" key={index}>
+                    <Link to={`/pokemon/tipo/${tipo}`}>
+                        <img src={`imagen/${tipo}.jpg`} alt={tipo} className="product-image" />
+                        <div className="product-text-container">
+                            <h3 className="product-type">{tipo}</h3>
+                        </div>
+                    </Link>
                 </div>
-            </Link>
+            ))}
         </div>
     );
 };

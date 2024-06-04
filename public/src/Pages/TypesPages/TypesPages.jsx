@@ -1,39 +1,35 @@
 import React from 'react';
-import { useProducts } from '../../usecontext/ProductContext.jsx';
-import Product from '../../Componentes/Product.jsx'; 
-import './TypesPages.css'
+import { Link } from 'react-router-dom';
+import { useProducts } from '../../usecontext/ProductContext';
+import './TypesPages.css';
+import PokemonBaner from '../../assets/Imagenes/pokemonBaner.jpeg'; 
 
-const TypePages = () => {
-    const products = useProducts();
+const TypesPages = () => {
+  const products = useProducts();
+  const types = Array.from(new Set(products.map(product => product.tipo[0])));
 
-    // Función para obtener todos los tipos de Pokémon
-    const getAllPokemonTypes = () => {
-        const allTypes = new Set();
-        products.forEach(product => {
-            product.tipo.forEach(type => {
-                allTypes.add(type);
-            });
-        });
-        return Array.from(allTypes);
-    };
+  const getRandomImageByType = (type) => {
+    const typeProducts = products.filter(product => product.tipo.includes(type));
+    return typeProducts.length > 0 ? typeProducts[Math.floor(Math.random() * typeProducts.length)].imagen : '';
+  };
 
-    const pokemonTypes = getAllPokemonTypes();
-
-
-    return (
-        <>
-        <div >
-            <h2>Tipos de Pokémon</h2>
-            <div className='container_home'>
-                {pokemonTypes.map((type, index) => (
-                    <div key={index}>
-                        <Product product={getPokemonOfType(type)} />
-                    </div>
-                ))}
-            </div>
-        </div>
-        </>
-    );
+  return (
+    <>
+    <div className="types-container-wrapper">
+       <img src={PokemonBaner} alt="Background" className="background-image" />
+      <div className="types-container">
+        {types.map(type => (
+          <div key={type} className="type-card">
+            <Link to={`/pokemon/tipo/${type}`}>
+              <img src={getRandomImageByType(type)} alt={type} className="type-image" />
+              <h3 className="type-title">{type}</h3>
+            </Link>
+          </div>
+        ))}
+      </div>
+    </div>
+    </>
+  );
 };
 
-export default TypePages;
+export default TypesPages;
