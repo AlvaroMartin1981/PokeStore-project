@@ -2,50 +2,37 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-direction: column;
   background-color: #ffffff;
-  color: black;
+  color: rgb(0, 0, 0);
 }
 
 .nav-links {
   display: flex;
   list-style: none;
   gap: 1rem;
+  color: rgb(0, 0, 0);
 }
 
 .nav-links.open {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
-
-.dropdown {
-  position: relative;
-}
-
-.dropdown-menu {
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  background-color: white;
+  display: block;
   color: black;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  background-color: #ffffff;
 }
 
+/* Show dropdown menu when hovering over the dropdown header or menu */
 .dropdown:hover .dropdown-menu,
 .dropdown-menu:hover {
   display: block;
   z-index: 20000;
 }
 
+/* Hide hamburger menu on small screens */
 @media (max-width: 768px) {
   .nav-links {
-    display: none;
+    display: flex;
     flex-direction: column;
-    width: 100%;
+    gap: 0;
   }
   .nav-links.open {
     display: flex;

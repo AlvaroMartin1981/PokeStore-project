@@ -13,6 +13,8 @@ import RegisterForm from '../Pages/Auht/RegisterForm.jsx';
 import LoginForm from '../Pages/Auht/LoginPages.jsx';
 import TypeComponent from '../Pages/TypesPages/TypesPages.jsx';
 import ProductForm from '../Pages/ProductForm/ProductForm.jsx';
+import TypePages from '../Pages/TypesPages/TypesPages.jsx';
+import CarritoPages from '../Pages/CarritoPages/CarritoPages.jsx';
 
 
 const ScrollTop=()=>{
@@ -25,7 +27,7 @@ const ScrollTop=()=>{
     }
 
 function Rutas() {
-    const  products  = useProducts();
+    const products = useProducts();
 
     return (
         <>
@@ -34,10 +36,11 @@ function Rutas() {
             <Nav />
             <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/pokemon" element={<Cards products={products} />} />
+                <Route path="/todos" element={<Cards products={products} showSort={true} />} />
                 <Route path="/pokemon/legendarios" element={<Legendarios />} />
                 <Route path="/pokemon/misticos" element={<Mythical />} />
                 <Route path="/pokemon/tipo" element={ <TypeComponent/>} />
+                <Route path="/tipos" element={<TypePages/>}/>
                 <Route path="/pokemon/tipo/:tipo" element={<ProductType />} />
                 <Route path="/pokemon/:nombre" element={<ProductDetail />} />
                 <Route path="/user/register" element={<RegisterForm role='user'/>} />
@@ -45,6 +48,7 @@ function Rutas() {
                 <Route path="/admin/register" element={<RegisterForm role='admin' />} />
                 <Route path="/pokemon/new" element={<ProductForm isEdit={false} />} />
                 <Route path="/pokemon/edit/:nombre" element={<ProductForm isEdit={true} />} />
+                <Route path='/carrito' element={<CarritoPages/>}/>
             </Routes>
             <Footer/>   
         </Router>

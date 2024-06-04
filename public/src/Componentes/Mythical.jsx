@@ -10,7 +10,7 @@ const Mythical = () => {
     return <div>No hay Pokémon Misticos disponibles.</div>;
   }
 
-  return (<Cards products={mythicalPokemon} />)
+  return (<Cards products={mythicalPokemon} showSort={true}/>)
 };
 
 export default Mythical;

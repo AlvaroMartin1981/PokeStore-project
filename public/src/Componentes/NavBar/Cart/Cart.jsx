@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useCarrito } from '../../../usecontext/CarritoContext';
+import { Link } from 'react-router-dom';
 import './Cart.css';
 
 const Cart = () => {
@@ -52,6 +53,9 @@ const Cart = () => {
                 Vaciar Carrito
               </button>
             )}
+            <Link to="/carrito" className="carrito-link-button">
+              Ir al Carrito
+            </Link>
             <div className="Cart-total">Total: {totalPrecio} €</div>
           </div>
         </div>
